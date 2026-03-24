@@ -264,5 +264,19 @@
     "description": "Firebreaks refers to the physical barriers cut into landscapes to stop fire from spreading. In this painting, the idea extends beyond land management. The layered marks and sharp divisions suggest moments where movement is interrupted and contained. Metaphorically, firebreaks represent boundaries we create in life — pauses, limits, or decisions that prevent escalation. The work reflects the balance between control and chaos, destruction and protection.",
     "order": 19,
     "featured": false
+  },
+  {
+    "id": "porcodio",
+    "title": "PORCODIO",
+    "category": "Stylised Realism",
+    "medium": "Acrylic on Canvas",
+    "width": 789,
+    "height": 978,
+    "price": 6789,
+    "status": "Sold",
+    "image": "images/img-1774383469687.jpg",
+    "description": "MOSTRA VENEZIA",
+    "order": 20,
+    "featured": true
   }
 ]
