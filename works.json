@@ -25,7 +25,7 @@
     "image": "images/img02.jpg",
     "description": "A dense, rhythmic composition capturing urgency and constant motion. Layers of red, pink, black, and white collide like intersecting paths. The scene recalls busy airports or train stations where commuters rush onward, barely connecting. A reflection on speed, routine, and modern life — where momentum dominates and stillness is rare.",
     "order": 1,
-    "featured": true
+    "featured": false
   },
   {
     "id": "lauterbrunnen",
