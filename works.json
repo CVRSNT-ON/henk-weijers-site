@@ -53,7 +53,7 @@
     "image": "images/img04.jpg",
     "description": "Burgdorf presents an expressive impression of the Swiss town and its historic castle rising above the landscape. Strong turquoise and green forms suggest rolling hills, while textured grey and red shapes echo stone walls and rooftops. The sun hangs quietly in a pale sky, adding calm contrast to the bold foreground.",
     "order": 4,
-    "featured": true
+    "featured": false
   },
   {
     "id": "timurid-palette",
