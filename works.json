@@ -278,5 +278,19 @@
     "description": "MOSTRA VENEZIA",
     "order": 20,
     "featured": true
+  },
+  {
+    "id": "matteo-folle",
+    "title": "Matteo FOLLE",
+    "category": "Stylised Realism",
+    "medium": "Acrylic on Canvas",
+    "width": 456,
+    "height": 432,
+    "price": 10000,
+    "status": "Available",
+    "image": "images/img-1774384142342.jpg",
+    "description": "Test anteprima in admin",
+    "order": 21,
+    "featured": false
   }
 ]
