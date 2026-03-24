@@ -245,18 +245,5 @@
     "image": "images/img19.jpg",
     "description": "Firebreaks refers to the physical barriers cut into landscapes to stop fire from spreading. In this painting, the idea extends beyond land management. The layered marks and sharp divisions suggest moments where movement is interrupted and contained. Metaphorically, firebreaks represent boundaries we create in life Ã¢ÂÂ pauses, limits, or decisions that prevent escalation. The work reflects the balance between control and chaos, destruction and protection.",
     "order": 19
-  },
-  {
-    "id": "matteo-il-folle",
-    "title": "Matteo il folle",
-    "category": "Geometric Abstraction",
-    "medium": "Acrylic on Canvas",
-    "width": 1000,
-    "height": 2000,
-    "price": 10000,
-    "status": "Available",
-    "image": "images/img-1774368280545.jpeg",
-    "description": "Immagine bagno Caru",
-    "order": 4
   }
 ]
