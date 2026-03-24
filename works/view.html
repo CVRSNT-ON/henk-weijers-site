@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="author" content="Henk Weijers">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Henk Weijers — Acrylic Painter">
+<title>Loading... — Henk Weijers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#F5F0E8;--text:#1A1A1A;--text-l:#5A5550;--accent:#2B4A8C;--accent-w:#8C3B2B;--border:#D4CFC5;--card:#FFFDF8;--overlay:rgba(26,26,26,.85);--display:'Cormorant Garamond',Georgia,serif;--body:'DM Sans',-apple-system,sans-serif;--max-w:1400px;--g:clamp(1.25rem,4vw,3rem)}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);background:var(--bg);color:var(--text);line-height:1.6;font-weight:300;-webkit-font-smoothing:antialiased}
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.25rem var(--g);display:flex;justify-content:space-between;align-items:center;transition:background .4s,backdrop-filter .4s}
+.nav.scrolled{background:rgba(245,240,232,.92);backdrop-filter:blur(12px);box-shadow:0 1px 0 var(--border)}
+.nav-logo{font-family:var(--display);font-size:1.35rem;font-weight:400;letter-spacing:.04em;color:var(--text);text-decoration:none}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:.78rem;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:var(--text-l);text-decoration:none;transition:color .3s}
+.nav-links a:hover,.nav-links a.active{color:var(--accent)}
+.hamburger{display:none;background:none;border:none;cursor:pointer;width:28px;height:20px;position:relative;z-index:110}
+.hamburger span{display:block;width:100%;height:1.5px;background:var(--text);position:absolute;left:0;transition:all .3s}
+.hamburger span:nth-child(1){top:0}.hamburger span:nth-child(2){top:50%;transform:translateY(-50%)}.hamburger span:nth-child(3){bottom:0}
+.hamburger.active span:nth-child(1){top:50%;transform:translateY(-50%) rotate(45deg)}.hamburger.active span:nth-child(2){opacity:0}.hamburger.active span:nth-child(3){bottom:50%;transform:translateY(50%) rotate(-45deg)}
+.mobile-menu{display:none;position:fixed;inset:0;z-index:105;background:rgba(245,240,232,.98);backdrop-filter:blur(20px);flex-direction:column;justify-content:center;align-items:center;gap:2.5rem}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-family:var(--display);font-size:1.8rem;font-weight:300;color:var(--text);text-decoration:none}
+section{padding:clamp(3rem,6vw,6rem) var(--g)}
+.section-label{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-l);margin-bottom:.75rem}
+.section-title{font-family:var(--display);font-weight:300;font-size:clamp(1.8rem,3.5vw,3rem);line-height:1.15;margin-bottom:1rem}
+.footer{border-top:1px solid var(--border);padding:2rem var(--g);display:flex;justify-content:space-between;align-items:center;max-width:var(--max-w);margin:0 auto;font-size:.78rem;color:var(--text-l);flex-wrap:wrap;gap:.75rem}
+.footer a{color:var(--text-l);text-decoration:none}
+.footer a:hover{color:var(--text)}
+.footer-links{display:flex;gap:1.5rem;flex-wrap:wrap}
+.artwork-detail{max-width:var(--max-w);margin:0 auto;padding-top:6rem}
+.artwork-layout{display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(2rem,4vw,4rem);align-items:start}
+.artwork-main-img{width:100%;display:block;box-shadow:0 4px 20px rgba(0,0,0,.1)}
+.artwork-info .section-title{margin-bottom:.5rem}
+.artwork-meta{font-size:.88rem;color:var(--text-l);margin-bottom:.35rem}
+.artwork-price{font-family:var(--display);font-size:1.8rem;font-weight:500;margin:1rem 0}
+.artwork-desc{font-size:.95rem;color:var(--text-l);line-height:1.75;margin-bottom:2rem}
+.artwork-actions{display:flex;gap:.75rem;flex-wrap:wrap}
+.btn{display:inline-block;text-align:center;font-family:var(--body);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;padding:.8rem 2rem;cursor:pointer;text-decoration:none;transition:all .3s}
+.btn-outline{border:1px solid var(--text);background:none;color:var(--text)}
+.btn-outline:hover{background:var(--text);color:var(--bg)}
+.btn-solid{border:none;background:var(--accent);color:#fff}
+.btn-solid:hover{background:#1e3a6e}
+.pf-badge{display:inline-block;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;padding:.2rem .5rem;background:#2B6B3B;color:#fff;margin-bottom:.35rem}
+.room-section{margin-top:2.5rem}
+.room-scene{position:relative;width:100%;aspect-ratio:16/10;border-radius:6px;overflow:hidden;background:#E2DDD4}
+.room-wall{position:absolute;inset:0;background:linear-gradient(180deg,#EAE5DC 0%,#E2DDD4 60%,#D6D0C5 60.5%,#C4BCB0 61%,#B8AFA2 100%)}
+.room-baseboard{position:absolute;bottom:0;left:0;right:0;height:5%;background:linear-gradient(180deg,#D6CFC3,#C8C0B3)}
+.room-floor{position:absolute;bottom:0;left:0;right:0;height:38%;background:linear-gradient(180deg,#B8AFA2 0%,#A89E90 100%)}
+.room-shadow{position:absolute;bottom:38%;left:50%;transform:translateX(-50%);width:50%;height:3%;background:radial-gradient(ellipse,rgba(0,0,0,.08) 0%,transparent 70%)}
+.room-furniture{position:absolute;bottom:38%;left:50%;transform:translateX(-50%);width:48%}
+.room-sofa-el{width:100%;aspect-ratio:4/1.6;background:linear-gradient(180deg,#A09080 0%,#8E8070 40%,#7D7060 100%);border-radius:8px 8px 4px 4px;position:relative}
+.room-sofa-el::before{content:'';position:absolute;top:15%;left:8%;right:8%;height:40%;background:linear-gradient(90deg,#B0A090,#A89888,#B0A090);border-radius:4px}
+.room-painting-wrap{position:absolute;left:50%;transform:translateX(-50%);box-shadow:0 6px 24px rgba(0,0,0,.2),0 2px 6px rgba(0,0,0,.1);background:#fff;padding:3px}
+.room-painting-wrap img{width:100%;height:100%;object-fit:cover;display:block}
+.room-caption{text-align:center;margin-top:1rem;font-size:.8rem;color:var(--text-l);font-style:italic}
+.loading-msg{text-align:center;padding:8rem 2rem;color:var(--text-l);font-size:1rem}
+@media(max-width:768px){
+  .nav-links{display:none}.hamburger{display:block}
+  .artwork-layout{grid-template-columns:1fr}
+  .footer{flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+<nav class="nav" id="nav">
+  <a href="../index.html" class="nav-logo">Henk Weijers</a>
+  <ul class="nav-links">
+    <li><a href="../index.html#about">About</a></li>
+    <li><a href="../portfolio.html" class="active">Portfolio</a></li>
+    <li><a href="../index.html#approach">Approach</a></li>
+    <li><a href="../index.html#contact">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="../index.html#about" onclick="closeMobile()">About</a>
+  <a href="../portfolio.html" onclick="closeMobile()">Portfolio</a>
+  <a href="../index.html#approach" onclick="closeMobile()">Approach</a>
+  <a href="../index.html#contact" onclick="closeMobile()">Contact</a>
+</div>
+
+<div id="artworkContent">
+  <p class="loading-msg">Loading artwork...</p>
+</div>
+
+<footer class="footer">
+  <span>&copy; 2026 Henk Weijers. All rights reserved.</span>
+  <div class="footer-links">
+    <a href="../privacy-policy.html">Privacy</a>
+    <a href="../cookie-policy.html">Cookies</a>
+    <a href="https://www.instagram.com/henk.weijers_artist" target="_blank" rel="noopener">Instagram</a>
+  </div>
+</footer>
+
+<script>
+// Nav scroll effect
+var nav=document.getElementById("nav");
+if(nav){window.addEventListener("scroll",function(){nav.classList.toggle("scrolled",window.scrollY>60)})}
+var hb=document.getElementById("hamburger"),mm=document.getElementById("mobileMenu");
+if(hb){hb.addEventListener("click",function(){hb.classList.toggle("active");mm.classList.toggle("open");document.body.style.overflow=mm.classList.contains("open")?"hidden":""})}
+function closeMobile(){if(hb){hb.classList.remove("active");mm.classList.remove("open");document.body.style.overflow=""}}
+
+// Escape HTML
+function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+
+// Get artwork ID from URL
+var params = new URLSearchParams(window.location.search);
+var artworkId = params.get('id');
+
+if(!artworkId){
+  document.getElementById('artworkContent').innerHTML = '<p class="loading-msg">Artwork not found. <a href="../portfolio.html" style="color:var(--accent)">Back to Portfolio</a></p>';
+} else {
+  fetch('../works.json').then(function(r){return r.json()}).then(function(works){
+    var sorted = works.sort(function(a,b){return (a.order||99)-(b.order||99)});
+    var idx = sorted.findIndex(function(w){return w.id === artworkId});
+    var work = sorted[idx];
+
+    if(!work){
+      document.getElementById('artworkContent').innerHTML = '<p class="loading-msg">Artwork not found. <a href="../portfolio.html" style="color:var(--accent)">Back to Portfolio</a></p>';
+      return;
+    }
+
+    // Update page title and meta
+    document.title = work.title + ' — Henk Weijers';
+
+    // Calculate room view proportions
+    var w = work.width || 24;
+    var h = work.height || 24;
+    var ratio = (w / h).toFixed(4);
+    var isLandscape = w > h;
+    var isSquare = Math.abs(w - h) < 1;
+    var isSmall = Math.max(w, h) < 16;
+
+    // Painting width as % of room scene
+    var paintWidthPct, paintTop;
+    if(isSmall){
+      paintWidthPct = (w / 100 * 90).toFixed(1);
+      paintTop = '10%';
+    } else if(isSquare || isLandscape){
+      paintWidthPct = '30.0';
+      paintTop = '6%';
+    } else {
+      paintWidthPct = '20.0';
+      paintTop = '6%';
+    }
+
+    // Determine badge color
+    var badgeColor = work.status==='Available'?'#2B6B3B':work.status==='Sold'?'#9B2C2C':'#8B6914';
+
+    // Prev / Next navigation
+    var prevWork = idx > 0 ? sorted[idx-1] : null;
+    var nextWork = idx < sorted.length-1 ? sorted[idx+1] : null;
+    var navHtml = '<div style="display:flex;gap:.75rem;margin-top:2rem">';
+    if(prevWork) navHtml += '<a href="view.html?id='+encodeURIComponent(prevWork.id)+'" class="btn btn-outline">&larr; Prev</a>';
+    if(nextWork) navHtml += '<a href="view.html?id='+encodeURIComponent(nextWork.id)+'" class="btn btn-outline">Next &rarr;</a>';
+    navHtml += '</div>';
+
+    // Purchase/Inquire messages
+    var purchaseMsg = 'Dear Henk, I would like to purchase: &quot;'+esc(work.title)+'&quot; at the price of &euro;'+work.price+'.00. Can you send payment details?';
+    var inquireMsg = 'Dear Henk, I am interested in: &quot;'+esc(work.title)+'&quot; at the price of &euro;'+work.price+'.00. Can you give me additional information?';
+
+    // Build actions (only show purchase/inquire if Available)
+    var actionsHtml = '';
+    if(work.status === 'Available'){
+      actionsHtml = '<div class="artwork-actions">'
+        + '<a href="../index.html#contact" class="btn btn-solid" onclick="sessionStorage.setItem(\'formMsg\',\''+purchaseMsg+'\');sessionStorage.setItem(\'formSubj\',\'purchase\')">Purchase</a>'
+        + '<a href="../index.html#contact" class="btn btn-outline" onclick="sessionStorage.setItem(\'formMsg\',\''+inquireMsg+'\');sessionStorage.setItem(\'formSubj\',\'purchase\')">Inquire</a>'
+        + '</div>';
+    } else if(work.status === 'Sold'){
+      actionsHtml = '<p style="font-size:.88rem;color:var(--danger);font-weight:400;margin-bottom:1rem">This painting has been sold.</p>';
+    } else {
+      actionsHtml = '<p style="font-size:.88rem;color:#8B6914;font-weight:400;margin-bottom:1rem">This painting is currently reserved.</p>';
+    }
+
+    var html = '<section class="artwork-detail">'
+      + '<p style="margin-bottom:1.5rem"><a href="../portfolio.html" style="color:var(--accent);text-decoration:none;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase">&larr; Back to Portfolio</a></p>'
+      + '<div class="artwork-layout">'
+      + '<div>'
+      + '<img src="../'+work.image+'" alt="'+esc(work.title)+'" class="artwork-main-img">'
+      + '<div class="room-section">'
+      + '<p class="section-label" style="margin-bottom:.75rem">View in Room</p>'
+      + '<div class="room-scene">'
+      + '<div class="room-wall"></div>'
+      + '<div class="room-floor"></div>'
+      + '<div class="room-baseboard"></div>'
+      + '<div class="room-shadow"></div>'
+      + '<div class="room-furniture"><div class="room-sofa-el"></div></div>'
+      + '<div class="room-painting-wrap" style="width:'+paintWidthPct+'%;aspect-ratio:'+ratio+';top:'+paintTop+'">'
+      + '<img src="../'+work.image+'" alt="'+esc(work.title)+' in room">'
+      + '</div>'
+      + '</div>'
+      + '<p class="room-caption">Proportionally accurate rendering &mdash; '+work.width+' &times; '+work.height+' in</p>'
+      + '</div>'
+      + '</div>'
+      + '<div class="artwork-info">'
+      + '<p class="section-label">'+esc(work.category || '')+'</p>'
+      + '<h1 class="section-title" style="font-style:italic">'+esc(work.title)+'</h1>'
+      + '<p class="artwork-meta">'+esc(work.medium || 'Acrylic on Canvas')+'</p>'
+      + '<p class="artwork-meta">'+work.width+' &times; '+work.height+' in</p>'
+      + '<p class="artwork-price">&euro;'+work.price+'</p>'
+      + '<span class="pf-badge" style="margin-bottom:1.25rem;background:'+badgeColor+'">'+work.status+'</span>'
+      + '<p class="artwork-desc">'+esc(work.description || '')+'</p>'
+      + actionsHtml
+      + navHtml
+      + '</div>'
+      + '</div>'
+      + '</section>';
+
+    document.getElementById('artworkContent').innerHTML = html;
+
+  }).catch(function(e){
+    console.error('Failed to load artwork:', e);
+    document.getElementById('artworkContent').innerHTML = '<p class="loading-msg">Could not load artwork data. <a href="../portfolio.html" style="color:var(--accent)">Back to Portfolio</a></p>';
+  });
+}
+</script>
+
+<!-- Cookie Banner -->
+<div id="cookieBanner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:rgba(26,26,26,.95);backdrop-filter:blur(10px);padding:1rem clamp(1.25rem,4vw,3rem);color:#F5F0E8">
+  <div style="max-width:1400px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap">
+    <p style="font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:300;line-height:1.6;margin:0;flex:1;min-width:280px">We use essential cookies to ensure the website functions properly. No tracking or advertising cookies are used. <a href="../cookie-policy.html" style="color:#7B9FD4;text-decoration:underline">Cookie Policy</a> · <a href="../privacy-policy.html" style="color:#7B9FD4;text-decoration:underline">Privacy Policy</a></p>
+    <button onclick="acceptCookies()" style="background:#F5F0E8;color:#1A1A1A;border:none;font-family:'DM Sans',sans-serif;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;padding:.6rem 1.5rem;cursor:pointer;white-space:nowrap;font-weight:400;transition:background .3s">Accept</button>
+  </div>
+</div>
+<script>
+(function(){if(!localStorage.getItem('cookieConsent')){document.getElementById('cookieBanner').style.display='block'}})();
+function acceptCookies(){localStorage.setItem('cookieConsent','accepted');document.getElementById('cookieBanner').style.display='none'}
+</script>
+</body>
+</html>

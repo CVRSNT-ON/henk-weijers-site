@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin — Henk Weijers</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#F5F0E8;--text:#1A1A1A;--text-l:#5A5550;--accent:#2B4A8C;--accent-w:#8C3B2B;--border:#D4CFC5;--card:#FFFDF8;--danger:#9B2C2C;--success:#2B6B3B;--display:'Cormorant Garamond',Georgia,serif;--body:'DM Sans',-apple-system,sans-serif;--max-w:1200px;--g:clamp(1.25rem,4vw,2rem)}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);background:var(--bg);color:var(--text);line-height:1.6;font-weight:300;-webkit-font-smoothing:antialiased}
+.admin-nav{position:sticky;top:0;z-index:100;background:rgba(245,240,232,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:.85rem var(--g);display:flex;justify-content:space-between;align-items:center}
+.admin-nav-left{display:flex;align-items:center;gap:1rem}
+.admin-nav-logo{font-family:var(--display);font-size:1.2rem;font-weight:400;letter-spacing:.04em;color:var(--text);text-decoration:none}
+.admin-nav-badge{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;padding:.2rem .5rem;background:var(--accent);color:#fff;border-radius:2px}
+.admin-nav-right{display:flex;align-items:center;gap:1rem}
+.admin-nav a{font-size:.78rem;color:var(--text-l);text-decoration:none;transition:color .3s}
+.admin-nav a:hover{color:var(--accent)}
+#loginScreen{min-height:100vh;display:none;flex-direction:column;justify-content:center;align-items:center;padding:2rem;text-align:center}
+#loginScreen h1{font-family:var(--display);font-weight:300;font-size:2.5rem;margin-bottom:.5rem}
+#loginScreen p{color:var(--text-l);margin-bottom:2rem;font-size:.92rem}
+.login-btn{background:var(--text);color:var(--bg);border:none;font-family:var(--body);font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;padding:.9rem 2.5rem;cursor:pointer;transition:background .3s}
+.login-btn:hover{background:var(--accent)}
+#adminPanel{display:none}
+.admin-content{max-width:var(--max-w);margin:0 auto;padding:2rem var(--g)}
+.admin-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;flex-wrap:wrap;gap:1rem}
+.admin-header h2{font-family:var(--display);font-weight:300;font-size:1.8rem}
+.btn-sm{font-family:var(--body);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;padding:.5rem 1.2rem;cursor:pointer;transition:all .3s;border:none;border-radius:0}
+.btn-primary{background:var(--accent);color:#fff}.btn-primary:hover{background:#1e3a6e}
+.btn-outline-sm{background:none;border:1px solid var(--border);color:var(--text)}.btn-outline-sm:hover{border-color:var(--text)}
+.btn-danger{background:var(--danger);color:#fff}.btn-danger:hover{background:#7a2222}
+.btn-success{background:var(--success);color:#fff}.btn-success:hover{background:#1e5a2e}
+.btn-sm:disabled{opacity:.5;cursor:not-allowed}
+.admin-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-bottom:2.5rem}
+.stat-card{background:var(--card);border:1px solid var(--border);padding:1.25rem;text-align:center}
+.stat-number{font-family:var(--display);font-size:2rem;font-weight:500;color:var(--accent)}
+.stat-label{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-l);margin-top:.25rem}
+.works-table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--border)}
+.works-table th{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-l);text-align:left;padding:.75rem 1rem;border-bottom:1px solid var(--border);background:var(--bg);position:sticky;top:52px;z-index:5}
+.works-table td{padding:.6rem 1rem;border-bottom:1px solid var(--border);font-size:.88rem;vertical-align:middle}
+.works-table tr:hover td{background:rgba(43,74,140,.03)}
+.works-table img{width:50px;height:50px;object-fit:cover;display:block;border:1px solid var(--border)}
+.status-badge{display:inline-block;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;padding:.15rem .45rem;border-radius:2px}
+.status-available{background:#2B6B3B;color:#fff}
+.status-sold{background:var(--danger);color:#fff}
+.status-reserved{background:#8B6914;color:#fff}
+.table-actions{display:flex;gap:.4rem}
+.table-wrap{overflow-x:auto;margin-bottom:2rem}
+.modal-overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(26,26,26,.6);backdrop-filter:blur(4px);justify-content:center;align-items:flex-start;padding:2rem;overflow-y:auto}
+.modal-overlay.open{display:flex}
+.modal{background:var(--bg);border:1px solid var(--border);width:100%;max-width:680px;margin:2rem auto;padding:0;box-shadow:0 20px 60px rgba(0,0,0,.15)}
+.modal-header{display:flex;justify-content:space-between;align-items:center;padding:1.25rem 1.5rem;border-bottom:1px solid var(--border)}
+.modal-header h3{font-family:var(--display);font-weight:400;font-size:1.3rem}
+.modal-close{background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--text-l);transition:color .3s;line-height:1}
+.modal-close:hover{color:var(--text)}
+.modal-body{padding:1.5rem}
+.modal-footer{padding:1rem 1.5rem;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:.5rem}
+.form-group{margin-bottom:1.15rem}
+.form-group label{display:block;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-l);margin-bottom:.35rem}
+.form-group input,.form-group textarea,.form-group select{width:100%;background:var(--card);border:1px solid var(--border);padding:.7rem .9rem;font-family:var(--body);font-size:.88rem;font-weight:300;color:var(--text);transition:border-color .3s;outline:none}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--accent)}
+.form-group textarea{resize:vertical;min-height:100px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem}
+.img-preview{max-width:200px;max-height:200px;object-fit:cover;border:1px solid var(--border);margin-top:.5rem;display:none}
+.img-upload-area{border:2px dashed var(--border);padding:2rem;text-align:center;cursor:pointer;transition:border-color .3s;position:relative}
+.img-upload-area:hover{border-color:var(--accent)}
+.img-upload-area input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer}
+.img-upload-area p{font-size:.82rem;color:var(--text-l)}
+.toast{position:fixed;bottom:2rem;right:2rem;z-index:300;background:var(--text);color:var(--bg);padding:.85rem 1.5rem;font-size:.82rem;opacity:0;transform:translateY(10px);transition:all .3s;pointer-events:none;max-width:400px}
+.toast.show{opacity:1;transform:translateY(0)}
+.toast.error{background:var(--danger)}
+.toast.success{background:var(--success)}
+.saving-overlay{display:none;position:fixed;inset:0;z-index:250;background:rgba(245,240,232,.85);backdrop-filter:blur(6px);justify-content:center;align-items:center;flex-direction:column;gap:1rem}
+.saving-overlay.active{display:flex}
+.saving-overlay p{font-size:1rem;color:var(--text)}
+.spinner{width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.sync-status{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;padding:.2rem .6rem;border-radius:2px;margin-left:.5rem}
+.sync-saved{background:var(--success);color:#fff}
+.sync-unsaved{background:#8B6914;color:#fff}
+.sync-error{background:var(--danger);color:#fff}
+@media(max-width:768px){
+  .form-row,.form-row-3{grid-template-columns:1fr}
+  .admin-stats{grid-template-columns:1fr 1fr}
+  .works-table th:nth-child(5),.works-table td:nth-child(5),
+  .works-table th:nth-child(4),.works-table td:nth-child(4){display:none}
+  .admin-header{flex-direction:column;align-items:flex-start}
+  .admin-nav{flex-wrap:wrap;gap:.5rem}
+  .admin-nav-right{flex-wrap:wrap}
+}
+@media(max-width:480px){
+  .admin-stats{grid-template-columns:1fr}
+  .works-table th:nth-child(3),.works-table td:nth-child(3){display:none}
+}
+</style>
+</head>
+<body>
+
+<div id="loginScreen">
+  <h1>Admin</h1>
+  <p>Sign in to manage your artworks</p>
+  <button class="login-btn" id="loginBtn">Sign In</button>
+</div>
+
+<div id="adminPanel">
+  <nav class="admin-nav">
+    <div class="admin-nav-left">
+      <a href="/" class="admin-nav-logo">Henk Weijers</a>
+      <span class="admin-nav-badge">Admin</span>
+      <span class="sync-status sync-saved" id="syncStatus">Synced</span>
+    </div>
+    <div class="admin-nav-right">
+      <a href="/" target="_blank">View Site</a>
+      <span id="userEmail" style="font-size:.78rem;color:var(--text-l)"></span>
+      <button class="btn-sm btn-outline-sm" onclick="logout()">Sign Out</button>
+    </div>
+  </nav>
+  <div class="admin-content">
+    <div class="admin-header">
+      <h2>Artwork Management</h2>
+      <button class="btn-sm btn-primary" onclick="openAddModal()">+ Add Artwork</button>
+    </div>
+    <div class="admin-stats" id="statsGrid"></div>
+    <div class="table-wrap">
+      <table class="works-table">
+        <thead><tr>
+          <th></th><th>Title</th><th>Category</th><th>Dimensions</th><th>Price</th><th>Status</th><th>Actions</th>
+        </tr></thead>
+        <tbody id="worksTableBody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ADD / EDIT MODAL -->
+<div class="modal-overlay" id="artworkModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="modalTitle">Add Artwork</h3>
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="editId">
+      <div class="form-group">
+        <label for="artTitle">Title</label>
+        <input type="text" id="artTitle" placeholder="e.g. Ruby My Dear">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="artCategory">Category</label>
+          <select id="artCategory">
+            <option value="Geometric Abstraction">Geometric Abstraction</option>
+            <option value="Landscapes">Landscapes</option>
+            <option value="Stylised Realism">Stylised Realism</option>
+            <option value="Ukraine Inspired">Ukraine Inspired</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="artMedium">Medium</label>
+          <input type="text" id="artMedium" value="Acrylic on Canvas">
+        </div>
+      </div>
+      <div class="form-row-3">
+        <div class="form-group">
+          <label for="artWidth">Width (in)</label>
+          <input type="number" id="artWidth" step="0.5" placeholder="24">
+        </div>
+        <div class="form-group">
+          <label for="artHeight">Height (in)</label>
+          <input type="number" id="artHeight" step="0.5" placeholder="24">
+        </div>
+        <div class="form-group">
+          <label for="artPrice">Price (&euro;)</label>
+          <input type="number" id="artPrice" step="1" placeholder="400">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="artStatus">Status</label>
+          <select id="artStatus">
+            <option value="Available">Available</option>
+            <option value="Sold">Sold</option>
+            <option value="Reserved">Reserved</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="artOrder">Display Order</label>
+          <input type="number" id="artOrder" step="1" placeholder="1">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Image</label>
+        <div class="img-upload-area" id="imgUploadArea">
+          <input type="file" id="artImage" accept="image/jpeg,image/png,image/webp" onchange="handleImageSelect(this)">
+          <p>Click or drag an image here<br><small>JPG/PNG/WebP, max 5 MB — uploaded directly to the site</small></p>
+        </div>
+        <img class="img-preview" id="imgPreview">
+        <input type="hidden" id="artImagePath">
+      </div>
+      <div class="form-group">
+        <label for="artDesc">Description</label>
+        <textarea id="artDesc" placeholder="Describe the artwork, its inspiration, and meaning..."></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-sm btn-outline-sm" onclick="closeModal()">Cancel</button>
+      <button class="btn-sm btn-primary" id="saveBtn" onclick="saveArtwork()">Save &amp; Publish</button>
+    </div>
+  </div>
+</div>
+
+<!-- DELETE MODAL -->
+<div class="modal-overlay" id="deleteModal">
+  <div class="modal" style="max-width:420px">
+    <div class="modal-header">
+      <h3>Delete Artwork</h3>
+      <button class="modal-close" onclick="closeDeleteModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:.92rem;color:var(--text-l)">Are you sure you want to delete <strong id="deleteTitle"></strong>?<br>The site will be republished automatically.</p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-sm btn-outline-sm" onclick="closeDeleteModal()">Cancel</button>
+      <button class="btn-sm btn-danger" id="deleteBtn" onclick="confirmDelete()">Delete &amp; Publish</button>
+    </div>
+  </div>
+</div>
+
+<!-- SAVING OVERLAY -->
+<div class="saving-overlay" id="savingOverlay">
+  <div class="spinner"></div>
+  <p id="savingMsg">Saving to repository...</p>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ============================================================
+// CONFIGURATION
+// ============================================================
+const GIT_API = '/.netlify/git/github';
+const WORKS_PATH = 'works.json';
+const IMAGES_DIR = 'images';
+const BRANCH = 'main';
+
+let works = [];
+let worksSha = null; // SHA of current works.json for updates
+let deleteTargetId = null;
+let pendingImageFile = null;
+let pendingImageBase64 = null;
+
+// ============================================================
+// GIT GATEWAY API HELPERS
+// ============================================================
+function getToken() {
+  const user = netlifyIdentity.currentUser();
+  if (!user) return null;
+  return user.jwt();
+}
+
+async function gitAPI(path, options = {}) {
+  const token = await getToken();
+  if (!token) throw new Error('Not authenticated');
+  const res = await fetch(GIT_API + path, {
+    ...options,
+    headers: {
+      'Authorization': 'Bearer ' + token,
+      'Content-Type': 'application/json',
+      ...(options.headers || {})
+    }
+  });
+  if (!res.ok) {
+    const err = await res.text().catch(() => res.statusText);
+    throw new Error('Git API error (' + res.status + '): ' + err);
+  }
+  return res.json();
+}
+
+// Read a file from the repo
+async function readFile(path) {
+  const data = await gitAPI('/contents/' + path + '?ref=' + BRANCH);
+  return {
+    content: atob(data.content.replace(/\n/g, '')),
+    sha: data.sha
+  };
+}
+
+// Write (create or update) a file in the repo
+async function writeFile(path, content, message, sha) {
+  const body = {
+    message: message,
+    content: btoa(unescape(encodeURIComponent(content))),
+    branch: BRANCH
+  };
+  if (sha) body.sha = sha;
+  return gitAPI('/contents/' + path, {
+    method: 'PUT',
+    body: JSON.stringify(body)
+  });
+}
+
+// Upload a binary file (image) to the repo
+async function uploadBinaryFile(path, base64Data, message) {
+  // Check if file already exists to get its SHA
+  let sha = null;
+  try {
+    const existing = await gitAPI('/contents/' + path + '?ref=' + BRANCH);
+    sha = existing.sha;
+  } catch(e) { /* file doesn't exist, that's fine */ }
+
+  const body = {
+    message: message,
+    content: base64Data,
+    branch: BRANCH
+  };
+  if (sha) body.sha = sha;
+  return gitAPI('/contents/' + path, {
+    method: 'PUT',
+    body: JSON.stringify(body)
+  });
+}
+
+// ============================================================
+// DATA MANAGEMENT
+// ============================================================
+async function loadWorks() {
+  try {
+    setSyncStatus('loading');
+    const file = await readFile(WORKS_PATH);
+    works = JSON.parse(file.content);
+    worksSha = file.sha;
+    renderAll();
+    setSyncStatus('saved');
+  } catch(e) {
+    console.error('Failed to load works.json from repo:', e);
+    // Fallback: try fetching from the deployed site
+    try {
+      const res = await fetch('/works.json?' + Date.now());
+      if (res.ok) {
+        works = await res.json();
+        renderAll();
+        setSyncStatus('saved');
+        showToast('Loaded works from deployed site', '');
+      }
+    } catch(e2) {
+      works = [];
+      renderAll();
+      setSyncStatus('error');
+      showToast('Could not load works data', 'error');
+    }
+  }
+}
+
+async function saveWorksToRepo(commitMessage) {
+  const json = JSON.stringify(works, null, 2);
+  try {
+    const result = await writeFile(WORKS_PATH, json, commitMessage, worksSha);
+    worksSha = result.content.sha;
+    setSyncStatus('saved');
+    return true;
+  } catch(e) {
+    console.error('Failed to save works.json:', e);
+    setSyncStatus('error');
+    showToast('Failed to save: ' + e.message, 'error');
+    return false;
+  }
+}
+
+function slugify(t) {
+  return t.toLowerCase().replace(/[^\w\s-]/g,'').replace(/\s+/g,'-').replace(/-+/g,'-').trim();
+}
+
+function esc(s) { const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+
+// ============================================================
+// SYNC STATUS
+// ============================================================
+function setSyncStatus(status) {
+  const el = document.getElementById('syncStatus');
+  if (status === 'saved') { el.textContent = 'Synced'; el.className = 'sync-status sync-saved'; }
+  else if (status === 'unsaved') { el.textContent = 'Unsaved'; el.className = 'sync-status sync-unsaved'; }
+  else if (status === 'error') { el.textContent = 'Error'; el.className = 'sync-status sync-error'; }
+  else if (status === 'loading') { el.textContent = 'Loading...'; el.className = 'sync-status sync-unsaved'; }
+}
+
+function showSaving(msg) {
+  document.getElementById('savingMsg').textContent = msg || 'Saving to repository...';
+  document.getElementById('savingOverlay').classList.add('active');
+}
+function hideSaving() {
+  document.getElementById('savingOverlay').classList.remove('active');
+}
+
+// ============================================================
+// RENDERING
+// ============================================================
+function renderAll() { renderStats(); renderTable(); }
+
+function renderStats() {
+  const total = works.length;
+  const avail = works.filter(w => w.status === 'Available').length;
+  const sold = works.filter(w => w.status === 'Sold').length;
+  const val = works.filter(w => w.status === 'Available').reduce((s,w) => s + (w.price||0), 0);
+  document.getElementById('statsGrid').innerHTML =
+    `<div class="stat-card"><div class="stat-number">${total}</div><div class="stat-label">Total Works</div></div>` +
+    `<div class="stat-card"><div class="stat-number">${avail}</div><div class="stat-label">Available</div></div>` +
+    `<div class="stat-card"><div class="stat-number">${sold}</div><div class="stat-label">Sold</div></div>` +
+    `<div class="stat-card"><div class="stat-number">&euro;${val.toLocaleString()}</div><div class="stat-label">Portfolio Value</div></div>`;
+}
+
+function renderTable() {
+  const sorted = [...works].sort((a,b) => (a.order||99) - (b.order||99));
+  const tbody = document.getElementById('worksTableBody');
+  if (!sorted.length) {
+    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:3rem;color:var(--text-l)">No artworks yet. Click "+ Add Artwork" to begin.</td></tr>';
+    return;
+  }
+  tbody.innerHTML = sorted.map(w => {
+    const sc = w.status==='Available'?'status-available':w.status==='Sold'?'status-sold':'status-reserved';
+    return `<tr>
+      <td><img src="/${w.image||'favicon.svg'}" alt="${esc(w.title)}" onerror="this.src='/favicon.svg'"></td>
+      <td><strong style="font-family:var(--display);font-weight:400;font-style:italic">${esc(w.title)}</strong></td>
+      <td style="font-size:.82rem;color:var(--text-l)">${esc(w.category||'')}</td>
+      <td style="font-size:.82rem">${w.width||'?'} &times; ${w.height||'?'} in</td>
+      <td style="font-family:var(--display);font-weight:500">&euro;${(w.price||0).toLocaleString()}</td>
+      <td><span class="status-badge ${sc}">${w.status}</span></td>
+      <td><div class="table-actions">
+        <button class="btn-sm btn-outline-sm" onclick="openEditModal('${w.id}')">Edit</button>
+        <button class="btn-sm btn-danger" onclick="openDeleteModal('${w.id}')">Del</button>
+      </div></td>
+    </tr>`;
+  }).join('');
+}
+
+// ============================================================
+// IMAGE HANDLING
+// ============================================================
+function handleImageSelect(input) {
+  if (!input.files || !input.files[0]) return;
+  const file = input.files[0];
+
+  // Validate
+  if (file.size > 5 * 1024 * 1024) {
+    showToast('Image too large. Maximum 5 MB.', 'error');
+    input.value = '';
+    return;
+  }
+
+  pendingImageFile = file;
+
+  // Show preview
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const p = document.getElementById('imgPreview');
+    p.src = e.target.result;
+    p.style.display = 'block';
+
+    // Store pure base64 (without data: prefix) for GitHub API
+    pendingImageBase64 = e.target.result.split(',')[1];
+  };
+  reader.readAsDataURL(file);
+}
+
+async function uploadImage(file, base64) {
+  // Generate unique filename from slug + timestamp
+  const ext = file.name.split('.').pop().toLowerCase();
+  const safeName = 'img-' + Date.now() + '.' + ext;
+  const path = IMAGES_DIR + '/' + safeName;
+
+  await uploadBinaryFile(path, base64, 'Add image: ' + safeName);
+  return path;
+}
+
+// ============================================================
+// ADD / EDIT MODAL
+// ============================================================
+function openAddModal() {
+  document.getElementById('modalTitle').textContent = 'Add Artwork';
+  document.getElementById('editId').value = '';
+  document.getElementById('artTitle').value = '';
+  document.getElementById('artCategory').value = 'Geometric Abstraction';
+  document.getElementById('artMedium').value = 'Acrylic on Canvas';
+  document.getElementById('artWidth').value = '';
+  document.getElementById('artHeight').value = '';
+  document.getElementById('artPrice').value = '';
+  document.getElementById('artStatus').value = 'Available';
+  document.getElementById('artOrder').value = works.length + 1;
+  document.getElementById('artDesc').value = '';
+  document.getElementById('artImagePath').value = '';
+  document.getElementById('artImage').value = '';
+  document.getElementById('imgPreview').style.display = 'none';
+  pendingImageFile = null;
+  pendingImageBase64 = null;
+  document.getElementById('artworkModal').classList.add('open');
+}
+
+function openEditModal(id) {
+  const w = works.find(x => x.id === id);
+  if (!w) return;
+  document.getElementById('modalTitle').textContent = 'Edit Artwork';
+  document.getElementById('editId').value = w.id;
+  document.getElementById('artTitle').value = w.title || '';
+  document.getElementById('artCategory').value = w.category || 'Geometric Abstraction';
+  document.getElementById('artMedium').value = w.medium || 'Acrylic on Canvas';
+  document.getElementById('artWidth').value = w.width || '';
+  document.getElementById('artHeight').value = w.height || '';
+  document.getElementById('artPrice').value = w.price || '';
+  document.getElementById('artStatus').value = w.status || 'Available';
+  document.getElementById('artOrder').value = w.order || 1;
+  document.getElementById('artDesc').value = w.description || '';
+  document.getElementById('artImagePath').value = w.image || '';
+  const prev = document.getElementById('imgPreview');
+  if (w.image) { prev.src = '/' + w.image; prev.style.display = 'block'; } else { prev.style.display = 'none'; }
+  pendingImageFile = null;
+  pendingImageBase64 = null;
+  document.getElementById('artImage').value = '';
+  document.getElementById('artworkModal').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('artworkModal').classList.remove('open');
+  pendingImageFile = null;
+  pendingImageBase64 = null;
+}
+
+async function saveArtwork() {
+  const title = document.getElementById('artTitle').value.trim();
+  if (!title) { showToast('Please enter a title', 'error'); return; }
+
+  const editId = document.getElementById('editId').value;
+  const id = editId || slugify(title);
+  if (!editId && works.find(w => w.id === id)) {
+    showToast('An artwork with a similar title already exists', 'error');
+    return;
+  }
+
+  // Disable save button
+  document.getElementById('saveBtn').disabled = true;
+  showSaving(pendingImageFile ? 'Uploading image...' : 'Saving artwork...');
+
+  try {
+    let imagePath = document.getElementById('artImagePath').value.trim();
+
+    // Upload image if a new one was selected
+    if (pendingImageFile && pendingImageBase64) {
+      imagePath = await uploadImage(pendingImageFile, pendingImageBase64);
+      showSaving('Saving artwork data...');
+    }
+
+    const data = {
+      id, title,
+      category: document.getElementById('artCategory').value,
+      medium: document.getElementById('artMedium').value,
+      width: parseFloat(document.getElementById('artWidth').value) || 0,
+      height: parseFloat(document.getElementById('artHeight').value) || 0,
+      price: parseInt(document.getElementById('artPrice').value) || 0,
+      status: document.getElementById('artStatus').value,
+      image: imagePath,
+      description: document.getElementById('artDesc').value.trim(),
+      order: parseInt(document.getElementById('artOrder').value) || works.length + 1
+    };
+
+    if (editId) {
+      const idx = works.findIndex(w => w.id === editId);
+      if (idx !== -1) {
+        if (!data.image && works[idx].image) data.image = works[idx].image;
+        works[idx] = { ...works[idx], ...data };
+      }
+    } else {
+      works.push(data);
+    }
+
+    const action = editId ? 'Update' : 'Add';
+    const ok = await saveWorksToRepo(action + ' artwork: ' + title);
+
+    if (ok) {
+      showToast(editId ? 'Artwork updated & published!' : 'Artwork added & published!', 'success');
+      renderAll();
+      closeModal();
+    }
+  } catch(e) {
+    console.error('Save failed:', e);
+    showToast('Save failed: ' + e.message, 'error');
+  } finally {
+    document.getElementById('saveBtn').disabled = false;
+    hideSaving();
+  }
+}
+
+// ============================================================
+// DELETE
+// ============================================================
+function openDeleteModal(id) {
+  deleteTargetId = id;
+  const w = works.find(x => x.id === id);
+  document.getElementById('deleteTitle').textContent = w ? w.title : id;
+  document.getElementById('deleteModal').classList.add('open');
+}
+
+function closeDeleteModal() {
+  document.getElementById('deleteModal').classList.remove('open');
+  deleteTargetId = null;
+}
+
+async function confirmDelete() {
+  if (!deleteTargetId) return;
+
+  const w = works.find(x => x.id === deleteTargetId);
+  const title = w ? w.title : deleteTargetId;
+
+  document.getElementById('deleteBtn').disabled = true;
+  showSaving('Deleting artwork...');
+
+  try {
+    works = works.filter(w => w.id !== deleteTargetId);
+    const ok = await saveWorksToRepo('Delete artwork: ' + title);
+    if (ok) {
+      showToast('Artwork deleted & published', 'success');
+      renderAll();
+    }
+  } catch(e) {
+    showToast('Delete failed: ' + e.message, 'error');
+  } finally {
+    document.getElementById('deleteBtn').disabled = false;
+    hideSaving();
+    closeDeleteModal();
+  }
+}
+
+// ============================================================
+// TOAST
+// ============================================================
+function showToast(msg, type) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show' + (type ? ' ' + type : '');
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => { t.className = 'toast'; }, 5000);
+}
+
+// ============================================================
+// AUTH — NETLIFY IDENTITY
+// ============================================================
+const netlifyIdentity = window.netlifyIdentity;
+
+function initAuth() {
+  if (!netlifyIdentity) {
+    console.warn('Netlify Identity not loaded');
+    document.getElementById('loginScreen').style.display = 'flex';
+    return;
+  }
+
+  netlifyIdentity.init();
+
+  const user = netlifyIdentity.currentUser();
+  if (user) {
+    showAdmin(user.email);
+    loadWorks();
+  } else {
+    document.getElementById('loginScreen').style.display = 'flex';
+  }
+
+  netlifyIdentity.on('login', function(u) {
+    showAdmin(u.email);
+    loadWorks();
+    netlifyIdentity.close();
+  });
+
+  netlifyIdentity.on('logout', function() {
+    document.getElementById('adminPanel').style.display = 'none';
+    document.getElementById('loginScreen').style.display = 'flex';
+    works = [];
+    worksSha = null;
+  });
+}
+
+function showAdmin(email) {
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('adminPanel').style.display = 'block';
+  document.getElementById('userEmail').textContent = email || '';
+}
+
+function logout() {
+  if (netlifyIdentity) netlifyIdentity.logout();
+}
+
+// Event listeners
+document.getElementById('loginBtn').addEventListener('click', function() {
+  if (netlifyIdentity) netlifyIdentity.open('login');
+});
+document.getElementById('artworkModal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+document.getElementById('deleteModal').addEventListener('click', function(e) { if (e.target === this) closeDeleteModal(); });
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { closeModal(); closeDeleteModal(); } });
+
+// Init
+initAuth();
+</script>
+</body>
+</html>
