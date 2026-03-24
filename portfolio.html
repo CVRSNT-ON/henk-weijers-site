@@ -181,7 +181,7 @@ section{padding:clamp(3rem,6vw,6rem) var(--g)}
 
   function buildFilters(){
     var cats = ['All'];
-    allWorks.forEach(function(w){ if(w.category && cats.indexOf(w.category)===-1) cats.push(w.category); });
+    allWorks.filter(function(w){return w.status !== 'Sold'}).forEach(function(w){ if(w.category && cats.indexOf(w.category)===-1) cats.push(w.category); });
     var bar = document.getElementById('filterBar');
     if(!bar) return;
     bar.innerHTML = cats.map(function(c){
@@ -199,7 +199,9 @@ section{padding:clamp(3rem,6vw,6rem) var(--g)}
   }
 
   function renderPortfolio(){
-    var filtered = activeFilter === 'All' ? allWorks : allWorks.filter(function(w){return w.category === activeFilter});
+    // Hide sold works from public portfolio
+    var visible = allWorks.filter(function(w){return w.status !== 'Sold'});
+    var filtered = activeFilter === 'All' ? visible : visible.filter(function(w){return w.category === activeFilter});
     var grid = document.getElementById('portfolioGrid');
     if(!grid) return;
     var html = '';

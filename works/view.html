@@ -173,17 +173,22 @@ if(!artworkId){
     var purchaseMsg = 'Dear Henk, I would like to purchase: &quot;'+esc(work.title)+'&quot; at the price of &euro;'+work.price+'.00. Can you send payment details?';
     var inquireMsg = 'Dear Henk, I am interested in: &quot;'+esc(work.title)+'&quot; at the price of &euro;'+work.price+'.00. Can you give me additional information?';
 
-    // Build actions (only show purchase/inquire if Available)
+    // Redirect sold works to portfolio
+    if(work.status === 'Sold'){
+      document.getElementById('artworkContent').innerHTML = '<p class="loading-msg">This artwork has been sold. <a href="../portfolio.html" style="color:var(--accent)">Browse available works</a></p>';
+      return;
+    }
+
+    // Build actions
     var actionsHtml = '';
     if(work.status === 'Available'){
       actionsHtml = '<div class="artwork-actions">'
-        + '<a href="../index.html#contact" class="btn btn-solid" onclick="sessionStorage.setItem(\'formMsg\',\''+purchaseMsg+'\');sessionStorage.setItem(\'formSubj\',\'purchase\')">Purchase</a>'
+        // Buy Now button (predisposed for Stripe — currently links to contact form)
+        + '<button class="btn btn-solid" id="buyNowBtn" data-id="'+work.id+'" data-price="'+work.price+'" onclick="handleBuyNow(this)">Buy Now &mdash; &euro;'+work.price+'</button>'
         + '<a href="../index.html#contact" class="btn btn-outline" onclick="sessionStorage.setItem(\'formMsg\',\''+inquireMsg+'\');sessionStorage.setItem(\'formSubj\',\'purchase\')">Inquire</a>'
         + '</div>';
-    } else if(work.status === 'Sold'){
-      actionsHtml = '<p style="font-size:.88rem;color:var(--danger);font-weight:400;margin-bottom:1rem">This painting has been sold.</p>';
     } else {
-      actionsHtml = '<p style="font-size:.88rem;color:#8B6914;font-weight:400;margin-bottom:1rem">This painting is currently reserved.</p>';
+      actionsHtml = '<p style="font-size:.88rem;color:#8B6914;font-weight:400;margin-bottom:1rem">This painting is currently reserved. <a href="../index.html#contact" style="color:var(--accent)" onclick="sessionStorage.setItem(\'formMsg\',\''+inquireMsg+'\');sessionStorage.setItem(\'formSubj\',\'purchase\')">Ask about availability</a></p>';
     }
 
     var html = '<section class="artwork-detail">'
@@ -226,6 +231,23 @@ if(!artworkId){
     console.error('Failed to load artwork:', e);
     document.getElementById('artworkContent').innerHTML = '<p class="loading-msg">Could not load artwork data. <a href="../portfolio.html" style="color:var(--accent)">Back to Portfolio</a></p>';
   });
+}
+</script>
+
+
+<script>
+// Buy Now handler — predisposed for Stripe Checkout
+// When Stripe is connected, replace the body of this function with:
+// fetch('/.netlify/functions/create-checkout', { method:'POST', body: JSON.stringify({id, price}) })
+// .then(r => r.json()).then(s => window.location = s.url);
+function handleBuyNow(btn) {
+  var id = btn.dataset.id;
+  var price = btn.dataset.price;
+  var title = document.querySelector('.section-title') ? document.querySelector('.section-title').textContent : 'this artwork';
+  var msg = 'Dear Henk, I would like to purchase: "' + title + '" at the price of €' + price + '.00. Can you send payment details?';
+  sessionStorage.setItem('formMsg', msg);
+  sessionStorage.setItem('formSubj', 'purchase');
+  window.location.href = '../index.html#contact';
 }
 </script>
 

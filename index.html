@@ -259,7 +259,7 @@ window.addEventListener('load', function() {
     var grid = document.getElementById('homeWorksGrid');
     if(!grid) return;
     // Show only featured works, max 12
-    var featured = sorted.filter(function(w){return w.featured});
+    var featured = sorted.filter(function(w){return w.featured && w.status !== 'Sold'});
     var toShow = featured.slice(0, 12);
     var html = '';
     for(var i=0; i<toShow.length; i++){

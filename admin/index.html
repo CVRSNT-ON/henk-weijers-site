@@ -49,6 +49,10 @@ body{font-family:var(--body);background:var(--bg);color:var(--text);line-height:
 .status-available{background:#2B6B3B;color:#fff}
 .status-sold{background:var(--danger);color:#fff}
 .status-reserved{background:#8B6914;color:#fff}
+.status-select{font-family:var(--body);font-size:.65rem;letter-spacing:.06em;text-transform:uppercase;padding:.2rem .35rem;border-radius:2px;border:none;cursor:pointer;font-weight:500;outline:none;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='5'%3E%3Cpath d='M0 0l4 5 4-5z' fill='%23fff'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 4px center;padding-right:16px}
+.status-select.sel-available{background:#2B6B3B;color:#fff}
+.status-select.sel-sold{background:var(--danger);color:#fff}
+.status-select.sel-reserved{background:#8B6914;color:#fff}
 .table-actions{display:flex;gap:.4rem}
 .table-wrap{overflow-x:auto;margin-bottom:2rem}
 .star{cursor:pointer;font-size:1.2rem;transition:color .2s;background:none;border:none;padding:0}
@@ -88,6 +92,8 @@ tr.drag-over td{border-top:2px solid var(--accent)}
 .saving-overlay p{font-size:1rem;color:var(--text)}
 .spinner{width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(43,107,59,.4)}50%{box-shadow:0 0 0 8px rgba(43,107,59,0)}}
+.btn-publish-pulse{animation:pulse 2s infinite}
 .sync-status{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;padding:.2rem .6rem;border-radius:2px;margin-left:.5rem}
 .sync-saved{background:var(--success);color:#fff}
 .sync-unsaved{background:#8B6914;color:#fff}
@@ -133,9 +139,15 @@ tr.drag-over td{border-top:2px solid var(--accent)}
   <div class="admin-content">
     <div class="admin-header">
       <h2>Artwork Management</h2>
-      <button class="btn-sm btn-primary" onclick="openAddModal()">+ Add Artwork</button>
+      <div style="display:flex;gap:.5rem;flex-wrap:wrap;align-items:center">
+        <button class="btn-sm btn-primary" onclick="openAddModal()">+ Add Artwork</button>
+        <button class="btn-sm btn-success" id="publishBtn" onclick="publishChanges()" style="display:none">&#9650; Publish Changes <span id="changeCount"></span></button>
+      </div>
     </div>
     <div class="admin-stats" id="statsGrid"></div>
+    <div style="margin-bottom:1rem">
+      <input type="text" id="searchInput" placeholder="Search artworks..." oninput="renderTable()" style="width:100%;max-width:320px;background:var(--card);border:1px solid var(--border);padding:.55rem .9rem;font-family:var(--body);font-size:.85rem;font-weight:300;color:var(--text);outline:none">
+    </div>
     <div class="table-wrap">
       <table class="works-table">
         <thead><tr>
@@ -217,13 +229,14 @@ tr.drag-over td{border-top:2px solid var(--accent)}
         <input type="hidden" id="artImagePath">
       </div>
       <div class="form-group">
-        <label for="artDesc">Description</label>
-        <textarea id="artDesc" placeholder="Describe the artwork, its inspiration, and meaning..."></textarea>
+        <label for="artDesc">Description <span id="charCount" style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--text-l)"></span></label>
+        <textarea id="artDesc" placeholder="Describe the artwork, its inspiration, and meaning..." oninput="updateCharCount()"></textarea>
+        <p style="font-size:.68rem;color:var(--text-l);margin-top:.25rem">Ideal: 150–300 characters for SEO</p>
       </div>
     </div>
     <div class="modal-footer">
       <button class="btn-sm btn-outline-sm" onclick="closeModal()">Cancel</button>
-      <button class="btn-sm btn-primary" id="saveBtn" onclick="saveArtwork()">Save &amp; Publish</button>
+      <button class="btn-sm btn-primary" id="saveBtn" onclick="saveArtwork()">Save Artwork</button>
     </div>
   </div>
 </div>
@@ -240,7 +253,7 @@ tr.drag-over td{border-top:2px solid var(--accent)}
     </div>
     <div class="modal-footer">
       <button class="btn-sm btn-outline-sm" onclick="closeDeleteModal()">Cancel</button>
-      <button class="btn-sm btn-danger" id="deleteBtn" onclick="confirmDelete()">Delete &amp; Publish</button>
+      <button class="btn-sm btn-danger" id="deleteBtn" onclick="confirmDelete()">Delete</button>
     </div>
   </div>
 </div>
@@ -263,10 +276,11 @@ const IMAGES_DIR = 'images';
 const BRANCH = 'main';
 
 let works = [];
-let worksSha = null; // SHA of current works.json for updates
+let worksSha = null;
 let deleteTargetId = null;
 let pendingImageFile = null;
 let pendingImageBase64 = null;
+let pendingChanges = 0;
 
 // ============================================================
 // GIT GATEWAY API HELPERS
@@ -376,12 +390,50 @@ async function saveWorksToRepo(commitMessage) {
     const result = await writeFile(WORKS_PATH, json, commitMessage, worksSha);
     worksSha = result.content.sha;
     setSyncStatus('saved');
+    pendingChanges = 0;
+    updatePublishBtn();
     return true;
   } catch(e) {
     console.error('Failed to save works.json:', e);
     setSyncStatus('error');
     showToast('Failed to save: ' + e.message, 'error');
     return false;
+  }
+}
+
+function markChanged() {
+  pendingChanges++;
+  setSyncStatus('unsaved');
+  updatePublishBtn();
+}
+
+function updatePublishBtn() {
+  const btn = document.getElementById('publishBtn');
+  const cnt = document.getElementById('changeCount');
+  if (pendingChanges > 0) {
+    btn.style.display = 'inline-block';
+    btn.classList.add('btn-publish-pulse');
+    cnt.textContent = '(' + pendingChanges + ')';
+  } else {
+    btn.style.display = 'none';
+    btn.classList.remove('btn-publish-pulse');
+  }
+}
+
+async function publishChanges() {
+  if (pendingChanges === 0) return;
+  document.getElementById('publishBtn').disabled = true;
+  showSaving('Publishing ' + pendingChanges + ' change' + (pendingChanges > 1 ? 's' : '') + '...');
+  try {
+    const ok = await saveWorksToRepo('Update artworks (' + pendingChanges + ' changes)');
+    if (ok) {
+      showToast('All changes published! Site updating...', 'success');
+    }
+  } catch(e) {
+    showToast('Publish failed: ' + e.message, 'error');
+  } finally {
+    document.getElementById('publishBtn').disabled = false;
+    hideSaving();
   }
 }
 
@@ -394,7 +446,6 @@ function esc(s) { const d=document.createElement('div'); d.textContent=s; return
 async function toggleFeatured(id) {
   const w = works.find(x => x.id === id);
   if (!w) return;
-  // Check max 12 featured
   if (!w.featured) {
     const featuredCount = works.filter(x => x.featured).length;
     if (featuredCount >= 12) {
@@ -404,19 +455,40 @@ async function toggleFeatured(id) {
   }
   w.featured = !w.featured;
   renderAll();
-  showSaving('Updating homepage...');
-  try {
-    const ok = await saveWorksToRepo((w.featured ? 'Feature' : 'Unfeature') + ' on homepage: ' + w.title);
-    if (ok) {
-      const fc = works.filter(x => x.featured).length;
-      showToast(w.featured ? 'Added to homepage (' + fc + '/12)' : 'Removed from homepage', 'success');
-    }
-  } catch(e) {
-    showToast('Failed to save: ' + e.message, 'error');
-  } finally {
-    hideSaving();
-  }
+  markChanged();
+  const fc = works.filter(x => x.featured).length;
+  showToast(w.featured ? 'Marked for homepage (' + fc + '/12) — publish to apply' : 'Removed from homepage — publish to apply', 'success');
 }
+
+function changeStatus(id, newStatus) {
+  const w = works.find(x => x.id === id);
+  if (!w || w.status === newStatus) return;
+  w.status = newStatus;
+  // If sold, auto-remove from featured
+  if (newStatus === 'Sold' && w.featured) {
+    w.featured = false;
+  }
+  renderAll();
+  markChanged();
+  showToast(w.title + ' → ' + newStatus + ' — publish to apply', 'success');
+}
+
+function updateCharCount() {
+  const len = (document.getElementById('artDesc').value || '').length;
+  const el = document.getElementById('charCount');
+  const color = len === 0 ? 'var(--text-l)' : len < 150 ? '#8B6914' : len <= 300 ? 'var(--success)' : 'var(--danger)';
+  el.style.color = color;
+  el.textContent = '(' + len + ' chars)';
+}
+
+// Warn before leaving with unsaved changes
+window.addEventListener('beforeunload', function(e) {
+  if (pendingChanges > 0) {
+    e.preventDefault();
+    e.returnValue = 'You have unpublished changes. Leave anyway?';
+    return e.returnValue;
+  }
+});
 
 // ============================================================
 // SYNC STATUS
@@ -445,34 +517,47 @@ function renderAll() { renderStats(); renderTable(); }
 function renderStats() {
   const total = works.length;
   const avail = works.filter(w => w.status === 'Available').length;
+  const reserved = works.filter(w => w.status === 'Reserved').length;
   const sold = works.filter(w => w.status === 'Sold').length;
-  const val = works.filter(w => w.status === 'Available').reduce((s,w) => s + (w.price||0), 0);
   document.getElementById('statsGrid').innerHTML =
     `<div class="stat-card"><div class="stat-number">${total}</div><div class="stat-label">Total Works</div></div>` +
     `<div class="stat-card"><div class="stat-number">${avail}</div><div class="stat-label">Available</div></div>` +
-    `<div class="stat-card"><div class="stat-number">${sold}</div><div class="stat-label">Sold</div></div>` +
-    `<div class="stat-card"><div class="stat-number">&euro;${val.toLocaleString()}</div><div class="stat-label">Portfolio Value</div></div>`;
+    `<div class="stat-card"><div class="stat-number">${reserved}</div><div class="stat-label">Reserved</div></div>` +
+    `<div class="stat-card"><div class="stat-number">${sold}</div><div class="stat-label">Sold</div></div>`;
 }
 
 function renderTable() {
-  const sorted = [...works].sort((a,b) => (a.order||99) - (b.order||99));
+  const searchTerm = (document.getElementById('searchInput')?.value || '').toLowerCase();
+  let sorted = [...works].sort((a,b) => (a.order||99) - (b.order||99));
+  if (searchTerm) {
+    sorted = sorted.filter(w =>
+      (w.title||'').toLowerCase().includes(searchTerm) ||
+      (w.category||'').toLowerCase().includes(searchTerm) ||
+      (w.status||'').toLowerCase().includes(searchTerm)
+    );
+  }
   const tbody = document.getElementById('worksTableBody');
   if (!sorted.length) {
-    tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;padding:3rem;color:var(--text-l)">No artworks yet. Click "+ Add Artwork" to begin.</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;padding:3rem;color:var(--text-l)">' + (searchTerm ? 'No results for "'+esc(searchTerm)+'"' : 'No artworks yet. Click "+ Add Artwork" to begin.') + '</td></tr>';
     return;
   }
   tbody.innerHTML = sorted.map((w, idx) => {
-    const sc = w.status==='Available'?'status-available':w.status==='Sold'?'status-sold':'status-reserved';
+    const selClass = w.status==='Available'?'sel-available':w.status==='Sold'?'sel-sold':'sel-reserved';
     const starClass = w.featured ? 'star on' : 'star off';
     const starChar = w.featured ? '&#9733;' : '&#9734;';
+    const imgSrc = w.image ? '/'+w.image : '/favicon.svg';
     return `<tr draggable="true" data-id="${w.id}" data-idx="${idx}">
       <td><span class="drag-handle" title="Drag to reorder">&#9776;</span></td>
-      <td><img src="/${w.image||'favicon.svg'}" alt="${esc(w.title)}" onerror="this.src='/favicon.svg'"></td>
+      <td><img src="${imgSrc}" alt="${esc(w.title)}" onerror="this.src='/favicon.svg'"></td>
       <td><strong style="font-family:var(--display);font-weight:400;font-style:italic">${esc(w.title)}</strong></td>
       <td style="font-size:.82rem;color:var(--text-l)">${esc(w.category||'')}</td>
       <td style="font-size:.82rem">${w.width||'?'} &times; ${w.height||'?'} in</td>
       <td style="font-family:var(--display);font-weight:500">&euro;${(w.price||0).toLocaleString()}</td>
-      <td><span class="status-badge ${sc}">${w.status}</span></td>
+      <td><select class="status-select ${selClass}" onchange="changeStatus('${w.id}',this.value)">
+        <option value="Available"${w.status==='Available'?' selected':''}>Available</option>
+        <option value="Reserved"${w.status==='Reserved'?' selected':''}>Reserved</option>
+        <option value="Sold"${w.status==='Sold'?' selected':''}>Sold</option>
+      </select></td>
       <td><button class="${starClass}" onclick="toggleFeatured('${w.id}')" title="Show on Homepage">${starChar}</button></td>
       <td><div class="table-actions">
         <button class="btn-sm btn-outline-sm" onclick="openEditModal('${w.id}')">Edit</button>
@@ -601,17 +686,16 @@ async function saveArtwork() {
     return;
   }
 
-  // Disable save button
   document.getElementById('saveBtn').disabled = true;
-  showSaving(pendingImageFile ? 'Uploading image...' : 'Saving artwork...');
 
   try {
     let imagePath = document.getElementById('artImagePath').value.trim();
 
-    // Upload image if a new one was selected
+    // Upload image to repo immediately (needs to be there for the site)
     if (pendingImageFile && pendingImageBase64) {
+      showSaving('Uploading image...');
       imagePath = await uploadImage(pendingImageFile, pendingImageBase64);
-      showSaving('Saving artwork data...');
+      hideSaving();
     }
 
     const data = {
@@ -638,20 +722,15 @@ async function saveArtwork() {
       works.push(data);
     }
 
-    const action = editId ? 'Update' : 'Add';
-    const ok = await saveWorksToRepo(action + ' artwork: ' + title);
-
-    if (ok) {
-      showToast(editId ? 'Artwork updated & published!' : 'Artwork added & published!', 'success');
-      renderAll();
-      closeModal();
-    }
+    renderAll();
+    markChanged();
+    closeModal();
+    showToast(editId ? 'Artwork updated — publish to apply' : 'Artwork added — publish to apply', 'success');
   } catch(e) {
     console.error('Save failed:', e);
     showToast('Save failed: ' + e.message, 'error');
   } finally {
     document.getElementById('saveBtn').disabled = false;
-    hideSaving();
   }
 }
 
@@ -672,27 +751,13 @@ function closeDeleteModal() {
 
 async function confirmDelete() {
   if (!deleteTargetId) return;
-
   const w = works.find(x => x.id === deleteTargetId);
   const title = w ? w.title : deleteTargetId;
-
-  document.getElementById('deleteBtn').disabled = true;
-  showSaving('Deleting artwork...');
-
-  try {
-    works = works.filter(w => w.id !== deleteTargetId);
-    const ok = await saveWorksToRepo('Delete artwork: ' + title);
-    if (ok) {
-      showToast('Artwork deleted & published', 'success');
-      renderAll();
-    }
-  } catch(e) {
-    showToast('Delete failed: ' + e.message, 'error');
-  } finally {
-    document.getElementById('deleteBtn').disabled = false;
-    hideSaving();
-    closeDeleteModal();
-  }
+  works = works.filter(w => w.id !== deleteTargetId);
+  renderAll();
+  markChanged();
+  showToast('Artwork "' + title + '" removed — publish to apply', 'success');
+  closeDeleteModal();
 }
 
 // ============================================================
@@ -764,7 +829,6 @@ document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { clo
 // DRAG & DROP REORDERING
 // ============================================================
 let dragSrcId = null;
-let dragSaveTimer = null;
 
 document.getElementById('worksTableBody').addEventListener('dragstart', function(e) {
   const tr = e.target.closest('tr');
@@ -803,20 +867,14 @@ document.getElementById('worksTableBody').addEventListener('drop', function(e) {
   const targetId = targetTr.dataset.id;
   if (targetId === dragSrcId) return;
 
-  // Reorder works array
   const sorted = [...works].sort((a,b) => (a.order||99) - (b.order||99));
   const srcIdx = sorted.findIndex(w => w.id === dragSrcId);
   const tgtIdx = sorted.findIndex(w => w.id === targetId);
   if (srcIdx === -1 || tgtIdx === -1) return;
 
-  // Move the item
   const [moved] = sorted.splice(srcIdx, 1);
   sorted.splice(tgtIdx, 0, moved);
-
-  // Reassign order numbers
   sorted.forEach((w, i) => { w.order = i + 1; });
-
-  // Update the main works array with new orders
   sorted.forEach(sw => {
     const w = works.find(x => x.id === sw.id);
     if (w) w.order = sw.order;
@@ -824,21 +882,8 @@ document.getElementById('worksTableBody').addEventListener('drop', function(e) {
 
   renderAll();
   dragSrcId = null;
-
-  // Debounced save (wait 1.5s after last drop to avoid rapid saves)
-  clearTimeout(dragSaveTimer);
-  setSyncStatus('unsaved');
-  dragSaveTimer = setTimeout(async function() {
-    showSaving('Saving new order...');
-    try {
-      const ok = await saveWorksToRepo('Reorder artworks');
-      if (ok) showToast('Order saved & published', 'success');
-    } catch(err) {
-      showToast('Failed to save order: ' + err.message, 'error');
-    } finally {
-      hideSaving();
-    }
-  }, 1500);
+  markChanged();
+  showToast('Order updated — publish to apply', 'success');
 });
 
 // Init
