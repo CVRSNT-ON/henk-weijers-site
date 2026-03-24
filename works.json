@@ -11,7 +11,7 @@
     "image": "images/img01.jpg",
     "description": "A structured grid of horizontal blocks suggests separation and confinement. Yet textures remain expressive, and colours bleed across boundaries, hinting that interaction persists despite rigid frameworks. A reflection on categorisation, structure, and quiet resistance.",
     "order": 2,
-    "featured": true
+    "featured": false
   },
   {
     "id": "the-relentless-red-race",
