@@ -123,7 +123,7 @@
     "image": "images/img09.jpg",
     "description": "This semi-abstract expressionist landscape presents Lavaux, a UNESCO World Heritage site. The painting shows St. Saphorin, an idyllic medieval village, overlooking Lac Leman with the French Alps rising beyond. Bold yellow vineyard terraces descend diagonally toward the blue expanse of water, while structured mountain forms anchor the horizon in rhythmic, high-contrast colour fields.",
     "order": 9,
-    "featured": true
+    "featured": false
   },
   {
     "id": "bavovna-ii",
