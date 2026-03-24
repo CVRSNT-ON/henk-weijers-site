@@ -109,7 +109,7 @@
     "image": "images/img08.jpg",
     "description": "Built around blue and yellow — the colours of the Ukrainian flag — this work evokes sky and golden fields. Layered, fragmented strokes create rhythm interrupted by darker accents and lighter pauses. The horizontal division suggests balance, while texture keeps the surface unresolved. A quiet yet resolute reflection on resilience, hope, and freedom.",
     "order": 8,
-    "featured": true
+    "featured": false
   },
   {
     "id": "lavaux",
