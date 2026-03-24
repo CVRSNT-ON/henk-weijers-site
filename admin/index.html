@@ -53,6 +53,11 @@ body{font-family:var(--body);background:var(--bg);color:var(--text);line-height:
 .table-wrap{overflow-x:auto;margin-bottom:2rem}
 .star{cursor:pointer;font-size:1.2rem;transition:color .2s;background:none;border:none;padding:0}
 .star.on{color:#D4A017}.star.off{color:var(--border)}
+.drag-handle{cursor:grab;color:var(--border);font-size:1.1rem;user-select:none;transition:color .2s;padding:0 .25rem}
+.drag-handle:hover{color:var(--text)}
+.drag-handle:active{cursor:grabbing}
+tr.dragging{opacity:.4;background:rgba(43,74,140,.05)}
+tr.drag-over td{border-top:2px solid var(--accent)}
 .modal-overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(26,26,26,.6);backdrop-filter:blur(4px);justify-content:center;align-items:flex-start;padding:2rem;overflow-y:auto}
 .modal-overlay.open{display:flex}
 .modal{background:var(--bg);border:1px solid var(--border);width:100%;max-width:680px;margin:2rem auto;padding:0;box-shadow:0 20px 60px rgba(0,0,0,.15)}
@@ -90,16 +95,17 @@ body{font-family:var(--body);background:var(--bg);color:var(--text);line-height:
 @media(max-width:768px){
   .form-row,.form-row-3{grid-template-columns:1fr}
   .admin-stats{grid-template-columns:1fr 1fr}
+  .works-table th:nth-child(1),.works-table td:nth-child(1),
   .works-table th:nth-child(5),.works-table td:nth-child(5),
-  .works-table th:nth-child(4),.works-table td:nth-child(4),
-  .works-table th:nth-child(7),.works-table td:nth-child(7){display:none}
+  .works-table th:nth-child(6),.works-table td:nth-child(6),
+  .works-table th:nth-child(8),.works-table td:nth-child(8){display:none}
   .admin-header{flex-direction:column;align-items:flex-start}
   .admin-nav{flex-wrap:wrap;gap:.5rem}
   .admin-nav-right{flex-wrap:wrap}
 }
 @media(max-width:480px){
   .admin-stats{grid-template-columns:1fr}
-  .works-table th:nth-child(3),.works-table td:nth-child(3){display:none}
+  .works-table th:nth-child(4),.works-table td:nth-child(4){display:none}
 }
 </style>
 </head>
@@ -133,7 +139,7 @@ body{font-family:var(--body);background:var(--bg);color:var(--text);line-height:
     <div class="table-wrap">
       <table class="works-table">
         <thead><tr>
-          <th></th><th>Title</th><th>Category</th><th>Dimensions</th><th>Price</th><th>Status</th><th>Home</th><th>Actions</th>
+          <th style="width:30px"></th><th></th><th>Title</th><th>Category</th><th>Dimensions</th><th>Price</th><th>Status</th><th>Home</th><th>Actions</th>
         </tr></thead>
         <tbody id="worksTableBody"></tbody>
       </table>
@@ -205,7 +211,7 @@ body{font-family:var(--body);background:var(--bg);color:var(--text);line-height:
         <label>Image</label>
         <div class="img-upload-area" id="imgUploadArea">
           <input type="file" id="artImage" accept="image/jpeg,image/png,image/webp" onchange="handleImageSelect(this)">
-          <p>Click or drag an image here<br><small>JPG/PNG/WebP, max 5 MB — uploaded directly to the site</small></p>
+          <p>Click or drag an image here<br><small>JPG/PNG/WebP, max 10 MB — auto-compressed to 1600px JPEG</small></p>
         </div>
         <img class="img-preview" id="imgPreview">
         <input type="hidden" id="artImagePath">
@@ -388,12 +394,23 @@ function esc(s) { const d=document.createElement('div'); d.textContent=s; return
 async function toggleFeatured(id) {
   const w = works.find(x => x.id === id);
   if (!w) return;
+  // Check max 12 featured
+  if (!w.featured) {
+    const featuredCount = works.filter(x => x.featured).length;
+    if (featuredCount >= 12) {
+      showToast('Maximum 12 works on homepage. Unfeature one first.', 'error');
+      return;
+    }
+  }
   w.featured = !w.featured;
   renderAll();
   showSaving('Updating homepage...');
   try {
     const ok = await saveWorksToRepo((w.featured ? 'Feature' : 'Unfeature') + ' on homepage: ' + w.title);
-    if (ok) showToast(w.featured ? 'Added to homepage' : 'Removed from homepage', 'success');
+    if (ok) {
+      const fc = works.filter(x => x.featured).length;
+      showToast(w.featured ? 'Added to homepage (' + fc + '/12)' : 'Removed from homepage', 'success');
+    }
   } catch(e) {
     showToast('Failed to save: ' + e.message, 'error');
   } finally {
@@ -441,14 +458,15 @@ function renderTable() {
   const sorted = [...works].sort((a,b) => (a.order||99) - (b.order||99));
   const tbody = document.getElementById('worksTableBody');
   if (!sorted.length) {
-    tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;padding:3rem;color:var(--text-l)">No artworks yet. Click "+ Add Artwork" to begin.</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;padding:3rem;color:var(--text-l)">No artworks yet. Click "+ Add Artwork" to begin.</td></tr>';
     return;
   }
-  tbody.innerHTML = sorted.map(w => {
+  tbody.innerHTML = sorted.map((w, idx) => {
     const sc = w.status==='Available'?'status-available':w.status==='Sold'?'status-sold':'status-reserved';
     const starClass = w.featured ? 'star on' : 'star off';
     const starChar = w.featured ? '&#9733;' : '&#9734;';
-    return `<tr>
+    return `<tr draggable="true" data-id="${w.id}" data-idx="${idx}">
+      <td><span class="drag-handle" title="Drag to reorder">&#9776;</span></td>
       <td><img src="/${w.image||'favicon.svg'}" alt="${esc(w.title)}" onerror="this.src='/favicon.svg'"></td>
       <td><strong style="font-family:var(--display);font-weight:400;font-style:italic">${esc(w.title)}</strong></td>
       <td style="font-size:.82rem;color:var(--text-l)">${esc(w.category||'')}</td>
@@ -471,34 +489,49 @@ function handleImageSelect(input) {
   if (!input.files || !input.files[0]) return;
   const file = input.files[0];
 
-  // Validate
-  if (file.size > 5 * 1024 * 1024) {
-    showToast('Image too large. Maximum 5 MB.', 'error');
+  if (file.size > 10 * 1024 * 1024) {
+    showToast('Image too large. Maximum 10 MB.', 'error');
     input.value = '';
     return;
   }
 
   pendingImageFile = file;
+  showToast('Compressing image...', '');
 
-  // Show preview
+  // Read and compress
   const reader = new FileReader();
   reader.onload = function(e) {
-    const p = document.getElementById('imgPreview');
-    p.src = e.target.result;
-    p.style.display = 'block';
-
-    // Store pure base64 (without data: prefix) for GitHub API
-    pendingImageBase64 = e.target.result.split(',')[1];
+    const img = new Image();
+    img.onload = function() {
+      // Resize to max 1600px on longest side
+      const MAX = 1600;
+      let w = img.width, h = img.height;
+      if (w > MAX || h > MAX) {
+        if (w > h) { h = Math.round(h * MAX / w); w = MAX; }
+        else { w = Math.round(w * MAX / h); h = MAX; }
+      }
+      const canvas = document.createElement('canvas');
+      canvas.width = w; canvas.height = h;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, w, h);
+      // Compress to JPEG 85%
+      const compressed = canvas.toDataURL('image/jpeg', 0.85);
+      const p = document.getElementById('imgPreview');
+      p.src = compressed; p.style.display = 'block';
+      pendingImageBase64 = compressed.split(',')[1];
+      // Force .jpg extension
+      pendingImageFile = { name: file.name.replace(/\.[^.]+$/, '.jpg') };
+      const size = Math.round(pendingImageBase64.length * 3 / 4 / 1024);
+      showToast('Image compressed to ' + size + ' KB (' + w + '×' + h + ')', 'success');
+    };
+    img.src = e.target.result;
   };
   reader.readAsDataURL(file);
 }
 
 async function uploadImage(file, base64) {
-  // Generate unique filename from slug + timestamp
-  const ext = file.name.split('.').pop().toLowerCase();
-  const safeName = 'img-' + Date.now() + '.' + ext;
+  const safeName = 'img-' + Date.now() + '.jpg';
   const path = IMAGES_DIR + '/' + safeName;
-
   await uploadBinaryFile(path, base64, 'Add image: ' + safeName);
   return path;
 }
@@ -726,6 +759,87 @@ document.getElementById('loginBtn').addEventListener('click', function() {
 document.getElementById('artworkModal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
 document.getElementById('deleteModal').addEventListener('click', function(e) { if (e.target === this) closeDeleteModal(); });
 document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { closeModal(); closeDeleteModal(); } });
+
+// ============================================================
+// DRAG & DROP REORDERING
+// ============================================================
+let dragSrcId = null;
+let dragSaveTimer = null;
+
+document.getElementById('worksTableBody').addEventListener('dragstart', function(e) {
+  const tr = e.target.closest('tr');
+  if (!tr) return;
+  dragSrcId = tr.dataset.id;
+  tr.classList.add('dragging');
+  e.dataTransfer.effectAllowed = 'move';
+  e.dataTransfer.setData('text/plain', dragSrcId);
+});
+
+document.getElementById('worksTableBody').addEventListener('dragend', function(e) {
+  const tr = e.target.closest('tr');
+  if (tr) tr.classList.remove('dragging');
+  document.querySelectorAll('.drag-over').forEach(function(el){ el.classList.remove('drag-over'); });
+});
+
+document.getElementById('worksTableBody').addEventListener('dragover', function(e) {
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+  const tr = e.target.closest('tr');
+  if (!tr || tr.dataset.id === dragSrcId) return;
+  document.querySelectorAll('.drag-over').forEach(function(el){ el.classList.remove('drag-over'); });
+  tr.classList.add('drag-over');
+});
+
+document.getElementById('worksTableBody').addEventListener('dragleave', function(e) {
+  const tr = e.target.closest('tr');
+  if (tr) tr.classList.remove('drag-over');
+});
+
+document.getElementById('worksTableBody').addEventListener('drop', function(e) {
+  e.preventDefault();
+  document.querySelectorAll('.drag-over').forEach(function(el){ el.classList.remove('drag-over'); });
+  const targetTr = e.target.closest('tr');
+  if (!targetTr || !dragSrcId) return;
+  const targetId = targetTr.dataset.id;
+  if (targetId === dragSrcId) return;
+
+  // Reorder works array
+  const sorted = [...works].sort((a,b) => (a.order||99) - (b.order||99));
+  const srcIdx = sorted.findIndex(w => w.id === dragSrcId);
+  const tgtIdx = sorted.findIndex(w => w.id === targetId);
+  if (srcIdx === -1 || tgtIdx === -1) return;
+
+  // Move the item
+  const [moved] = sorted.splice(srcIdx, 1);
+  sorted.splice(tgtIdx, 0, moved);
+
+  // Reassign order numbers
+  sorted.forEach((w, i) => { w.order = i + 1; });
+
+  // Update the main works array with new orders
+  sorted.forEach(sw => {
+    const w = works.find(x => x.id === sw.id);
+    if (w) w.order = sw.order;
+  });
+
+  renderAll();
+  dragSrcId = null;
+
+  // Debounced save (wait 1.5s after last drop to avoid rapid saves)
+  clearTimeout(dragSaveTimer);
+  setSyncStatus('unsaved');
+  dragSaveTimer = setTimeout(async function() {
+    showSaving('Saving new order...');
+    try {
+      const ok = await saveWorksToRepo('Reorder artworks');
+      if (ok) showToast('Order saved & published', 'success');
+    } catch(err) {
+      showToast('Failed to save order: ' + err.message, 'error');
+    } finally {
+      hideSaving();
+    }
+  }, 1500);
+});
 
 // Init
 initAuth();

@@ -7,6 +7,8 @@
 <meta name="author" content="Henk Weijers">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Henk Weijers — Acrylic Painter">
+<meta name="description" id="metaDesc" content="Original artwork by Henk Weijers — Acrylic Painter">
+<meta property="og:description" id="ogDesc" content="Original artwork by Henk Weijers — Acrylic Painter">
 <title>Loading... — Henk Weijers</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
@@ -130,6 +132,10 @@ if(!artworkId){
 
     // Update page title and meta
     document.title = work.title + ' — Henk Weijers';
+    // Dynamic SEO meta
+    var descText = work.description ? work.description.substring(0, 160) : work.title + ' by Henk Weijers. ' + work.medium + ', ' + work.width + ' × ' + work.height + ' in.';
+    var md = document.getElementById('metaDesc'); if(md) md.setAttribute('content', descText);
+    var od = document.getElementById('ogDesc'); if(od) od.setAttribute('content', descText);
 
     // Calculate room view proportions
     var w = work.width || 24;

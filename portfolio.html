@@ -48,6 +48,11 @@ section{padding:clamp(3rem,6vw,6rem) var(--g)}
 .portfolio-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;max-width:var(--max-w);margin:0 auto}
 .pf-card{background:var(--card);border:1px solid var(--border);overflow:hidden;text-decoration:none;color:var(--text);transition:box-shadow .3s,transform .3s}
 .pf-card:hover{box-shadow:0 8px 30px rgba(0,0,0,.08);transform:translateY(-3px)}
+.filter-btn{font-family:var(--body);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;padding:.45rem 1.1rem;background:none;border:1px solid var(--border);color:var(--text-l);cursor:pointer;transition:all .3s}
+.filter-btn:hover{border-color:var(--text);color:var(--text)}
+.filter-btn.filter-active{background:var(--text);color:var(--bg);border-color:var(--text)}
+.pf-fade{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease}
+.pf-fade.pf-visible{opacity:1;transform:translateY(0)}
 .pf-card img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block}
 .pf-card-info{padding:1rem 1.15rem}
 .pf-card-title{font-family:var(--display);font-size:1.15rem;font-weight:400;font-style:italic;margin-bottom:.25rem}
@@ -156,6 +161,7 @@ section{padding:clamp(3rem,6vw,6rem) var(--g)}
     <p class="section-label">Original Paintings for Sale</p>
     <h2 class="section-title">Portfolio</h2>
     <p style="color:var(--text-l);font-size:.95rem;max-width:560px;line-height:1.7">Each painting is a unique original acrylic on canvas, ready to hang. Click any work to see full details, dimensions, and a room preview.</p>
+    <div id="filterBar" style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1.25rem"></div>
   </div>
   <div class="portfolio-grid reveal" id="portfolioGrid">
     <!-- Populated dynamically from works.json -->
@@ -164,15 +170,43 @@ section{padding:clamp(3rem,6vw,6rem) var(--g)}
 
 <script>
 (function(){
+  var allWorks = [];
+  var activeFilter = 'All';
+
   fetch('works.json').then(function(r){return r.json()}).then(function(works){
-    var sorted = works.sort(function(a,b){return (a.order||99)-(b.order||99)});
+    allWorks = works.sort(function(a,b){return (a.order||99)-(b.order||99)});
+    buildFilters();
+    renderPortfolio();
+  }).catch(function(e){ console.warn('Could not load works.json', e); });
+
+  function buildFilters(){
+    var cats = ['All'];
+    allWorks.forEach(function(w){ if(w.category && cats.indexOf(w.category)===-1) cats.push(w.category); });
+    var bar = document.getElementById('filterBar');
+    if(!bar) return;
+    bar.innerHTML = cats.map(function(c){
+      var cls = c === activeFilter ? 'filter-btn filter-active' : 'filter-btn';
+      return '<button class="'+cls+'" data-cat="'+c+'">'+c+'</button>';
+    }).join('');
+    bar.querySelectorAll('.filter-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        activeFilter = this.getAttribute('data-cat');
+        bar.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('filter-active')});
+        this.classList.add('filter-active');
+        renderPortfolio();
+      });
+    });
+  }
+
+  function renderPortfolio(){
+    var filtered = activeFilter === 'All' ? allWorks : allWorks.filter(function(w){return w.category === activeFilter});
     var grid = document.getElementById('portfolioGrid');
     if(!grid) return;
     var html = '';
-    for(var i=0; i<sorted.length; i++){
-      var w = sorted[i];
+    for(var i=0; i<filtered.length; i++){
+      var w = filtered[i];
       var badgeColor = w.status==='Available'?'#2B6B3B':w.status==='Sold'?'#9B2C2C':'#8B6914';
-      html += '<a href="works/view.html?id='+encodeURIComponent(w.id)+'" class="pf-card">'
+      html += '<a href="works/view.html?id='+encodeURIComponent(w.id)+'" class="pf-card pf-fade">'
         + '<img src="'+w.image+'" alt="'+w.title.replace(/"/g,'&quot;')+'" loading="lazy">'
         + '<div class="pf-card-info">'
         + '<span class="pf-badge" style="background:'+badgeColor+'">'+w.status+'</span>'
@@ -182,7 +216,10 @@ section{padding:clamp(3rem,6vw,6rem) var(--g)}
         + '</div></a>';
     }
     grid.innerHTML = html;
-  }).catch(function(e){ console.warn('Could not load works.json', e); });
+    // Fade-in
+    var fobs = new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('pf-visible');fobs.unobserve(e.target)}})},{threshold:.05});
+    grid.querySelectorAll('.pf-fade').forEach(function(el){fobs.observe(el)});
+  }
 })();
 </script>
 
