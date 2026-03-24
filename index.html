@@ -256,13 +256,14 @@ window.addEventListener('load', function() {
     var sorted = works.sort(function(a,b){return (a.order||99)-(b.order||99)});
     var grid = document.getElementById('homeWorksGrid');
     if(!grid) return;
+    // Show featured works first, then fill remaining slots by order
+    var featured = sorted.filter(function(w){return w.featured});
+    var others = sorted.filter(function(w){return !w.featured});
+    var toShow = featured.concat(others).slice(0, 8);
     var html = '';
-    // Show first 8 available works
-    var shown = 0;
-    for(var i=0; i<sorted.length && shown<8; i++){
-      var w = sorted[i];
+    for(var i=0; i<toShow.length; i++){
+      var w = toShow[i];
       html += '<a href="works/view.html?id='+encodeURIComponent(w.id)+'"><img src="'+w.image+'" alt="'+w.title.replace(/"/g,'&quot;')+'" loading="lazy"></a>';
-      shown++;
     }
     grid.innerHTML = html;
   }).catch(function(e){ console.warn('Could not load works.json', e); });

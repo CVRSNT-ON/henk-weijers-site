@@ -41,7 +41,7 @@ body{font-family:var(--body);background:var(--bg);color:var(--text);line-height:
 .stat-number{font-family:var(--display);font-size:2rem;font-weight:500;color:var(--accent)}
 .stat-label{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-l);margin-top:.25rem}
 .works-table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--border)}
-.works-table th{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-l);text-align:left;padding:.75rem 1rem;border-bottom:1px solid var(--border);background:var(--bg);position:sticky;top:52px;z-index:5}
+.works-table th{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-l);text-align:left;padding:.75rem 1rem;border-bottom:2px solid var(--border);background:var(--bg)}
 .works-table td{padding:.6rem 1rem;border-bottom:1px solid var(--border);font-size:.88rem;vertical-align:middle}
 .works-table tr:hover td{background:rgba(43,74,140,.03)}
 .works-table img{width:50px;height:50px;object-fit:cover;display:block;border:1px solid var(--border)}
@@ -51,6 +51,8 @@ body{font-family:var(--body);background:var(--bg);color:var(--text);line-height:
 .status-reserved{background:#8B6914;color:#fff}
 .table-actions{display:flex;gap:.4rem}
 .table-wrap{overflow-x:auto;margin-bottom:2rem}
+.star{cursor:pointer;font-size:1.2rem;transition:color .2s;background:none;border:none;padding:0}
+.star.on{color:#D4A017}.star.off{color:var(--border)}
 .modal-overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(26,26,26,.6);backdrop-filter:blur(4px);justify-content:center;align-items:flex-start;padding:2rem;overflow-y:auto}
 .modal-overlay.open{display:flex}
 .modal{background:var(--bg);border:1px solid var(--border);width:100%;max-width:680px;margin:2rem auto;padding:0;box-shadow:0 20px 60px rgba(0,0,0,.15)}
@@ -89,7 +91,8 @@ body{font-family:var(--body);background:var(--bg);color:var(--text);line-height:
   .form-row,.form-row-3{grid-template-columns:1fr}
   .admin-stats{grid-template-columns:1fr 1fr}
   .works-table th:nth-child(5),.works-table td:nth-child(5),
-  .works-table th:nth-child(4),.works-table td:nth-child(4){display:none}
+  .works-table th:nth-child(4),.works-table td:nth-child(4),
+  .works-table th:nth-child(7),.works-table td:nth-child(7){display:none}
   .admin-header{flex-direction:column;align-items:flex-start}
   .admin-nav{flex-wrap:wrap;gap:.5rem}
   .admin-nav-right{flex-wrap:wrap}
@@ -130,7 +133,7 @@ body{font-family:var(--body);background:var(--bg);color:var(--text);line-height:
     <div class="table-wrap">
       <table class="works-table">
         <thead><tr>
-          <th></th><th>Title</th><th>Category</th><th>Dimensions</th><th>Price</th><th>Status</th><th>Actions</th>
+          <th></th><th>Title</th><th>Category</th><th>Dimensions</th><th>Price</th><th>Status</th><th>Home</th><th>Actions</th>
         </tr></thead>
         <tbody id="worksTableBody"></tbody>
       </table>
@@ -193,6 +196,10 @@ body{font-family:var(--body);background:var(--bg);color:var(--text);line-height:
           <label for="artOrder">Display Order</label>
           <input type="number" id="artOrder" step="1" placeholder="1">
         </div>
+      </div>
+      <div class="form-group" style="display:flex;align-items:center;gap:.6rem">
+        <input type="checkbox" id="artFeatured" style="width:auto;accent-color:var(--accent)">
+        <label for="artFeatured" style="margin:0;cursor:pointer">Show on Homepage (Recent Paintings)</label>
       </div>
       <div class="form-group">
         <label>Image</label>
@@ -378,6 +385,22 @@ function slugify(t) {
 
 function esc(s) { const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
 
+async function toggleFeatured(id) {
+  const w = works.find(x => x.id === id);
+  if (!w) return;
+  w.featured = !w.featured;
+  renderAll();
+  showSaving('Updating homepage...');
+  try {
+    const ok = await saveWorksToRepo((w.featured ? 'Feature' : 'Unfeature') + ' on homepage: ' + w.title);
+    if (ok) showToast(w.featured ? 'Added to homepage' : 'Removed from homepage', 'success');
+  } catch(e) {
+    showToast('Failed to save: ' + e.message, 'error');
+  } finally {
+    hideSaving();
+  }
+}
+
 // ============================================================
 // SYNC STATUS
 // ============================================================
@@ -418,11 +441,13 @@ function renderTable() {
   const sorted = [...works].sort((a,b) => (a.order||99) - (b.order||99));
   const tbody = document.getElementById('worksTableBody');
   if (!sorted.length) {
-    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:3rem;color:var(--text-l)">No artworks yet. Click "+ Add Artwork" to begin.</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;padding:3rem;color:var(--text-l)">No artworks yet. Click "+ Add Artwork" to begin.</td></tr>';
     return;
   }
   tbody.innerHTML = sorted.map(w => {
     const sc = w.status==='Available'?'status-available':w.status==='Sold'?'status-sold':'status-reserved';
+    const starClass = w.featured ? 'star on' : 'star off';
+    const starChar = w.featured ? '&#9733;' : '&#9734;';
     return `<tr>
       <td><img src="/${w.image||'favicon.svg'}" alt="${esc(w.title)}" onerror="this.src='/favicon.svg'"></td>
       <td><strong style="font-family:var(--display);font-weight:400;font-style:italic">${esc(w.title)}</strong></td>
@@ -430,6 +455,7 @@ function renderTable() {
       <td style="font-size:.82rem">${w.width||'?'} &times; ${w.height||'?'} in</td>
       <td style="font-family:var(--display);font-weight:500">&euro;${(w.price||0).toLocaleString()}</td>
       <td><span class="status-badge ${sc}">${w.status}</span></td>
+      <td><button class="${starClass}" onclick="toggleFeatured('${w.id}')" title="Show on Homepage">${starChar}</button></td>
       <td><div class="table-actions">
         <button class="btn-sm btn-outline-sm" onclick="openEditModal('${w.id}')">Edit</button>
         <button class="btn-sm btn-danger" onclick="openDeleteModal('${w.id}')">Del</button>
@@ -495,6 +521,7 @@ function openAddModal() {
   document.getElementById('artImagePath').value = '';
   document.getElementById('artImage').value = '';
   document.getElementById('imgPreview').style.display = 'none';
+  document.getElementById('artFeatured').checked = false;
   pendingImageFile = null;
   pendingImageBase64 = null;
   document.getElementById('artworkModal').classList.add('open');
@@ -515,6 +542,7 @@ function openEditModal(id) {
   document.getElementById('artOrder').value = w.order || 1;
   document.getElementById('artDesc').value = w.description || '';
   document.getElementById('artImagePath').value = w.image || '';
+  document.getElementById('artFeatured').checked = !!w.featured;
   const prev = document.getElementById('imgPreview');
   if (w.image) { prev.src = '/' + w.image; prev.style.display = 'block'; } else { prev.style.display = 'none'; }
   pendingImageFile = null;
@@ -563,7 +591,8 @@ async function saveArtwork() {
       status: document.getElementById('artStatus').value,
       image: imagePath,
       description: document.getElementById('artDesc').value.trim(),
-      order: parseInt(document.getElementById('artOrder').value) || works.length + 1
+      order: parseInt(document.getElementById('artOrder').value) || works.length + 1,
+      featured: document.getElementById('artFeatured').checked
     };
 
     if (editId) {
