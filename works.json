@@ -81,7 +81,7 @@
     "image": "images/img06.jpg",
     "description": "Inspired by early predecessors of the jukebox, this painting imagines music as colour. When the box opens, sound spills out as small, interlocking rectangles scattered across the surface. Turquoise, ochre, lilac, brown, and white move in a lively rhythm, translating melody into visual motion where music is not only heard, but seen.",
     "order": 6,
-    "featured": true
+    "featured": false
   },
   {
     "id": "ruby-my-dear",
