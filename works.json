@@ -95,7 +95,7 @@
     "image": "images/img07.jpg",
     "description": "Named after the jazz standard by Thelonious Monk, this painting mirrors his unconventional rhythms and melodic twists. Overlapping rectangles in ruby red, crimson, rose, black, and white create a syncopated visual field. The ruby palette drives emotional intensity, while underlying structure brings balance beneath apparent disorder.",
     "order": 7,
-    "featured": true
+    "featured": false
   },
   {
     "id": "fragments-of-freedom",
