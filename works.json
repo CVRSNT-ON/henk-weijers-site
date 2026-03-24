@@ -249,7 +249,7 @@
     "image": "images/img18.jpg",
     "description": "Colour Dialogues shows two complementary colour ranges moving across the canvas in structured rows of fragments. The diversity of colours creates a visual dialogue where contrast and cooperation exist at the same time. The work can also be read as a reflection of politics and social issues — where different voices, interests, and identities meet. Despite tension and difference, the composition suggests that dialogue can create balance and synergy rather than division.",
     "order": 17,
-    "featured": false
+    "featured": true
   },
   {
     "id": "firebreaks",
