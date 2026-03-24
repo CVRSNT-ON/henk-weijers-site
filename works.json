@@ -39,7 +39,7 @@
     "image": "images/img03.jpg",
     "description": "Lauterbrunnen captures an impression of the famous village, with bold turquoise mountains, dramatic cliffs, and a bright open sky. A small house rests quietly in a wide yellow-green field, surrounded by textured brushstrokes that suggest waterfalls and steep rock faces. This painting reflects the powerful landscape of Lauterbrunnen in a simple, expressive way.",
     "order": 3,
-    "featured": true
+    "featured": false
   },
   {
     "id": "burgdorf",
