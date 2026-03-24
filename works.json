@@ -67,7 +67,7 @@
     "image": "images/img05.jpg",
     "description": "Inspired by visits to Bukhara and Samarqand, this work draws on the geometry of Islamic art. Interlocking hexagonal forms symbolise order, continuity, and repetition. Layers of blue, turquoise, teal, and green echo glazed tiles of Timurid architecture. Precision and painterly freedom coexist, inviting contemplation where rhythm, balance, and pattern become a meditative experience.",
     "order": 5,
-    "featured": true
+    "featured": false
   },
   {
     "id": "the-musical-box",
