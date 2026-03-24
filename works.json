@@ -221,7 +221,7 @@
     "image": "images/img16.jpg",
     "description": "Dad's Ties refers to the Father's Day presents my daughter gave me as a child. The vertical bands resemble neckties, but also stand for conventions, opinions, and expectations that shape identity. Two dark bars interrupt the rhythm. The hands forcing them apart suggest a jailbreak — a metaphor for my pursuit of artistic freedom. Built with heavy palette-knife layers, the work combines geometric order with expressive texture and symbolic abstraction.",
     "order": 15,
-    "featured": false
+    "featured": true
   },
   {
     "id": "cerrado",
