@@ -25,7 +25,7 @@
     "image": "images/img02.jpg",
     "description": "A dense, rhythmic composition capturing urgency and constant motion. Layers of red, pink, black, and white collide like intersecting paths. The scene recalls busy airports or train stations where commuters rush onward, barely connecting. A reflection on speed, routine, and modern life ÃÂ¢ÃÂÃÂ where momentum dominates and stillness is rare.",
     "order": 4,
-    "featured": true
+    "featured": false
   },
   {
     "id": "lauterbrunnen",
@@ -39,7 +39,7 @@
     "image": "images/img03.jpg",
     "description": "Lauterbrunnen captures an impression of the famous village, with bold turquoise mountains, dramatic cliffs, and a bright open sky. A small house rests quietly in a wide yellow-green field, surrounded by textured brushstrokes that suggest waterfalls and steep rock faces. This painting reflects the powerful landscape of Lauterbrunnen in a simple, expressive way.",
     "order": 5,
-    "featured": true
+    "featured": false
   },
   {
     "id": "burgdorf",
@@ -151,7 +151,7 @@
     "image": "images/img11.jpg",
     "description": "A grid composed of 25 individual paintings, each a self-contained work that gains meaning through proximity. Repetition creates order, while variation invites discovery. With each viewing, new shapes and connections emerge as the eye moves across the surface. A meditation on multiplicity, observation, and constraint.",
     "order": 13,
-    "featured": true
+    "featured": false
   },
   {
     "id": "pictures-at-an-exhibition-ii",
@@ -165,7 +165,7 @@
     "image": "images/img12.jpg",
     "description": "This second exploration assembles 25 individual works into a unified grid. Warm tones ÃÂ¢ÃÂÃÂ reds, ochres, golds, and pinks ÃÂ¢ÃÂÃÂ create density and cohesion. Each square holds its own rhythm, yet relationships shift with every viewing. A reflection on repetition, variation, and how perception evolves over time.",
     "order": 14,
-    "featured": true
+    "featured": false
   },
   {
     "id": "collected-thoughts",
@@ -305,7 +305,7 @@
     "image": "images/img-1774423260681.jpg",
     "description": "dsaofiugvhaosiudhbcaS",
     "order": 3,
-    "featured": true,
+    "featured": false,
     "room_positions": {
       "living-minimal": {
         "x": 48.96819206349206,
