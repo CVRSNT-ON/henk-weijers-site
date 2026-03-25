@@ -1024,17 +1024,21 @@ document.getElementById('worksTableBody').addEventListener('drop', function(e) {
   const targetId = targetTr.dataset.id;
   if (targetId === dragSrcId) return;
 
+  // Get sorted list (same as renderTable uses)
   const sorted = [...works].sort((a,b) => (a.order||99) - (b.order||99));
   const srcIdx = sorted.findIndex(w => w.id === dragSrcId);
   const tgtIdx = sorted.findIndex(w => w.id === targetId);
   if (srcIdx === -1 || tgtIdx === -1) return;
 
+  // Remove dragged item and insert at target position
   const [moved] = sorted.splice(srcIdx, 1);
   sorted.splice(tgtIdx, 0, moved);
-  sorted.forEach((w, i) => { w.order = i + 1; });
-  sorted.forEach(sw => {
-    const w = works.find(x => x.id === sw.id);
-    if (w) w.order = sw.order;
+
+  // Reassign sequential order numbers 1, 2, 3...
+  // Write directly to the works array items (same object references)
+  sorted.forEach(function(sortedWork, i) {
+    const original = works.find(function(w) { return w.id === sortedWork.id; });
+    if (original) original.order = i + 1;
   });
 
   renderAll();
@@ -1097,12 +1101,29 @@ function updateRoomPosEditor() {
   var pos = getRoomPos(room.id);
   var paintEl = document.getElementById('rpePainting');
   var maxPct = room.max_painting_pct || 30;
-  var scaledPct = maxPct * (pos.scale / 100);
 
-  // Get artwork aspect ratio
+  // Get artwork aspect ratio and adapt scale to dimensions
   var artW = parseFloat(document.getElementById('artWidth').value) || 24;
   var artH = parseFloat(document.getElementById('artHeight').value) || 24;
   var ratio = artW / artH;
+
+  // Auto-adapt: tall paintings (portrait) get narrower width%
+  // Wide paintings (landscape) use the full maxPct
+  // Square paintings use slightly less
+  var dimFactor = 1;
+  if (ratio < 0.8) {
+    // Portrait: reduce width so painting doesn't look oversized
+    dimFactor = ratio * 0.9;
+  } else if (ratio > 1.3) {
+    // Landscape: use full width
+    dimFactor = 1;
+  } else {
+    // Square-ish
+    dimFactor = 0.85;
+  }
+
+  var basePct = maxPct * dimFactor;
+  var scaledPct = basePct * (pos.scale / 100);
 
   paintEl.style.left = pos.x + '%';
   paintEl.style.top = pos.y + '%';

@@ -16,7 +16,7 @@
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{--bg:#F5F0E8;--text:#1A1A1A;--text-l:#5A5550;--accent:#2B4A8C;--accent-w:#8C3B2B;--border:#D4CFC5;--card:#FFFDF8;--overlay:rgba(26,26,26,.85);--display:'Cormorant Garamond',Georgia,serif;--body:'DM Sans',-apple-system,sans-serif;--max-w:1400px;--g:clamp(1.25rem,4vw,3rem)}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:100px}
 body{font-family:var(--body);background:var(--bg);color:var(--text);line-height:1.6;font-weight:300;-webkit-font-smoothing:antialiased}
 
 /* NAV */
@@ -33,6 +33,7 @@ body{font-family:var(--body);background:var(--bg);color:var(--text);line-height:
 .mobile-menu{display:none;position:fixed;inset:0;z-index:105;background:rgba(245,240,232,.98);backdrop-filter:blur(20px);flex-direction:column;justify-content:center;align-items:center;gap:2.5rem}
 .mobile-menu.open{display:flex}
 .mobile-menu a{font-family:var(--display);font-size:1.8rem;font-weight:300;color:var(--text);text-decoration:none}
+.mobile-close{position:absolute;top:1.25rem;right:var(--g);background:none;border:none;font-size:2rem;color:var(--text);cursor:pointer;z-index:111;line-height:1;padding:.25rem}
 
 section{padding:clamp(3rem,6vw,6rem) var(--g)}
 .section-label{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-l);margin-bottom:.75rem}
@@ -147,6 +148,7 @@ section{padding:clamp(3rem,6vw,6rem) var(--g)}
   <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 <div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose" aria-label="Close menu">&times;</button>
   <a href="index.html#about" onclick="closeMobile()">About</a>
   <a href="portfolio.html" onclick="closeMobile()">Portfolio</a>
   <a href="index.html#approach" onclick="closeMobile()">Approach</a>
@@ -206,7 +208,9 @@ section{padding:clamp(3rem,6vw,6rem) var(--g)}
         <a href="https://www.instagram.com/henk.weijers_artist" target="_blank" rel="noopener">Instagram &rarr;</a>
       </div>
     </div>
-    <form class="contact-form" data-netlify="true" name="contact" method="POST">
+    <form class="contact-form" data-netlify="true" netlify-honeypot="bot-field" name="contact" method="POST">
+      <input type="hidden" name="form-name" value="contact">
+      <p style="display:none"><label>Don't fill this out: <input name="bot-field"></label></p>
       <div class="form-row">
         <div><label for="name">Name</label><input type="text" id="name" name="name" required placeholder="Your name"></div>
         <div><label for="email">Email</label><input type="email" id="email" name="email" required placeholder="your@email.com"></div>
@@ -229,8 +233,9 @@ section{padding:clamp(3rem,6vw,6rem) var(--g)}
 <script>
 var nav=document.getElementById("nav");
 if(nav){window.addEventListener("scroll",function(){nav.classList.toggle("scrolled",window.scrollY>60)})}
-var hb=document.getElementById("hamburger"),mm=document.getElementById("mobileMenu");
+var hb=document.getElementById("hamburger"),mm=document.getElementById("mobileMenu"),mc=document.getElementById("mobileClose");
 if(hb){hb.addEventListener("click",function(){hb.classList.toggle("active");mm.classList.toggle("open");document.body.style.overflow=mm.classList.contains("open")?"hidden":""})}
+if(mc){mc.addEventListener("click",function(){closeMobile()})}
 function closeMobile(){if(hb){hb.classList.remove("active");mm.classList.remove("open");document.body.style.overflow=""}}
 var reveals=document.querySelectorAll(".reveal");
 var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add("visible");obs.unobserve(e.target)}})},{threshold:.1});
@@ -239,6 +244,15 @@ reveals.forEach(function(el){obs.observe(el)});
 window.addEventListener('load', function() {
   var msg = sessionStorage.getItem('formMsg');
   var subj = sessionStorage.getItem('formSubj');
+  if (msg || subj) {
+    // Scroll to form after a brief delay to ensure layout is ready
+    setTimeout(function(){
+      var formEl = document.querySelector('.contact-form');
+      if (formEl) {
+        formEl.scrollIntoView({behavior:'smooth', block:'center'});
+      }
+    }, 300);
+  }
   if (msg) {
     var el = document.getElementById('message');
     if (el) { el.value = msg.replace(/&quot;/g, '"').replace(/&euro;/g, '€').replace(/&#39;/g, "'"); }
@@ -250,6 +264,35 @@ window.addEventListener('load', function() {
     sessionStorage.removeItem('formSubj');
   }
 });
+
+// Netlify form AJAX submit
+(function(){
+  var form = document.querySelector('form[name="contact"]');
+  if (!form) return;
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var btn = form.querySelector('button[type="submit"]');
+    var origText = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+    var formData = new FormData(form);
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(formData).toString()
+    }).then(function(res) {
+      if (res.ok) {
+        form.innerHTML = '<div style="text-align:center;padding:2rem 0"><p style="font-family:var(--display);font-size:1.5rem;font-weight:400;margin-bottom:.5rem">Thank you!</p><p style="color:var(--text-l)">Your message has been sent. Henk will get back to you soon.</p></div>';
+      } else {
+        throw new Error('Form submission failed');
+      }
+    }).catch(function(err) {
+      btn.disabled = false;
+      btn.textContent = origText;
+      alert('Sorry, there was an error sending your message. Please try again or email directly.');
+    });
+  });
+})();
 </script>
 <script>
 // Load works.json and populate Recent Paintings grid
