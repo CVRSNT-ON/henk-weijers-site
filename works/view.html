@@ -11,7 +11,6 @@
 <meta property="og:description" id="ogDesc" content="Original artwork by Henk Weijers — Acrylic Painter">
 <title>Loading... — Henk Weijers</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{--bg:#F5F0E8;--text:#1A1A1A;--text-l:#5A5550;--accent:#2B4A8C;--accent-w:#8C3B2B;--border:#D4CFC5;--card:#FFFDF8;--display:'Cormorant Garamond',Georgia,serif;--body:'DM Sans',-apple-system,sans-serif;--max-w:1400px;--g:clamp(1.25rem,4vw,3rem)}
@@ -40,7 +39,7 @@ section{padding:clamp(3rem,6vw,6rem) var(--g)}
 .footer-links{display:flex;gap:1.5rem;flex-wrap:wrap}
 .artwork-detail{max-width:var(--max-w);margin:0 auto;padding-top:6rem}
 .artwork-layout{display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(2rem,4vw,4rem);align-items:start}
-.artwork-main-img{width:100%;display:block;box-shadow:0 4px 20px rgba(0,0,0,.1)}
+.artwork-main-img{width:100%;display:block;box-shadow:0 4px 20px rgba(0,0,0,.1);pointer-events:none;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
 .artwork-info .section-title{margin-bottom:.5rem}
 .artwork-meta{font-size:.88rem;color:var(--text-l);margin-bottom:.35rem}
 .artwork-price{font-family:var(--display);font-size:1.8rem;font-weight:500;margin:1rem 0}
@@ -57,14 +56,19 @@ section{padding:clamp(3rem,6vw,6rem) var(--g)}
 .room-section{margin-top:2.5rem}
 .room-scene{position:relative;width:100%;aspect-ratio:16/10;border-radius:6px;overflow:hidden;background:#e0ddd6}
 .room-scene img.room-bg{width:100%;height:100%;object-fit:cover;display:block}
+/* FIX: aspect-ratio lives on the OUTER div (.room-painting) so it works as an absolutely-positioned block.
+   The inner div must NOT have height:100% — that conflicts with aspect-ratio when the parent has no explicit height. */
 .room-painting{position:absolute;transition:all .3s ease;transform:translate(-50%,-50%)}
-.room-painting-inner{position:relative;width:100%;height:100%;border:4px solid #1a1a1a;box-shadow:0 8px 32px rgba(0,0,0,.35),0 2px 8px rgba(0,0,0,.2)}
-.room-painting-inner img{width:100%;height:100%;object-fit:cover;display:block}
+.room-painting-inner{position:relative;width:100%;border:4px solid #1a1a1a;box-shadow:0 8px 32px rgba(0,0,0,.35),0 2px 8px rgba(0,0,0,.2)}
+.room-painting-inner img{width:100%;height:auto;display:block;pointer-events:none;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
 .room-selector{display:flex;gap:.5rem;margin-top:.75rem;flex-wrap:wrap}
 .room-thumb{width:60px;height:38px;object-fit:cover;border:2px solid transparent;cursor:pointer;opacity:.6;transition:all .3s;border-radius:3px}
 .room-thumb:hover{opacity:.9}
 .room-thumb.active{border-color:var(--accent);opacity:1}
 .room-caption{text-align:center;margin-top:.75rem;font-size:.8rem;color:var(--text-l);font-style:italic}
+/* Global image protection */
+img{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+.artwork-main-img{pointer-events:none}
 
 .loading-msg{text-align:center;padding:8rem 2rem;color:var(--text-l);font-size:1rem}
 @media(max-width:768px){
@@ -74,7 +78,6 @@ section{padding:clamp(3rem,6vw,6rem) var(--g)}
   .artwork-actions .btn{width:100%;text-align:center}
   .footer{flex-direction:column;text-align:center}
   .room-thumb{width:48px;height:30px}
-  .room-scene{aspect-ratio:4/3}
 }
 </style>
 </head>
@@ -192,6 +195,7 @@ if(!artworkId){
       var posY = customPos ? customPos.y : defaultRoom.wall_center_y;
       var maxPct = defaultRoom.max_painting_pct || 30;
       var scaleFactor = customPos ? (customPos.scale / 100) : 1;
+      var rotation = (customPos && customPos.rotation) ? customPos.rotation : 0;
       var artW = work.width || 24;
       var artH = work.height || 24;
       var artRatio = artW / artH;
@@ -215,8 +219,8 @@ if(!artworkId){
         + '<p class="section-label" style="margin-bottom:.75rem">View in Room</p>'
         + '<div class="room-scene" id="roomScene">'
         + '<img class="room-bg" id="roomBg" src="../'+defaultRoom.image+'" alt="Room view">'
-        + '<div class="room-painting" id="roomPainting" style="left:'+posX+'%;top:'+posY+'%;width:'+paintWidthPct+'%">'
-        + '<div class="room-painting-inner" style="aspect-ratio:'+artRatio+'">'
+        + '<div class="room-painting" id="roomPainting" style="left:'+posX+'%;top:'+posY+'%;width:'+paintWidthPct+'%;aspect-ratio:'+artRatio+';transform:translate(-50%,-50%) rotate('+rotation+'deg)">'
+        + '<div class="room-painting-inner">'
         + '<img src="../'+work.image+'" alt="'+esc(work.title)+' in room" id="roomArtImg">'
         + '</div>'
         + '</div>'
@@ -264,13 +268,13 @@ function switchRoom(idx) {
   var work = window._currentWork;
   document.getElementById('roomBg').src = '../' + room.image;
   var paintEl = document.getElementById('roomPainting');
-  var innerEl = paintEl.querySelector('.room-painting-inner');
 
   var customPos = work.room_positions && work.room_positions[room.id];
   var posX = customPos ? customPos.x : room.wall_center_x;
   var posY = customPos ? customPos.y : room.wall_center_y;
   var maxPct = room.max_painting_pct || 30;
   var scaleFactor = customPos ? (customPos.scale / 100) : 1;
+  var rotation = (customPos && customPos.rotation) ? customPos.rotation : 0;
   var artW = work.width || 24;
   var artH = work.height || 24;
   var artRatio = artW / artH;
@@ -285,7 +289,8 @@ function switchRoom(idx) {
   paintEl.style.left = posX + '%';
   paintEl.style.top = posY + '%';
   paintEl.style.width = paintWidthPct + '%';
-  if (innerEl) innerEl.style.aspectRatio = artRatio;
+  paintEl.style.aspectRatio = artRatio;
+  paintEl.style.transform = 'translate(-50%,-50%) rotate(' + rotation + 'deg)';
   document.querySelectorAll('.room-thumb').forEach(function(t){t.classList.remove('active')});
   document.querySelectorAll('.room-thumb')[idx].classList.add('active');
 }
@@ -306,6 +311,22 @@ function handleInquire() {
   }
   window.location.href = '../index.html#contact';
 }
+
+// ============================================================
+// IMAGE PROTECTION — disable right-click save, drag, long-press
+// ============================================================
+document.addEventListener('contextmenu', function(e) {
+  if (e.target.tagName === 'IMG') { e.preventDefault(); return false; }
+});
+document.addEventListener('dragstart', function(e) {
+  if (e.target.tagName === 'IMG') { e.preventDefault(); return false; }
+});
+// Prevent iOS long-press save on images
+document.addEventListener('touchstart', function(e) {}, {passive: true});
+// Disable text/image selection globally
+document.addEventListener('selectstart', function(e) {
+  if (e.target.tagName === 'IMG') { e.preventDefault(); return false; }
+});
 </script>
 
 <!-- Cookie Banner -->

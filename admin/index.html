@@ -120,13 +120,18 @@ tr.drag-below td{border-bottom:2px solid var(--accent)}
 .cat-tag .cat-remove:hover{color:var(--danger)}
 .room-pos-editor{position:relative;width:100%;aspect-ratio:16/10;border-radius:6px;overflow:hidden;background:#e0ddd6;cursor:crosshair;margin-top:.5rem;border:2px solid var(--border)}
 .room-pos-editor img.rpe-bg{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
-.room-pos-editor .rpe-painting{position:absolute;box-shadow:0 4px 16px rgba(0,0,0,.25);background:#fff;padding:2px;cursor:move;user-select:none;touch-action:none}
+.room-pos-editor .rpe-painting{position:absolute;box-shadow:0 4px 16px rgba(0,0,0,.25);background:#fff;padding:2px;cursor:move;user-select:none;touch-action:none;transform-origin:center center}
 .room-pos-editor .rpe-painting img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
 .room-pos-editor .rpe-resize{position:absolute;bottom:-5px;right:-5px;width:14px;height:14px;background:var(--accent);border:2px solid #fff;cursor:nwse-resize;border-radius:2px;z-index:5}
 .room-pos-editor .rpe-crosshair{position:absolute;pointer-events:none;z-index:3}
 .room-pos-editor .rpe-crosshair-h{position:absolute;left:0;right:0;height:1px;background:rgba(43,74,140,.3);pointer-events:none}
 .room-pos-editor .rpe-crosshair-v{position:absolute;top:0;bottom:0;width:1px;background:rgba(43,74,140,.3);pointer-events:none}
 .room-pos-coords{font-size:.68rem;color:var(--text-l);margin-top:.35rem;font-family:monospace}
+.rpe-rotation-btns{display:flex;gap:.35rem;margin-top:.5rem;align-items:center}
+.rpe-rotation-btns label{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-l);margin-right:.25rem}
+.rpe-rot-btn{background:none;border:1px solid var(--border);color:var(--text);font-family:var(--body);font-size:.7rem;padding:.3rem .7rem;cursor:pointer;border-radius:2px;transition:all .2s;letter-spacing:.05em}
+.rpe-rot-btn:hover{border-color:var(--accent);color:var(--accent)}
+.rpe-rot-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
 </style>
 </head>
 <body>
@@ -134,6 +139,7 @@ tr.drag-below td{border-bottom:2px solid var(--accent)}
 <div id="loginScreen">
   <h1>Admin</h1>
   <p>Sign in to manage your artworks</p>
+  <p style="font-size:.78rem;color:var(--text-l);margin-top:-.5rem;margin-bottom:2rem">New accounts are created by invitation only.</p>
   <button class="login-btn" id="loginBtn">Sign In</button>
 </div>
 
@@ -258,7 +264,7 @@ tr.drag-below td{border-bottom:2px solid var(--accent)}
       <!-- ROOM POSITION EDITOR -->
       <div class="form-group" id="roomPosGroup" style="display:none">
         <label>Image Position in Room View</label>
-        <p style="font-size:.75rem;color:var(--text-l);margin-bottom:.5rem">Drag the painting to position it. Drag the blue handle to resize (proportions locked).</p>
+        <p style="font-size:.75rem;color:var(--text-l);margin-bottom:.5rem">Drag the painting to position it. Drag the blue handle to resize (proportions locked). Use rotation buttons to adjust how the painting is hung.</p>
         <select id="roomPosRoom" onchange="updateRoomPosEditor()" style="width:100%;max-width:240px;padding:.4rem .6rem;font-size:.82rem;border:1px solid var(--border);background:var(--card);font-family:var(--body);outline:none;margin-bottom:.5rem"></select>
         <div class="room-pos-editor" id="roomPosEditor">
           <img class="rpe-bg" id="rpeBg" src="">
@@ -267,7 +273,15 @@ tr.drag-below td{border-bottom:2px solid var(--accent)}
             <div class="rpe-resize" id="rpeResize"></div>
           </div>
         </div>
-        <div class="room-pos-coords" id="rpePosInfo">Position: — | Size: —</div>
+        <div class="room-pos-coords" id="rpePosInfo">Position: — | Size: — | Rotation: 0°</div>
+        <!-- Rotation controls -->
+        <div class="rpe-rotation-btns" id="rpeRotationBtns">
+          <label>Rotation:</label>
+          <button type="button" class="rpe-rot-btn active" data-rot="0" onclick="setRotation(0)">0°</button>
+          <button type="button" class="rpe-rot-btn" data-rot="90" onclick="setRotation(90)">90°</button>
+          <button type="button" class="rpe-rot-btn" data-rot="180" onclick="setRotation(180)">180°</button>
+          <button type="button" class="rpe-rot-btn" data-rot="270" onclick="setRotation(270)">270°</button>
+        </div>
         <div style="display:flex;gap:.5rem;margin-top:.5rem">
           <button type="button" class="btn-sm btn-outline-sm" onclick="resetRoomPos()">Reset to Default</button>
           <button type="button" class="btn-sm btn-primary" onclick="saveAllRoomPositions()">Apply to All Rooms</button>
@@ -979,6 +993,24 @@ function initAuth() {
 
   netlifyIdentity.init();
 
+  // Hide signup tab: inject CSS into the identity widget after it mounts
+  netlifyIdentity.on('open', function() {
+    setTimeout(function() {
+      var iframe = document.querySelector('[data-netlify-identity-widget] iframe, iframe[src*="identity"]');
+      if (iframe && iframe.contentDocument) {
+        var style = iframe.contentDocument.createElement('style');
+        style.textContent = '[data-testid="signup-tab"],[data-name="signup-tab"],[href*="signup"],[data-link="signup"]{display:none!important}';
+        iframe.contentDocument.head.appendChild(style);
+      }
+      // Also try to hide via the container shadow DOM
+      document.querySelectorAll('[data-netlify-identity-widget] a, .netlify-identity-menu-item').forEach(function(el){
+        if (el.textContent && el.textContent.toLowerCase().includes('sign up')) {
+          el.style.display = 'none';
+        }
+      });
+    }, 300);
+  });
+
   const user = netlifyIdentity.currentUser();
   if (user) {
     showAdmin(user.email);
@@ -1016,6 +1048,7 @@ function logout() {
 
 // Event listeners
 document.getElementById('loginBtn').addEventListener('click', function() {
+  // Always open login tab specifically (not signup)
   if (netlifyIdentity) netlifyIdentity.open('login');
 });
 document.getElementById('artworkModal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
@@ -1139,8 +1172,8 @@ function showRoomPosEditor(work) {
 function getRoomPos(roomId) {
   if (editingRoomPositions[roomId]) return editingRoomPositions[roomId];
   var room = allRooms.find(function(r){ return r.id === roomId; });
-  if (!room) return { x: 50, y: 30, scale: 100 };
-  return { x: room.wall_center_x, y: room.wall_center_y, scale: 100 };
+  if (!room) return { x: 50, y: 30, scale: 100, rotation: 0 };
+  return { x: room.wall_center_x, y: room.wall_center_y, scale: 100, rotation: 0 };
 }
 
 function updateRoomPosEditor() {
@@ -1160,19 +1193,34 @@ function updateRoomPosEditor() {
   var artW = parseFloat(document.getElementById('artWidth').value) || 24;
   var artH = parseFloat(document.getElementById('artHeight').value) || 24;
   var ratio = artW / artH;
+  var rotation = pos.rotation || 0;
 
   paintEl.style.left = pos.x + '%';
   paintEl.style.top = pos.y + '%';
   paintEl.style.width = scaledPct + '%';
   paintEl.style.aspectRatio = ratio;
-  paintEl.style.transform = 'translate(-50%, -50%)';
+  paintEl.style.transform = 'translate(-50%, -50%) rotate(' + rotation + 'deg)';
+
+  // Update rotation button states
+  document.querySelectorAll('.rpe-rot-btn').forEach(function(btn) {
+    btn.classList.toggle('active', parseInt(btn.dataset.rot) === rotation);
+  });
 
   updatePosInfo(pos, scaledPct);
 }
 
+function setRotation(deg) {
+  var room = allRooms[currentRoomIdx];
+  if (!room) return;
+  var pos = getRoomPos(room.id);
+  pos.rotation = deg;
+  editingRoomPositions[room.id] = pos;
+  updateRoomPosEditor();
+}
+
 function updatePosInfo(pos, sizePct) {
   document.getElementById('rpePosInfo').textContent =
-    'Position: X=' + Math.round(pos.x) + '% Y=' + Math.round(pos.y) + '% | Size: ' + Math.round(pos.scale) + '%';
+    'Position: X=' + Math.round(pos.x) + '% Y=' + Math.round(pos.y) + '% | Size: ' + Math.round(pos.scale) + '% | Rotation: ' + (pos.rotation || 0) + '°';
 }
 
 function resetRoomPos() {
@@ -1184,12 +1232,12 @@ function resetRoomPos() {
 }
 
 function saveAllRoomPositions() {
-  // Copy current room position to all rooms
+  // Copy current room position (including rotation) to all rooms
   var room = allRooms[currentRoomIdx];
   if (!room) return;
   var pos = getRoomPos(room.id);
   allRooms.forEach(function(r) {
-    editingRoomPositions[r.id] = { x: pos.x, y: pos.y, scale: pos.scale };
+    editingRoomPositions[r.id] = { x: pos.x, y: pos.y, scale: pos.scale, rotation: pos.rotation || 0 };
   });
   showToast('Position applied to all rooms', 'success');
 }
