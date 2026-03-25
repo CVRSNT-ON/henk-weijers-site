@@ -294,52 +294,6 @@
     "featured": false
   },
   {
-    "id": "prova",
-    "title": "Prova",
-    "category": "Prova",
-    "medium": "Acrylic on Canvas",
-    "width": 48,
-    "height": 48,
-    "price": 400,
-    "status": "Available",
-    "image": "images/img-1774423260681.jpg",
-    "description": "dsaofiugvhaosiudhbcaS",
-    "order": 3,
-    "featured": false,
-    "room_positions": {
-      "living-minimal": {
-        "x": 48.96819206349206,
-        "y": 33.80949682539683,
-        "scale": 101.58730158730158
-      },
-      "living-marble": {
-        "x": 66.90470793650795,
-        "y": 36.34918253968254,
-        "scale": 87.83068783068784
-      },
-      "living-grey": {
-        "x": 65.4761365079365,
-        "y": 35.84124603174603,
-        "scale": 101.58730158730158
-      },
-      "studio-leather": {
-        "x": 44.999906349206356,
-        "y": 32.03175873015873,
-        "scale": 101.58730158730158
-      },
-      "gallery-gold": {
-        "x": 49.28566031746032,
-        "y": 48.53965873015873,
-        "scale": 60.985797827903085
-      },
-      "bedroom-wood": {
-        "x": 48.96819206349206,
-        "y": 33.80949682539683,
-        "scale": 73.65079365079366
-      }
-    }
-  },
-  {
     "id": "prova123",
     "title": "Prova123",
     "category": "Landscapes",
@@ -350,7 +304,7 @@
     "status": "Sold",
     "image": "images/img-1774425782815.jpg",
     "description": "TEST DEI TEST",
-    "order": 1,
+    "order": 3,
     "featured": true,
     "room_positions": {
       "living-minimal": {
