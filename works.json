@@ -10,7 +10,7 @@
     "status": "Reserved",
     "image": "images/img01.jpg",
     "description": "A structured grid of horizontal blocks suggests separation and confinement. Yet textures remain expressive, and colours bleed across boundaries, hinting that interaction persists despite rigid frameworks. A reflection on categorisation, structure, and quiet resistance.",
-    "order": 1,
+    "order": 2,
     "featured": false
   },
   {
@@ -23,8 +23,8 @@
     "price": 300,
     "status": "Available",
     "image": "images/img02.jpg",
-    "description": "A dense, rhythmic composition capturing urgency and constant motion. Layers of red, pink, black, and white collide like intersecting paths. The scene recalls busy airports or train stations where commuters rush onward, barely connecting. A reflection on speed, routine, and modern life Ã¢ÂÂ where momentum dominates and stillness is rare.",
-    "order": 2,
+    "description": "A dense, rhythmic composition capturing urgency and constant motion. Layers of red, pink, black, and white collide like intersecting paths. The scene recalls busy airports or train stations where commuters rush onward, barely connecting. A reflection on speed, routine, and modern life ÃÂ¢ÃÂÃÂ where momentum dominates and stillness is rare.",
+    "order": 4,
     "featured": true
   },
   {
@@ -38,7 +38,7 @@
     "status": "Reserved",
     "image": "images/img03.jpg",
     "description": "Lauterbrunnen captures an impression of the famous village, with bold turquoise mountains, dramatic cliffs, and a bright open sky. A small house rests quietly in a wide yellow-green field, surrounded by textured brushstrokes that suggest waterfalls and steep rock faces. This painting reflects the powerful landscape of Lauterbrunnen in a simple, expressive way.",
-    "order": 3,
+    "order": 5,
     "featured": true
   },
   {
@@ -52,7 +52,7 @@
     "status": "Available",
     "image": "images/img04.jpg",
     "description": "Burgdorf presents an expressive impression of the Swiss town and its historic castle rising above the landscape. Strong turquoise and green forms suggest rolling hills, while textured grey and red shapes echo stone walls and rooftops. The sun hangs quietly in a pale sky, adding calm contrast to the bold foreground.",
-    "order": 4,
+    "order": 6,
     "featured": true
   },
   {
@@ -66,7 +66,7 @@
     "status": "Available",
     "image": "images/img05.jpg",
     "description": "Inspired by visits to Bukhara and Samarqand, this work draws on the geometry of Islamic art. Interlocking hexagonal forms symbolise order, continuity, and repetition. Layers of blue, turquoise, teal, and green echo glazed tiles of Timurid architecture. Precision and painterly freedom coexist, inviting contemplation where rhythm, balance, and pattern become a meditative experience.",
-    "order": 5,
+    "order": 7,
     "featured": true
   },
   {
@@ -80,7 +80,7 @@
     "status": "Available",
     "image": "images/img06.jpg",
     "description": "Inspired by early predecessors of the jukebox, this painting imagines music as colour. When the box opens, sound spills out as small, interlocking rectangles scattered across the surface. Turquoise, ochre, lilac, brown, and white move in a lively rhythm, translating melody into visual motion where music is not only heard, but seen.",
-    "order": 6,
+    "order": 8,
     "featured": true
   },
   {
@@ -94,7 +94,7 @@
     "status": "Reserved",
     "image": "images/img07.jpg",
     "description": "Named after the jazz standard by Thelonious Monk, this painting mirrors his unconventional rhythms and melodic twists. Overlapping rectangles in ruby red, crimson, rose, black, and white create a syncopated visual field. The ruby palette drives emotional intensity, while underlying structure brings balance beneath apparent disorder.",
-    "order": 7,
+    "order": 9,
     "featured": true
   },
   {
@@ -107,8 +107,8 @@
     "price": 300,
     "status": "Available",
     "image": "images/img08.jpg",
-    "description": "Built around blue and yellow Ã¢ÂÂ the colours of the Ukrainian flag Ã¢ÂÂ this work evokes sky and golden fields. Layered, fragmented strokes create rhythm interrupted by darker accents and lighter pauses. The horizontal division suggests balance, while texture keeps the surface unresolved. A quiet yet resolute reflection on resilience, hope, and freedom.",
-    "order": 8,
+    "description": "Built around blue and yellow ÃÂ¢ÃÂÃÂ the colours of the Ukrainian flag ÃÂ¢ÃÂÃÂ this work evokes sky and golden fields. Layered, fragmented strokes create rhythm interrupted by darker accents and lighter pauses. The horizontal division suggests balance, while texture keeps the surface unresolved. A quiet yet resolute reflection on resilience, hope, and freedom.",
+    "order": 10,
     "featured": true
   },
   {
@@ -122,7 +122,7 @@
     "status": "Available",
     "image": "images/img09.jpg",
     "description": "This semi-abstract expressionist landscape presents Lavaux, a UNESCO World Heritage site. The painting shows St. Saphorin, an idyllic medieval village, overlooking Lac Leman with the French Alps rising beyond. Bold yellow vineyard terraces descend diagonally toward the blue expanse of water, while structured mountain forms anchor the horizon in rhythmic, high-contrast colour fields.",
-    "order": 9,
+    "order": 11,
     "featured": true
   },
   {
@@ -135,8 +135,8 @@
     "price": 300,
     "status": "Available",
     "image": "images/img10.jpg",
-    "description": "Bavovna means explosion in Ukrainian. Energetic, fractured strokes radiate across the surface, colliding like bursts of light and sound. At the centre stands the Ukrainian trident, containing the hidden word Volya Ã¢ÂÂ Freedom. The contrast between explosive movement and firm geometry reflects resilience, continuity, and resolve in the face of chaos.",
-    "order": 10,
+    "description": "Bavovna means explosion in Ukrainian. Energetic, fractured strokes radiate across the surface, colliding like bursts of light and sound. At the centre stands the Ukrainian trident, containing the hidden word Volya ÃÂ¢ÃÂÃÂ Freedom. The contrast between explosive movement and firm geometry reflects resilience, continuity, and resolve in the face of chaos.",
+    "order": 12,
     "featured": true
   },
   {
@@ -150,7 +150,7 @@
     "status": "Available",
     "image": "images/img11.jpg",
     "description": "A grid composed of 25 individual paintings, each a self-contained work that gains meaning through proximity. Repetition creates order, while variation invites discovery. With each viewing, new shapes and connections emerge as the eye moves across the surface. A meditation on multiplicity, observation, and constraint.",
-    "order": 11,
+    "order": 13,
     "featured": true
   },
   {
@@ -163,8 +163,8 @@
     "price": 400,
     "status": "Reserved",
     "image": "images/img12.jpg",
-    "description": "This second exploration assembles 25 individual works into a unified grid. Warm tones Ã¢ÂÂ reds, ochres, golds, and pinks Ã¢ÂÂ create density and cohesion. Each square holds its own rhythm, yet relationships shift with every viewing. A reflection on repetition, variation, and how perception evolves over time.",
-    "order": 12,
+    "description": "This second exploration assembles 25 individual works into a unified grid. Warm tones ÃÂ¢ÃÂÃÂ reds, ochres, golds, and pinks ÃÂ¢ÃÂÃÂ create density and cohesion. Each square holds its own rhythm, yet relationships shift with every viewing. A reflection on repetition, variation, and how perception evolves over time.",
+    "order": 14,
     "featured": true
   },
   {
@@ -178,7 +178,7 @@
     "status": "Available",
     "image": "images/img13.jpg",
     "description": "Books arranged on three shelves become metaphors for the mind. Some volumes are large and heavy, others small and fleeting; some bright, others dark. Together they form a personal archive of thoughts shaped by memory and experience. A contemplative work about knowledge, reflection, and the layered nature of thinking.",
-    "order": 13,
+    "order": 15,
     "featured": false
   },
   {
@@ -191,8 +191,8 @@
     "price": 300,
     "status": "Available",
     "image": "images/img14.jpg",
-    "description": "Impulse versus discipline reflects the tension between spontaneity and structure. Energetic strokes meet carefully placed rectangular forms, as impulse confronts discipline. Greens, blues, oranges, and whites move freely within an underlying framework. The work explores balance Ã¢ÂÂ where intuition is shaped by order and contrasting energies coexist in harmony.",
-    "order": 14,
+    "description": "Impulse versus discipline reflects the tension between spontaneity and structure. Energetic strokes meet carefully placed rectangular forms, as impulse confronts discipline. Greens, blues, oranges, and whites move freely within an underlying framework. The work explores balance ÃÂ¢ÃÂÃÂ where intuition is shaped by order and contrasting energies coexist in harmony.",
+    "order": 16,
     "featured": false
   },
   {
@@ -206,7 +206,7 @@
     "status": "Available",
     "image": "images/img15.jpg",
     "description": "Dolce Maria depicts the hill town of Pitigliano after sunset, its clustered buildings glowing against a restless blue sky. The scene recalls an adolescent romance in Italy, marked by heightened emotion and possibility. Named after a song by PFM, the work carries a sense of nostalgia and youthful longing. It reflects on how a single choice can shape a life, leaving the lasting question of what might have been.",
-    "order": 15,
+    "order": 17,
     "featured": false
   },
   {
@@ -219,8 +219,8 @@
     "price": 400,
     "status": "Available",
     "image": "images/img16.jpg",
-    "description": "Dad's Ties refers to the Father's Day presents my daughter gave me as a child. The vertical bands resemble neckties, but also stand for conventions, opinions, and expectations that shape identity. Two dark bars interrupt the rhythm. The hands forcing them apart suggest a jailbreak Ã¢ÂÂ a metaphor for my pursuit of artistic freedom. Built with heavy palette-knife layers, the work combines geometric order with expressive texture and symbolic abstraction.",
-    "order": 16,
+    "description": "Dad's Ties refers to the Father's Day presents my daughter gave me as a child. The vertical bands resemble neckties, but also stand for conventions, opinions, and expectations that shape identity. Two dark bars interrupt the rhythm. The hands forcing them apart suggest a jailbreak ÃÂ¢ÃÂÃÂ a metaphor for my pursuit of artistic freedom. Built with heavy palette-knife layers, the work combines geometric order with expressive texture and symbolic abstraction.",
+    "order": 18,
     "featured": false
   },
   {
@@ -234,7 +234,7 @@
     "status": "Available",
     "image": "images/img17.jpg",
     "description": "Cerrado reflects a return to origins. The title refers to Djavan's song Cerrado, about longing for one's roots and the people who shaped a life. In Portuguese, cerrado means closed, describing a dense Brazilian landscape named by early settlers for its resistant vegetation. The painting mirrors this idea: the surface is cut into separate fields, compact and fragmented. What first feels closed slowly reveals rhythm, warmth, memory, and quiet joy.",
-    "order": 17,
+    "order": 19,
     "featured": false
   },
   {
@@ -247,8 +247,8 @@
     "price": 400,
     "status": "Available",
     "image": "images/img18.jpg",
-    "description": "Colour Dialogues shows two complementary colour ranges moving across the canvas in structured rows of fragments. The diversity of colours creates a visual dialogue where contrast and cooperation exist at the same time. The work can also be read as a reflection of politics and social issues Ã¢ÂÂ where different voices, interests, and identities meet. Despite tension and difference, the composition suggests that dialogue can create balance and synergy rather than division.",
-    "order": 18,
+    "description": "Colour Dialogues shows two complementary colour ranges moving across the canvas in structured rows of fragments. The diversity of colours creates a visual dialogue where contrast and cooperation exist at the same time. The work can also be read as a reflection of politics and social issues ÃÂ¢ÃÂÃÂ where different voices, interests, and identities meet. Despite tension and difference, the composition suggests that dialogue can create balance and synergy rather than division.",
+    "order": 20,
     "featured": false
   },
   {
@@ -261,8 +261,8 @@
     "price": 400,
     "status": "Available",
     "image": "images/img19.jpg",
-    "description": "Firebreaks refers to the physical barriers cut into landscapes to stop fire from spreading. In this painting, the idea extends beyond land management. The layered marks and sharp divisions suggest moments where movement is interrupted and contained. Metaphorically, firebreaks represent boundaries we create in life Ã¢ÂÂ pauses, limits, or decisions that prevent escalation. The work reflects the balance between control and chaos, destruction and protection.",
-    "order": 19,
+    "description": "Firebreaks refers to the physical barriers cut into landscapes to stop fire from spreading. In this painting, the idea extends beyond land management. The layered marks and sharp divisions suggest moments where movement is interrupted and contained. Metaphorically, firebreaks represent boundaries we create in life ÃÂ¢ÃÂÃÂ pauses, limits, or decisions that prevent escalation. The work reflects the balance between control and chaos, destruction and protection.",
+    "order": 21,
     "featured": false
   },
   {
@@ -276,7 +276,7 @@
     "status": "Available",
     "image": "images/img-1774416027495.jpg",
     "description": "ydhcahudiohciasuhmc",
-    "order": 20,
+    "order": 22,
     "featured": false
   },
   {
@@ -290,7 +290,7 @@
     "status": "Available",
     "image": "",
     "description": "",
-    "order": 21,
+    "order": 23,
     "featured": false
   },
   {
@@ -304,7 +304,7 @@
     "status": "Available",
     "image": "images/img-1774423260681.jpg",
     "description": "dsaofiugvhaosiudhbcaS",
-    "order": 1,
+    "order": 3,
     "featured": true,
     "room_positions": {
       "living-minimal": {
@@ -336,6 +336,52 @@
         "x": 48.96819206349206,
         "y": 33.80949682539683,
         "scale": 73.65079365079366
+      }
+    }
+  },
+  {
+    "id": "prova123",
+    "title": "Prova123",
+    "category": "Landscapes",
+    "medium": "Acrylic on Canvas",
+    "width": 30,
+    "height": 75,
+    "price": 999,
+    "status": "Available",
+    "image": "images/img-1774425782815.jpg",
+    "description": "TEST DEI TEST",
+    "order": 1,
+    "featured": true,
+    "room_positions": {
+      "living-minimal": {
+        "x": 50.714285714285715,
+        "y": 29.492063492063494,
+        "scale": 100
+      },
+      "living-marble": {
+        "x": 63.25398253968254,
+        "y": 32.03178253968254,
+        "scale": 100
+      },
+      "living-grey": {
+        "x": 54.52382380952381,
+        "y": 33.30162380952381,
+        "scale": 100
+      },
+      "studio-leather": {
+        "x": 47.06350634920635,
+        "y": 30.76194126984127,
+        "scale": 100
+      },
+      "gallery-gold": {
+        "x": 50.7143,
+        "y": 43.968290476190475,
+        "scale": 100
+      },
+      "bedroom-wood": {
+        "x": 50.714285714285715,
+        "y": 29.492063492063494,
+        "scale": 100
       }
     }
   }
