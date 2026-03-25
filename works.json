@@ -23,7 +23,7 @@
     "price": 300,
     "status": "Available",
     "image": "images/img02.jpg",
-    "description": "A dense, rhythmic composition capturing urgency and constant motion. Layers of red, pink, black, and white collide like intersecting paths. The scene recalls busy airports or train stations where commuters rush onward, barely connecting. A reflection on speed, routine, and modern life â where momentum dominates and stillness is rare.",
+    "description": "A dense, rhythmic composition capturing urgency and constant motion. Layers of red, pink, black, and white collide like intersecting paths. The scene recalls busy airports or train stations where commuters rush onward, barely connecting. A reflection on speed, routine, and modern life Ã¢ÂÂ where momentum dominates and stillness is rare.",
     "order": 2,
     "featured": true
   },
@@ -107,7 +107,7 @@
     "price": 300,
     "status": "Available",
     "image": "images/img08.jpg",
-    "description": "Built around blue and yellow â the colours of the Ukrainian flag â this work evokes sky and golden fields. Layered, fragmented strokes create rhythm interrupted by darker accents and lighter pauses. The horizontal division suggests balance, while texture keeps the surface unresolved. A quiet yet resolute reflection on resilience, hope, and freedom.",
+    "description": "Built around blue and yellow Ã¢ÂÂ the colours of the Ukrainian flag Ã¢ÂÂ this work evokes sky and golden fields. Layered, fragmented strokes create rhythm interrupted by darker accents and lighter pauses. The horizontal division suggests balance, while texture keeps the surface unresolved. A quiet yet resolute reflection on resilience, hope, and freedom.",
     "order": 8,
     "featured": true
   },
@@ -135,7 +135,7 @@
     "price": 300,
     "status": "Available",
     "image": "images/img10.jpg",
-    "description": "Bavovna means explosion in Ukrainian. Energetic, fractured strokes radiate across the surface, colliding like bursts of light and sound. At the centre stands the Ukrainian trident, containing the hidden word Volya â Freedom. The contrast between explosive movement and firm geometry reflects resilience, continuity, and resolve in the face of chaos.",
+    "description": "Bavovna means explosion in Ukrainian. Energetic, fractured strokes radiate across the surface, colliding like bursts of light and sound. At the centre stands the Ukrainian trident, containing the hidden word Volya Ã¢ÂÂ Freedom. The contrast between explosive movement and firm geometry reflects resilience, continuity, and resolve in the face of chaos.",
     "order": 10,
     "featured": true
   },
@@ -163,7 +163,7 @@
     "price": 400,
     "status": "Reserved",
     "image": "images/img12.jpg",
-    "description": "This second exploration assembles 25 individual works into a unified grid. Warm tones â reds, ochres, golds, and pinks â create density and cohesion. Each square holds its own rhythm, yet relationships shift with every viewing. A reflection on repetition, variation, and how perception evolves over time.",
+    "description": "This second exploration assembles 25 individual works into a unified grid. Warm tones Ã¢ÂÂ reds, ochres, golds, and pinks Ã¢ÂÂ create density and cohesion. Each square holds its own rhythm, yet relationships shift with every viewing. A reflection on repetition, variation, and how perception evolves over time.",
     "order": 12,
     "featured": true
   },
@@ -191,7 +191,7 @@
     "price": 300,
     "status": "Available",
     "image": "images/img14.jpg",
-    "description": "Impulse versus discipline reflects the tension between spontaneity and structure. Energetic strokes meet carefully placed rectangular forms, as impulse confronts discipline. Greens, blues, oranges, and whites move freely within an underlying framework. The work explores balance â where intuition is shaped by order and contrasting energies coexist in harmony.",
+    "description": "Impulse versus discipline reflects the tension between spontaneity and structure. Energetic strokes meet carefully placed rectangular forms, as impulse confronts discipline. Greens, blues, oranges, and whites move freely within an underlying framework. The work explores balance Ã¢ÂÂ where intuition is shaped by order and contrasting energies coexist in harmony.",
     "order": 14,
     "featured": false
   },
@@ -219,7 +219,7 @@
     "price": 400,
     "status": "Available",
     "image": "images/img16.jpg",
-    "description": "Dad's Ties refers to the Father's Day presents my daughter gave me as a child. The vertical bands resemble neckties, but also stand for conventions, opinions, and expectations that shape identity. Two dark bars interrupt the rhythm. The hands forcing them apart suggest a jailbreak â a metaphor for my pursuit of artistic freedom. Built with heavy palette-knife layers, the work combines geometric order with expressive texture and symbolic abstraction.",
+    "description": "Dad's Ties refers to the Father's Day presents my daughter gave me as a child. The vertical bands resemble neckties, but also stand for conventions, opinions, and expectations that shape identity. Two dark bars interrupt the rhythm. The hands forcing them apart suggest a jailbreak Ã¢ÂÂ a metaphor for my pursuit of artistic freedom. Built with heavy palette-knife layers, the work combines geometric order with expressive texture and symbolic abstraction.",
     "order": 16,
     "featured": false
   },
@@ -247,7 +247,7 @@
     "price": 400,
     "status": "Available",
     "image": "images/img18.jpg",
-    "description": "Colour Dialogues shows two complementary colour ranges moving across the canvas in structured rows of fragments. The diversity of colours creates a visual dialogue where contrast and cooperation exist at the same time. The work can also be read as a reflection of politics and social issues â where different voices, interests, and identities meet. Despite tension and difference, the composition suggests that dialogue can create balance and synergy rather than division.",
+    "description": "Colour Dialogues shows two complementary colour ranges moving across the canvas in structured rows of fragments. The diversity of colours creates a visual dialogue where contrast and cooperation exist at the same time. The work can also be read as a reflection of politics and social issues Ã¢ÂÂ where different voices, interests, and identities meet. Despite tension and difference, the composition suggests that dialogue can create balance and synergy rather than division.",
     "order": 18,
     "featured": false
   },
@@ -261,8 +261,22 @@
     "price": 400,
     "status": "Available",
     "image": "images/img19.jpg",
-    "description": "Firebreaks refers to the physical barriers cut into landscapes to stop fire from spreading. In this painting, the idea extends beyond land management. The layered marks and sharp divisions suggest moments where movement is interrupted and contained. Metaphorically, firebreaks represent boundaries we create in life â pauses, limits, or decisions that prevent escalation. The work reflects the balance between control and chaos, destruction and protection.",
+    "description": "Firebreaks refers to the physical barriers cut into landscapes to stop fire from spreading. In this painting, the idea extends beyond land management. The layered marks and sharp divisions suggest moments where movement is interrupted and contained. Metaphorically, firebreaks represent boundaries we create in life Ã¢ÂÂ pauses, limits, or decisions that prevent escalation. The work reflects the balance between control and chaos, destruction and protection.",
     "order": 19,
+    "featured": false
+  },
+  {
+    "id": "bestia-madonna",
+    "title": "bestia madonna",
+    "category": "Geometric Abstraction",
+    "medium": "Acrylic on Canvas",
+    "width": 200,
+    "height": 80,
+    "price": 400,
+    "status": "Available",
+    "image": "images/img-1774416027495.jpg",
+    "description": "ydhcahudiohciasuhmc",
+    "order": 20,
     "featured": false
   }
 ]
