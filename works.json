@@ -21,11 +21,11 @@
     "width": 16,
     "height": 24,
     "price": 300,
-    "status": "Available",
+    "status": "Sold",
     "image": "images/img02.jpg",
     "description": "A dense, rhythmic composition capturing urgency and constant motion. Layers of red, pink, black, and white collide like intersecting paths. The scene recalls busy airports or train stations where commuters rush onward, barely connecting. A reflection on speed, routine, and modern life ÃÂ¢ÃÂÃÂ where momentum dominates and stillness is rare.",
     "order": 2,
-    "featured": true
+    "featured": false
   },
   {
     "id": "lauterbrunnen",
@@ -39,7 +39,39 @@
     "image": "images/img03.jpg",
     "description": "Lauterbrunnen captures an impression of the famous village, with bold turquoise mountains, dramatic cliffs, and a bright open sky. A small house rests quietly in a wide yellow-green field, surrounded by textured brushstrokes that suggest waterfalls and steep rock faces. This painting reflects the powerful landscape of Lauterbrunnen in a simple, expressive way.",
     "order": 3,
-    "featured": true
+    "featured": true,
+    "room_positions": {
+      "living-minimal": {
+        "x": 49.920634920634924,
+        "y": 31.26984126984127,
+        "scale": 80.72562358276643
+      },
+      "living-marble": {
+        "x": 67.22222222222223,
+        "y": 34.57142857142857,
+        "scale": 100
+      },
+      "studio-leather": {
+        "x": 44.698412698412696,
+        "y": 33.58730158730159,
+        "scale": 80.85317460317462
+      },
+      "living-grey": {
+        "x": 55.65079365079365,
+        "y": 35.61904761904762,
+        "scale": 78.83597883597882
+      },
+      "gallery-gold": {
+        "x": 50.15873015873016,
+        "y": 36.317460317460316,
+        "scale": 87.71929824561401
+      },
+      "bedroom-wood": {
+        "x": 51.746,
+        "y": 31.603173015873015,
+        "scale": 91.42857142857143
+      }
+    }
   },
   {
     "id": "burgdorf",
@@ -53,7 +85,39 @@
     "image": "images/img04.jpg",
     "description": "Burgdorf presents an expressive impression of the Swiss town and its historic castle rising above the landscape. Strong turquoise and green forms suggest rolling hills, while textured grey and red shapes echo stone walls and rooftops. The sun hangs quietly in a pale sky, adding calm contrast to the bold foreground.",
     "order": 4,
-    "featured": true
+    "featured": true,
+    "room_positions": {
+      "living-minimal": {
+        "x": 48.80952380952381,
+        "y": 31.523809523809526,
+        "scale": 100
+      },
+      "living-marble": {
+        "x": 65.7936507936508,
+        "y": 33.80952380952381,
+        "scale": 90.47619047619048
+      },
+      "living-grey": {
+        "x": 54.06349206349206,
+        "y": 33.333333333333336,
+        "scale": 89.94708994708994
+      },
+      "studio-leather": {
+        "x": 42.63492063492063,
+        "y": 34.85714285714286,
+        "scale": 86.80555555555556
+      },
+      "gallery-gold": {
+        "x": 50.79365079365079,
+        "y": 36.317460317460316,
+        "scale": 86.04845446950709
+      },
+      "bedroom-wood": {
+        "x": 51.26984126984127,
+        "y": 30.58730158730159,
+        "scale": 94.6031746031746
+      }
+    }
   },
   {
     "id": "timurid-palette",
@@ -67,7 +131,39 @@
     "image": "images/img05.jpg",
     "description": "Inspired by visits to Bukhara and Samarqand, this work draws on the geometry of Islamic art. Interlocking hexagonal forms symbolise order, continuity, and repetition. Layers of blue, turquoise, teal, and green echo glazed tiles of Timurid architecture. Precision and painterly freedom coexist, inviting contemplation where rhythm, balance, and pattern become a meditative experience.",
     "order": 5,
-    "featured": true
+    "featured": true,
+    "room_positions": {
+      "living-minimal": {
+        "x": 49.920634920634924,
+        "y": 30,
+        "scale": 94.33106575963718
+      },
+      "living-marble": {
+        "x": 63.57142857142857,
+        "y": 33.301587301587304,
+        "scale": 94.70899470899471
+      },
+      "living-grey": {
+        "x": 54.69842063492063,
+        "y": 35.619,
+        "scale": 97.35449735449735
+      },
+      "studio-leather": {
+        "x": 42,
+        "y": 31.80952380952381,
+        "scale": 92.7579365079365
+      },
+      "gallery-gold": {
+        "x": 50.15873015873016,
+        "y": 37.079365079365076,
+        "scale": 96.49122807017542
+      },
+      "bedroom-wood": {
+        "x": 50.476190476190474,
+        "y": 31.857142857142858,
+        "scale": 97.77777777777777
+      }
+    }
   },
   {
     "id": "the-musical-box",
@@ -81,7 +177,39 @@
     "image": "images/img06.jpg",
     "description": "Inspired by early predecessors of the jukebox, this painting imagines music as colour. When the box opens, sound spills out as small, interlocking rectangles scattered across the surface. Turquoise, ochre, lilac, brown, and white move in a lively rhythm, translating melody into visual motion where music is not only heard, but seen.",
     "order": 6,
-    "featured": true
+    "featured": true,
+    "room_positions": {
+      "living-minimal": {
+        "x": 49.920634920634924,
+        "y": 32.03174603174603,
+        "scale": 100
+      },
+      "living-marble": {
+        "x": 64.2063492063492,
+        "y": 33.301587301587304,
+        "scale": 90.47619047619048
+      },
+      "living-grey": {
+        "x": 54.22222222222222,
+        "y": 36.12698412698413,
+        "scale": 100
+      },
+      "studio-leather": {
+        "x": 42.15873015873016,
+        "y": 37.14285714285714,
+        "scale": 100
+      },
+      "gallery-gold": {
+        "x": 50,
+        "y": 36.82539682539682,
+        "scale": 95.23809523809523
+      },
+      "bedroom-wood": {
+        "x": 51.111111111111114,
+        "y": 30.07933650793651,
+        "scale": 96.5079365079365
+      }
+    }
   },
   {
     "id": "ruby-my-dear",
@@ -91,11 +219,43 @@
     "width": 24,
     "height": 16,
     "price": 300,
-    "status": "Reserved",
+    "status": "Available",
     "image": "images/img07.jpg",
     "description": "Named after the jazz standard by Thelonious Monk, this painting mirrors his unconventional rhythms and melodic twists. Overlapping rectangles in ruby red, crimson, rose, black, and white create a syncopated visual field. The ruby palette drives emotional intensity, while underlying structure brings balance beneath apparent disorder.",
     "order": 7,
-    "featured": true
+    "featured": true,
+    "room_positions": {
+      "living-minimal": {
+        "x": 49.44444444444444,
+        "y": 32.53968253968254,
+        "scale": 97.05215419501134
+      },
+      "living-marble": {
+        "x": 64.36507936507937,
+        "y": 33.04761904761905,
+        "scale": 100
+      },
+      "living-grey": {
+        "x": 54.22222222222222,
+        "y": 36.888888888888886,
+        "scale": 100
+      },
+      "studio-leather": {
+        "x": 41.84126984126984,
+        "y": 34.85714285714286,
+        "scale": 100
+      },
+      "gallery-gold": {
+        "x": 50.15873015873016,
+        "y": 35.80952380952381,
+        "scale": 100
+      },
+      "bedroom-wood": {
+        "x": 51.42857142857143,
+        "y": 32.111111111111114,
+        "scale": 100
+      }
+    }
   },
   {
     "id": "fragments-of-freedom",
@@ -109,7 +269,39 @@
     "image": "images/img08.jpg",
     "description": "Built around blue and yellow ÃÂ¢ÃÂÃÂ the colours of the Ukrainian flag ÃÂ¢ÃÂÃÂ this work evokes sky and golden fields. Layered, fragmented strokes create rhythm interrupted by darker accents and lighter pauses. The horizontal division suggests balance, while texture keeps the surface unresolved. A quiet yet resolute reflection on resilience, hope, and freedom.",
     "order": 8,
-    "featured": true
+    "featured": true,
+    "room_positions": {
+      "living-minimal": {
+        "x": 49.6031746031746,
+        "y": 31.523809523809526,
+        "scale": 89.3424036281179
+      },
+      "living-marble": {
+        "x": 64.2063492063492,
+        "y": 32.79365079365079,
+        "scale": 100
+      },
+      "living-grey": {
+        "x": 54.698412698412696,
+        "y": 35.111111111111114,
+        "scale": 100
+      },
+      "studio-leather": {
+        "x": 42,
+        "y": 33.58730158730159,
+        "scale": 100
+      },
+      "gallery-gold": {
+        "x": 50.15873015873016,
+        "y": 34.285714285714285,
+        "scale": 100
+      },
+      "bedroom-wood": {
+        "x": 50,
+        "y": 29.825396825396826,
+        "scale": 100
+      }
+    }
   },
   {
     "id": "lavaux",
@@ -123,7 +315,39 @@
     "image": "images/img09.jpg",
     "description": "This semi-abstract expressionist landscape presents Lavaux, a UNESCO World Heritage site. The painting shows St. Saphorin, an idyllic medieval village, overlooking Lac Leman with the French Alps rising beyond. Bold yellow vineyard terraces descend diagonally toward the blue expanse of water, while structured mountain forms anchor the horizon in rhythmic, high-contrast colour fields.",
     "order": 9,
-    "featured": true
+    "featured": true,
+    "room_positions": {
+      "living-minimal": {
+        "x": 49.76185873015873,
+        "y": 33.04758253968254,
+        "scale": 73.92290249433108
+      },
+      "living-marble": {
+        "x": 63.41274126984127,
+        "y": 33.55554126984127,
+        "scale": 89.41798941798942
+      },
+      "living-grey": {
+        "x": 54.698412698412696,
+        "y": 35.61904761904762,
+        "scale": 100
+      },
+      "studio-leather": {
+        "x": 42.317460317460316,
+        "y": 34.34918571428572,
+        "scale": 91.76587301587303
+      },
+      "gallery-gold": {
+        "x": 51.4286,
+        "y": 36.31753174603175,
+        "scale": 89.8078529657477
+      },
+      "bedroom-wood": {
+        "x": 50.63496031746032,
+        "y": 31.603204761904763,
+        "scale": 88.25396825396825
+      }
+    }
   },
   {
     "id": "bavovna-ii",
@@ -137,7 +361,39 @@
     "image": "images/img10.jpg",
     "description": "Bavovna means explosion in Ukrainian. Energetic, fractured strokes radiate across the surface, colliding like bursts of light and sound. At the centre stands the Ukrainian trident, containing the hidden word Volya ÃÂ¢ÃÂÃÂ Freedom. The contrast between explosive movement and firm geometry reflects resilience, continuity, and resolve in the face of chaos.",
     "order": 10,
-    "featured": true
+    "featured": true,
+    "room_positions": {
+      "living-minimal": {
+        "x": 48.1745619047619,
+        "y": 30.254,
+        "scale": 100
+      },
+      "living-marble": {
+        "x": 65.63492063492063,
+        "y": 31.26984126984127,
+        "scale": 100
+      },
+      "living-grey": {
+        "x": 54.22222222222222,
+        "y": 35.36507936507937,
+        "scale": 100
+      },
+      "studio-leather": {
+        "x": 42,
+        "y": 30.285714285714285,
+        "scale": 100
+      },
+      "gallery-gold": {
+        "x": 50.476190476190474,
+        "y": 35.301568253968256,
+        "scale": 100
+      },
+      "bedroom-wood": {
+        "x": 50.476190476190474,
+        "y": 30.58730158730159,
+        "scale": 100
+      }
+    }
   },
   {
     "id": "pictures-at-an-exhibition-i",
@@ -151,7 +407,39 @@
     "image": "images/img11.jpg",
     "description": "A grid composed of 25 individual paintings, each a self-contained work that gains meaning through proximity. Repetition creates order, while variation invites discovery. With each viewing, new shapes and connections emerge as the eye moves across the surface. A meditation on multiplicity, observation, and constraint.",
     "order": 11,
-    "featured": true
+    "featured": true,
+    "room_positions": {
+      "living-minimal": {
+        "x": 50.55555555555556,
+        "y": 33.55555555555556,
+        "scale": 88.43537414965986
+      },
+      "living-marble": {
+        "x": 66.58730158730158,
+        "y": 33.04761904761905,
+        "scale": 96.82539682539684
+      },
+      "living-grey": {
+        "x": 54.698412698412696,
+        "y": 35.111111111111114,
+        "scale": 89.94708994708994
+      },
+      "studio-leather": {
+        "x": 42.317460317460316,
+        "y": 33.079365079365076,
+        "scale": 87.79761904761905
+      },
+      "gallery-gold": {
+        "x": 50.63492063492063,
+        "y": 36.31746825396825,
+        "scale": 71.84628237259815
+      },
+      "bedroom-wood": {
+        "x": 50.95238095238095,
+        "y": 30.333333333333336,
+        "scale": 91.42857142857143
+      }
+    }
   },
   {
     "id": "pictures-at-an-exhibition-ii",
@@ -161,11 +449,43 @@
     "width": 24,
     "height": 24,
     "price": 400,
-    "status": "Reserved",
+    "status": "Available",
     "image": "images/img12.jpg",
     "description": "This second exploration assembles 25 individual works into a unified grid. Warm tones ÃÂ¢ÃÂÃÂ reds, ochres, golds, and pinks ÃÂ¢ÃÂÃÂ create density and cohesion. Each square holds its own rhythm, yet relationships shift with every viewing. A reflection on repetition, variation, and how perception evolves over time.",
     "order": 12,
-    "featured": true
+    "featured": true,
+    "room_positions": {
+      "living-minimal": {
+        "x": 49.44444444444444,
+        "y": 32.03174603174603,
+        "scale": 81.17913832199545
+      },
+      "living-marble": {
+        "x": 66.42857142857143,
+        "y": 34.82539682539682,
+        "scale": 91.005291005291
+      },
+      "living-grey": {
+        "x": 54.698412698412696,
+        "y": 35.36507936507937,
+        "scale": 93.12169312169313
+      },
+      "studio-leather": {
+        "x": 42.15873015873016,
+        "y": 32.82539682539682,
+        "scale": 82.8373015873016
+      },
+      "gallery-gold": {
+        "x": 50.95238095238095,
+        "y": 37.079365079365076,
+        "scale": 79.36507936507937
+      },
+      "bedroom-wood": {
+        "x": 51.111111111111114,
+        "y": 32.111111111111114,
+        "scale": 90.7936507936508
+      }
+    }
   },
   {
     "id": "collected-thoughts",
@@ -175,7 +495,7 @@
     "width": 24,
     "height": 16,
     "price": 300,
-    "status": "Available",
+    "status": "Sold",
     "image": "images/img13.jpg",
     "description": "Books arranged on three shelves become metaphors for the mind. Some volumes are large and heavy, others small and fleeting; some bright, others dark. Together they form a personal archive of thoughts shaped by memory and experience. A contemplative work about knowledge, reflection, and the layered nature of thinking.",
     "order": 13,
@@ -193,7 +513,39 @@
     "image": "images/img14.jpg",
     "description": "Impulse versus discipline reflects the tension between spontaneity and structure. Energetic strokes meet carefully placed rectangular forms, as impulse confronts discipline. Greens, blues, oranges, and whites move freely within an underlying framework. The work explores balance ÃÂ¢ÃÂÃÂ where intuition is shaped by order and contrasting energies coexist in harmony.",
     "order": 14,
-    "featured": false
+    "featured": false,
+    "room_positions": {
+      "living-minimal": {
+        "x": 49.920634920634924,
+        "y": 35.84126984126984,
+        "scale": 100
+      },
+      "living-marble": {
+        "x": 65.15873015873015,
+        "y": 33.04761904761905,
+        "scale": 100
+      },
+      "living-grey": {
+        "x": 55.492063492063494,
+        "y": 37.14285714285714,
+        "scale": 96.82539682539684
+      },
+      "studio-leather": {
+        "x": 42,
+        "y": 35.36507936507937,
+        "scale": 100
+      },
+      "gallery-gold": {
+        "x": 50,
+        "y": 36.82539682539682,
+        "scale": 84.7953216374269
+      },
+      "bedroom-wood": {
+        "x": 50.317460317460316,
+        "y": 31.603168253968253,
+        "scale": 94.6031746031746
+      }
+    }
   },
   {
     "id": "dolce-maria",
@@ -207,7 +559,39 @@
     "image": "images/img15.jpg",
     "description": "Dolce Maria depicts the hill town of Pitigliano after sunset, its clustered buildings glowing against a restless blue sky. The scene recalls an adolescent romance in Italy, marked by heightened emotion and possibility. Named after a song by PFM, the work carries a sense of nostalgia and youthful longing. It reflects on how a single choice can shape a life, leaving the lasting question of what might have been.",
     "order": 15,
-    "featured": false
+    "featured": false,
+    "room_positions": {
+      "living-minimal": {
+        "x": 49.920634920634924,
+        "y": 32.03174603174603,
+        "scale": 92.06349206349206
+      },
+      "living-marble": {
+        "x": 63.73016984126984,
+        "y": 34.31750952380953,
+        "scale": 88.35978835978835
+      },
+      "living-grey": {
+        "x": 54.2222,
+        "y": 36.38097301587301,
+        "scale": 83.06878306878306
+      },
+      "studio-leather": {
+        "x": 42,
+        "y": 34.34920634920635,
+        "scale": 87.79761904761905
+      },
+      "gallery-gold": {
+        "x": 50.79365079365079,
+        "y": 35.55554126984127,
+        "scale": 85.63074352548036
+      },
+      "bedroom-wood": {
+        "x": 50.95238095238095,
+        "y": 31.095238095238095,
+        "scale": 86.34920634920636
+      }
+    }
   },
   {
     "id": "dads-ties",
@@ -221,7 +605,39 @@
     "image": "images/img16.jpg",
     "description": "Dad's Ties refers to the Father's Day presents my daughter gave me as a child. The vertical bands resemble neckties, but also stand for conventions, opinions, and expectations that shape identity. Two dark bars interrupt the rhythm. The hands forcing them apart suggest a jailbreak ÃÂ¢ÃÂÃÂ a metaphor for my pursuit of artistic freedom. Built with heavy palette-knife layers, the work combines geometric order with expressive texture and symbolic abstraction.",
     "order": 16,
-    "featured": false
+    "featured": false,
+    "room_positions": {
+      "living-minimal": {
+        "x": 49.76190476190476,
+        "y": 31.26984126984127,
+        "scale": 85.71428571428571
+      },
+      "living-marble": {
+        "x": 64.0476126984127,
+        "y": 34.57144126984127,
+        "scale": 82.010582010582
+      },
+      "living-grey": {
+        "x": 53.904761904761905,
+        "y": 35.87301587301587,
+        "scale": 91.53439153439155
+      },
+      "studio-leather": {
+        "x": 42.15873015873016,
+        "y": 34.6031746031746,
+        "scale": 85.81349206349206
+      },
+      "gallery-gold": {
+        "x": 50,
+        "y": 36.317460317460316,
+        "scale": 74.35254803675856
+      },
+      "bedroom-wood": {
+        "x": 50.79365079365079,
+        "y": 32.111111111111114,
+        "scale": 92.06349206349206
+      }
+    }
   },
   {
     "id": "cerrado",
@@ -235,7 +651,39 @@
     "image": "images/img17.jpg",
     "description": "Cerrado reflects a return to origins. The title refers to Djavan's song Cerrado, about longing for one's roots and the people who shaped a life. In Portuguese, cerrado means closed, describing a dense Brazilian landscape named by early settlers for its resistant vegetation. The painting mirrors this idea: the surface is cut into separate fields, compact and fragmented. What first feels closed slowly reveals rhythm, warmth, memory, and quiet joy.",
     "order": 17,
-    "featured": false
+    "featured": false,
+    "room_positions": {
+      "living-minimal": {
+        "x": 49.6031746031746,
+        "y": 34.82539682539682,
+        "scale": 84.80725623582767
+      },
+      "living-marble": {
+        "x": 63.25396825396825,
+        "y": 36.095238095238095,
+        "scale": 88.35978835978835
+      },
+      "living-grey": {
+        "x": 54.857142857142854,
+        "y": 36.63492063492063,
+        "scale": 87.30158730158732
+      },
+      "studio-leather": {
+        "x": 42,
+        "y": 32.57142857142857,
+        "scale": 91.76587301587303
+      },
+      "gallery-gold": {
+        "x": 50.476190476190474,
+        "y": 37.079365079365076,
+        "scale": 83.5421888053467
+      },
+      "bedroom-wood": {
+        "x": 51.111111111111114,
+        "y": 30.841269841269842,
+        "scale": 100
+      }
+    }
   },
   {
     "id": "colour-dialogues",
@@ -249,7 +697,39 @@
     "image": "images/img18.jpg",
     "description": "Colour Dialogues shows two complementary colour ranges moving across the canvas in structured rows of fragments. The diversity of colours creates a visual dialogue where contrast and cooperation exist at the same time. The work can also be read as a reflection of politics and social issues ÃÂ¢ÃÂÃÂ where different voices, interests, and identities meet. Despite tension and difference, the composition suggests that dialogue can create balance and synergy rather than division.",
     "order": 18,
-    "featured": false
+    "featured": false,
+    "room_positions": {
+      "living-minimal": {
+        "x": 50.079365079365076,
+        "y": 32.285714285714285,
+        "scale": 84.35374149659864
+      },
+      "living-marble": {
+        "x": 65,
+        "y": 33.55557777777778,
+        "scale": 81.48148148148148
+      },
+      "living-grey": {
+        "x": 54.22222222222222,
+        "y": 34.85714285714286,
+        "scale": 86.24338624338625
+      },
+      "studio-leather": {
+        "x": 41.84126984126984,
+        "y": 32.82539682539682,
+        "scale": 85.31746031746032
+      },
+      "gallery-gold": {
+        "x": 51.111111111111114,
+        "y": 39.36507936507937,
+        "scale": 71.42857142857143
+      },
+      "bedroom-wood": {
+        "x": 51.11116031746032,
+        "y": 31.6032,
+        "scale": 90.7936507936508
+      }
+    }
   },
   {
     "id": "firebreaks",
@@ -263,7 +743,39 @@
     "image": "images/img19.jpg",
     "description": "Firebreaks refers to the physical barriers cut into landscapes to stop fire from spreading. In this painting, the idea extends beyond land management. The layered marks and sharp divisions suggest moments where movement is interrupted and contained. Metaphorically, firebreaks represent boundaries we create in life ÃÂ¢ÃÂÃÂ pauses, limits, or decisions that prevent escalation. The work reflects the balance between control and chaos, destruction and protection.",
     "order": 19,
-    "featured": false
+    "featured": false,
+    "room_positions": {
+      "living-minimal": {
+        "x": 49.920634920634924,
+        "y": 32.03174603174603,
+        "scale": 91.156462585034
+      },
+      "living-marble": {
+        "x": 65.15873015873015,
+        "y": 34.317460317460316,
+        "scale": 86.77248677248677
+      },
+      "living-grey": {
+        "x": 55.17460317460318,
+        "y": 34.6031746031746,
+        "scale": 88.8888888888889
+      },
+      "studio-leather": {
+        "x": 42.15873015873016,
+        "y": 32.57142857142857,
+        "scale": 89.28571428571428
+      },
+      "gallery-gold": {
+        "x": 50.6349,
+        "y": 35.5555,
+        "scale": 81.87134502923976
+      },
+      "bedroom-wood": {
+        "x": 51.587269841269844,
+        "y": 31.857168253968254,
+        "scale": 87.61904761904762
+      }
+    }
   },
   {
     "id": "bestia-madonna",
