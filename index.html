@@ -245,12 +245,9 @@ window.addEventListener('load', function() {
   var msg = sessionStorage.getItem('formMsg');
   var subj = sessionStorage.getItem('formSubj');
   if (msg || subj) {
-    // Scroll to form after a brief delay to ensure layout is ready
     setTimeout(function(){
       var formEl = document.querySelector('.contact-form');
-      if (formEl) {
-        formEl.scrollIntoView({behavior:'smooth', block:'center'});
-      }
+      if (formEl) formEl.scrollIntoView({behavior:'smooth', block:'center'});
     }, 300);
   }
   if (msg) {
@@ -283,13 +280,11 @@ window.addEventListener('load', function() {
     }).then(function(res) {
       if (res.ok) {
         form.innerHTML = '<div style="text-align:center;padding:2rem 0"><p style="font-family:var(--display);font-size:1.5rem;font-weight:400;margin-bottom:.5rem">Thank you!</p><p style="color:var(--text-l)">Your message has been sent. Henk will get back to you soon.</p></div>';
-      } else {
-        throw new Error('Form submission failed');
-      }
-    }).catch(function(err) {
+      } else { throw new Error('fail'); }
+    }).catch(function() {
       btn.disabled = false;
       btn.textContent = origText;
-      alert('Sorry, there was an error sending your message. Please try again or email directly.');
+      alert('Sorry, there was an error sending your message. Please try again.');
     });
   });
 })();

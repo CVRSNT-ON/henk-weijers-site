@@ -62,6 +62,7 @@ body{font-family:var(--body);background:var(--bg);color:var(--text);line-height:
 .drag-handle:active{cursor:grabbing}
 tr.dragging{opacity:.4;background:rgba(43,74,140,.05)}
 tr.drag-over td{border-top:2px solid var(--accent)}
+tr.drag-below td{border-bottom:2px solid var(--accent)}
 .modal-overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(26,26,26,.6);backdrop-filter:blur(4px);justify-content:center;align-items:flex-start;padding:2rem;overflow-y:auto}
 .modal-overlay.open{display:flex}
 .modal{background:var(--bg);border:1px solid var(--border);width:100%;max-width:680px;margin:2rem auto;padding:0;box-shadow:0 20px 60px rgba(0,0,0,.15)}
@@ -526,7 +527,8 @@ let customCategories = JSON.parse(localStorage.getItem('henk_custom_cats') || '[
 
 function getCategories() {
   var cats = new Set();
-  DEFAULT_CATEGORIES.forEach(function(c){cats.add(c)});
+  var removedDefaults = JSON.parse(localStorage.getItem('henk_removed_cats') || '[]');
+  DEFAULT_CATEGORIES.forEach(function(c){ if (removedDefaults.indexOf(c) === -1) cats.add(c); });
   customCategories.forEach(function(c){cats.add(c)});
   works.forEach(function(w){ if(w.category) cats.add(w.category); });
   return Array.from(cats).sort();
@@ -579,18 +581,21 @@ function addCategoryFromMain() {
 }
 
 function removeCategory(cat) {
-  // Check if any works use this category
   var usedBy = works.filter(function(w){ return w.category === cat; });
   if (usedBy.length > 0) {
     showToast('Cannot delete "' + cat + '" — used by ' + usedBy.length + ' artwork(s)', 'error');
     return;
   }
-  if (DEFAULT_CATEGORIES.indexOf(cat) !== -1) {
-    showToast('Cannot delete default category "' + cat + '"', 'error');
-    return;
-  }
+  if (!confirm('Delete category "' + cat + '"?')) return;
+  // Remove from custom categories if present
   customCategories = customCategories.filter(function(c){ return c !== cat; });
   saveCustomCategories();
+  // If it's a default category, add it to a "removed defaults" list
+  if (DEFAULT_CATEGORIES.indexOf(cat) !== -1) {
+    var removed = JSON.parse(localStorage.getItem('henk_removed_cats') || '[]');
+    if (removed.indexOf(cat) === -1) removed.push(cat);
+    localStorage.setItem('henk_removed_cats', JSON.stringify(removed));
+  }
   renderCategoryList();
   showToast('Category "' + cat + '" removed', 'success');
 }
@@ -601,9 +606,7 @@ function renderCategoryList() {
   var cats = getCategories();
   el.innerHTML = cats.map(function(c){
     var count = works.filter(function(w){ return w.category === c; }).length;
-    var isDefault = DEFAULT_CATEGORIES.indexOf(c) !== -1;
-    var isUsed = count > 0;
-    var removeBtn = (!isDefault && !isUsed) ? '<button class="cat-remove" onclick="removeCategory(\''+c.replace(/'/g,"\\'")+'\')" title="Delete category">&times;</button>' : '';
+    var removeBtn = (count === 0) ? '<button class="cat-remove" onclick="removeCategory(\''+c.replace(/'/g,"\\'")+'\')" title="Delete category">&times;</button>' : '';
     return '<span class="cat-tag">'+esc(c)+' <span class="cat-count">('+count+')</span>'+removeBtn+'</span>';
   }).join('');
 }
@@ -826,9 +829,21 @@ function closeModal() {
 
 async function saveArtwork() {
   const title = document.getElementById('artTitle').value.trim();
-  if (!title) { showToast('Please enter a title', 'error'); return; }
-
+  const artWidth = document.getElementById('artWidth').value;
+  const artHeight = document.getElementById('artHeight').value;
+  const artPrice = document.getElementById('artPrice').value;
+  const artDesc = document.getElementById('artDesc').value.trim();
   const editId = document.getElementById('editId').value;
+  const hasImage = !!(document.getElementById('artImagePath').value.trim() || (pendingImageFile && pendingImageBase64));
+
+  // Validate all required fields
+  if (!title) { showToast('Title is required', 'error'); return; }
+  if (!artWidth || parseFloat(artWidth) <= 0) { showToast('Width is required', 'error'); return; }
+  if (!artHeight || parseFloat(artHeight) <= 0) { showToast('Height is required', 'error'); return; }
+  if (!artPrice || parseInt(artPrice) <= 0) { showToast('Price is required', 'error'); return; }
+  if (!artDesc) { showToast('Description is required', 'error'); return; }
+  if (!editId && !hasImage) { showToast('Image is required', 'error'); return; }
+
   const id = editId || slugify(title);
   if (!editId && works.find(w => w.id === id)) {
     showToast('An artwork with a similar title already exists', 'error');
@@ -840,24 +855,25 @@ async function saveArtwork() {
   try {
     let imagePath = document.getElementById('artImagePath').value.trim();
 
-    // Upload image to repo immediately (needs to be there for the site)
     if (pendingImageFile && pendingImageBase64) {
       showSaving('Uploading image...');
       imagePath = await uploadImage(pendingImageFile, pendingImageBase64);
       hideSaving();
     }
 
+    const newOrder = parseInt(document.getElementById('artOrder').value) || works.length + 1;
+
     const data = {
       id, title,
       category: document.getElementById('artCategory').value,
       medium: document.getElementById('artMedium').value,
-      width: parseFloat(document.getElementById('artWidth').value) || 0,
-      height: parseFloat(document.getElementById('artHeight').value) || 0,
-      price: parseInt(document.getElementById('artPrice').value) || 0,
+      width: parseFloat(artWidth) || 0,
+      height: parseFloat(artHeight) || 0,
+      price: parseInt(artPrice) || 0,
       status: document.getElementById('artStatus').value,
       image: imagePath,
-      description: document.getElementById('artDesc').value.trim(),
-      order: parseInt(document.getElementById('artOrder').value) || works.length + 1,
+      description: artDesc,
+      order: newOrder,
       featured: document.getElementById('artFeatured').checked
     };
 
@@ -870,10 +886,14 @@ async function saveArtwork() {
       const idx = works.findIndex(w => w.id === editId);
       if (idx !== -1) {
         if (!data.image && works[idx].image) data.image = works[idx].image;
+        const oldOrder = works[idx].order || 99;
         works[idx] = { ...works[idx], ...data };
+        // Reindex if order changed
+        if (oldOrder !== newOrder) reindexOrders(editId, newOrder);
       }
     } else {
       works.push(data);
+      reindexOrders(id, newOrder);
     }
 
     renderAll();
@@ -886,6 +906,26 @@ async function saveArtwork() {
   } finally {
     document.getElementById('saveBtn').disabled = false;
   }
+}
+
+// Reindex all order values so they stay sequential after inserting/moving an item
+function reindexOrders(movedId, targetOrder) {
+  // Sort all works by order, then for ties put the moved one at targetOrder
+  var sorted = [...works].sort(function(a, b) {
+    if (a.id === movedId) return 0;
+    if (b.id === movedId) return 0;
+    return (a.order || 99) - (b.order || 99);
+  });
+  // Remove moved item, insert at correct position
+  sorted = sorted.filter(function(w) { return w.id !== movedId; });
+  var movedWork = works.find(function(w) { return w.id === movedId; });
+  var insertIdx = Math.max(0, Math.min(sorted.length, targetOrder - 1));
+  sorted.splice(insertIdx, 0, movedWork);
+  // Reassign sequential orders
+  sorted.forEach(function(sw, i) {
+    var original = works.find(function(w) { return w.id === sw.id; });
+    if (original) original.order = i + 1;
+  });
 }
 
 // ============================================================
@@ -1000,6 +1040,7 @@ document.getElementById('worksTableBody').addEventListener('dragend', function(e
   const tr = e.target.closest('tr');
   if (tr) tr.classList.remove('dragging');
   document.querySelectorAll('.drag-over').forEach(function(el){ el.classList.remove('drag-over'); });
+  document.querySelectorAll('.drag-below').forEach(function(el){ el.classList.remove('drag-below'); });
 });
 
 document.getElementById('worksTableBody').addEventListener('dragover', function(e) {
@@ -1007,35 +1048,47 @@ document.getElementById('worksTableBody').addEventListener('dragover', function(
   e.dataTransfer.dropEffect = 'move';
   const tr = e.target.closest('tr');
   if (!tr || tr.dataset.id === dragSrcId) return;
-  document.querySelectorAll('.drag-over').forEach(function(el){ el.classList.remove('drag-over'); });
-  tr.classList.add('drag-over');
+  document.querySelectorAll('.drag-over,.drag-below').forEach(function(el){ el.classList.remove('drag-over','drag-below'); });
+  // Determine if cursor is in upper or lower half of the row
+  var rect = tr.getBoundingClientRect();
+  var midY = rect.top + rect.height / 2;
+  if (e.clientY < midY) {
+    tr.classList.add('drag-over'); // insert above
+  } else {
+    tr.classList.add('drag-below'); // insert below
+  }
 });
 
 document.getElementById('worksTableBody').addEventListener('dragleave', function(e) {
   const tr = e.target.closest('tr');
-  if (tr) tr.classList.remove('drag-over');
+  if (tr) { tr.classList.remove('drag-over'); tr.classList.remove('drag-below'); }
 });
 
 document.getElementById('worksTableBody').addEventListener('drop', function(e) {
   e.preventDefault();
-  document.querySelectorAll('.drag-over').forEach(function(el){ el.classList.remove('drag-over'); });
+  var isBelow = !!e.target.closest('tr.drag-below');
+  document.querySelectorAll('.drag-over,.drag-below').forEach(function(el){ el.classList.remove('drag-over','drag-below'); });
   const targetTr = e.target.closest('tr');
   if (!targetTr || !dragSrcId) return;
   const targetId = targetTr.dataset.id;
   if (targetId === dragSrcId) return;
 
-  // Get sorted list (same as renderTable uses)
   const sorted = [...works].sort((a,b) => (a.order||99) - (b.order||99));
   const srcIdx = sorted.findIndex(w => w.id === dragSrcId);
-  const tgtIdx = sorted.findIndex(w => w.id === targetId);
+  var tgtIdx = sorted.findIndex(w => w.id === targetId);
   if (srcIdx === -1 || tgtIdx === -1) return;
 
-  // Remove dragged item and insert at target position
+  // Remove dragged item
   const [moved] = sorted.splice(srcIdx, 1);
-  sorted.splice(tgtIdx, 0, moved);
-
-  // Reassign sequential order numbers 1, 2, 3...
-  // Write directly to the works array items (same object references)
+  // Recalculate target index after removal
+  tgtIdx = sorted.findIndex(w => w.id === targetId);
+  // Insert above or below target
+  if (isBelow) {
+    sorted.splice(tgtIdx + 1, 0, moved);
+  } else {
+    sorted.splice(tgtIdx, 0, moved);
+  }
+  // Reassign sequential order numbers
   sorted.forEach(function(sortedWork, i) {
     const original = works.find(function(w) { return w.id === sortedWork.id; });
     if (original) original.order = i + 1;
@@ -1101,29 +1154,12 @@ function updateRoomPosEditor() {
   var pos = getRoomPos(room.id);
   var paintEl = document.getElementById('rpePainting');
   var maxPct = room.max_painting_pct || 30;
+  var scaledPct = maxPct * (pos.scale / 100);
 
-  // Get artwork aspect ratio and adapt scale to dimensions
+  // Get artwork aspect ratio
   var artW = parseFloat(document.getElementById('artWidth').value) || 24;
   var artH = parseFloat(document.getElementById('artHeight').value) || 24;
   var ratio = artW / artH;
-
-  // Auto-adapt: tall paintings (portrait) get narrower width%
-  // Wide paintings (landscape) use the full maxPct
-  // Square paintings use slightly less
-  var dimFactor = 1;
-  if (ratio < 0.8) {
-    // Portrait: reduce width so painting doesn't look oversized
-    dimFactor = ratio * 0.9;
-  } else if (ratio > 1.3) {
-    // Landscape: use full width
-    dimFactor = 1;
-  } else {
-    // Square-ish
-    dimFactor = 0.85;
-  }
-
-  var basePct = maxPct * dimFactor;
-  var scaledPct = basePct * (pos.scale / 100);
 
   paintEl.style.left = pos.x + '%';
   paintEl.style.top = pos.y + '%';
