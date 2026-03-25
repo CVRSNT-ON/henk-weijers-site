@@ -56,11 +56,12 @@ section{padding:clamp(3rem,6vw,6rem) var(--g)}
 .room-section{margin-top:2.5rem}
 .room-scene{position:relative;width:100%;aspect-ratio:16/10;border-radius:6px;overflow:hidden;background:#e0ddd6}
 .room-scene img.room-bg{width:100%;height:100%;object-fit:cover;display:block}
-/* FIX: aspect-ratio lives on the OUTER div (.room-painting) so it works as an absolutely-positioned block.
-   The inner div must NOT have height:100% — that conflicts with aspect-ratio when the parent has no explicit height. */
+/* aspect-ratio on .room-painting sets the correct artwork proportions (width/height from works.json).
+   .room-painting-inner and its img must both use height:100% + object-fit:cover to fill that box,
+   matching the admin preview behaviour. */
 .room-painting{position:absolute;transition:all .3s ease;transform:translate(-50%,-50%)}
-.room-painting-inner{position:relative;width:100%;border:4px solid #1a1a1a;box-shadow:0 8px 32px rgba(0,0,0,.35),0 2px 8px rgba(0,0,0,.2)}
-.room-painting-inner img{width:100%;height:auto;display:block;pointer-events:none;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+.room-painting-inner{position:relative;width:100%;height:100%;border:4px solid #1a1a1a;box-shadow:0 8px 32px rgba(0,0,0,.35),0 2px 8px rgba(0,0,0,.2)}
+.room-painting-inner img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
 .room-selector{display:flex;gap:.5rem;margin-top:.75rem;flex-wrap:wrap}
 .room-thumb{width:60px;height:38px;object-fit:cover;border:2px solid transparent;cursor:pointer;opacity:.6;transition:all .3s;border-radius:3px}
 .room-thumb:hover{opacity:.9}
