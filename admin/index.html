@@ -175,12 +175,11 @@ tr.drag-over td{border-top:2px solid var(--accent)}
       <div class="form-row">
         <div class="form-group">
           <label for="artCategory">Category</label>
-          <select id="artCategory">
-            <option value="Geometric Abstraction">Geometric Abstraction</option>
-            <option value="Landscapes">Landscapes</option>
-            <option value="Stylised Realism">Stylised Realism</option>
-            <option value="Ukraine Inspired">Ukraine Inspired</option>
-          </select>
+          <select id="artCategory"></select>
+          <div style="display:flex;gap:.4rem;margin-top:.3rem">
+            <input type="text" id="newCatInput" placeholder="New category..." style="flex:1;padding:.3rem .5rem;font-size:.78rem;border:1px solid var(--border);background:var(--card);font-family:var(--body);outline:none">
+            <button type="button" class="btn-sm btn-outline-sm" style="padding:.3rem .6rem;font-size:.65rem" onclick="addCategory()">+ Add</button>
+          </div>
         </div>
         <div class="form-group">
           <label for="artMedium">Medium</label>
@@ -473,6 +472,42 @@ function changeStatus(id, newStatus) {
   showToast(w.title + ' → ' + newStatus + ' — publish to apply', 'success');
 }
 
+// ============================================================
+// CATEGORY MANAGEMENT
+// ============================================================
+function getCategories() {
+  var cats = new Set();
+  // Default categories
+  ['Geometric Abstraction', 'Landscapes', 'Stylised Realism', 'Ukraine Inspired'].forEach(function(c){cats.add(c)});
+  // Add categories from existing works
+  works.forEach(function(w){ if(w.category) cats.add(w.category); });
+  return Array.from(cats).sort();
+}
+
+function populateCategorySelect(selectedValue) {
+  var sel = document.getElementById('artCategory');
+  if (!sel) return;
+  var cats = getCategories();
+  sel.innerHTML = cats.map(function(c){
+    return '<option value="'+c+'"'+(c===selectedValue?' selected':'')+'>'+c+'</option>';
+  }).join('');
+}
+
+function addCategory() {
+  var input = document.getElementById('newCatInput');
+  var name = (input.value || '').trim();
+  if (!name) return;
+  // Check if already exists
+  var cats = getCategories();
+  if (cats.indexOf(name) !== -1) {
+    showToast('Category "' + name + '" already exists', 'error');
+    return;
+  }
+  input.value = '';
+  populateCategorySelect(name);
+  showToast('Category "' + name + '" added', 'success');
+}
+
 function updateCharCount() {
   const len = (document.getElementById('artDesc').value || '').length;
   const el = document.getElementById('charCount');
@@ -628,7 +663,7 @@ function openAddModal() {
   document.getElementById('modalTitle').textContent = 'Add Artwork';
   document.getElementById('editId').value = '';
   document.getElementById('artTitle').value = '';
-  document.getElementById('artCategory').value = 'Geometric Abstraction';
+  populateCategorySelect('Geometric Abstraction');
   document.getElementById('artMedium').value = 'Acrylic on Canvas';
   document.getElementById('artWidth').value = '';
   document.getElementById('artHeight').value = '';
@@ -651,7 +686,7 @@ function openEditModal(id) {
   document.getElementById('modalTitle').textContent = 'Edit Artwork';
   document.getElementById('editId').value = w.id;
   document.getElementById('artTitle').value = w.title || '';
-  document.getElementById('artCategory').value = w.category || 'Geometric Abstraction';
+  populateCategorySelect(w.category || 'Geometric Abstraction');
   document.getElementById('artMedium').value = w.medium || 'Acrylic on Canvas';
   document.getElementById('artWidth').value = w.width || '';
   document.getElementById('artHeight').value = w.height || '';
@@ -814,6 +849,9 @@ function showAdmin(email) {
 }
 
 function logout() {
+  if (pendingChanges > 0) {
+    if (!confirm('You have ' + pendingChanges + ' unpublished change(s). Sign out anyway? Changes will be lost.')) return;
+  }
   if (netlifyIdentity) netlifyIdentity.logout();
 }
 
