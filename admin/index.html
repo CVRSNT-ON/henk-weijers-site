@@ -113,6 +113,19 @@ tr.drag-over td{border-top:2px solid var(--accent)}
   .admin-stats{grid-template-columns:1fr}
   .works-table th:nth-child(4),.works-table td:nth-child(4){display:none}
 }
+.cat-tag{display:inline-flex;align-items:center;gap:.35rem;font-size:.72rem;letter-spacing:.06em;padding:.3rem .6rem;background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:2px}
+.cat-tag .cat-count{color:var(--text-l);font-size:.65rem}
+.cat-tag .cat-remove{background:none;border:none;color:var(--text-l);cursor:pointer;font-size:.9rem;line-height:1;padding:0 0 0 .2rem;transition:color .2s}
+.cat-tag .cat-remove:hover{color:var(--danger)}
+.room-pos-editor{position:relative;width:100%;aspect-ratio:16/10;border-radius:6px;overflow:hidden;background:#e0ddd6;cursor:crosshair;margin-top:.5rem;border:2px solid var(--border)}
+.room-pos-editor img.rpe-bg{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+.room-pos-editor .rpe-painting{position:absolute;box-shadow:0 4px 16px rgba(0,0,0,.25);background:#fff;padding:2px;cursor:move;user-select:none;touch-action:none}
+.room-pos-editor .rpe-painting img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+.room-pos-editor .rpe-resize{position:absolute;bottom:-5px;right:-5px;width:14px;height:14px;background:var(--accent);border:2px solid #fff;cursor:nwse-resize;border-radius:2px;z-index:5}
+.room-pos-editor .rpe-crosshair{position:absolute;pointer-events:none;z-index:3}
+.room-pos-editor .rpe-crosshair-h{position:absolute;left:0;right:0;height:1px;background:rgba(43,74,140,.3);pointer-events:none}
+.room-pos-editor .rpe-crosshair-v{position:absolute;top:0;bottom:0;width:1px;background:rgba(43,74,140,.3);pointer-events:none}
+.room-pos-coords{font-size:.68rem;color:var(--text-l);margin-top:.35rem;font-family:monospace}
 </style>
 </head>
 <body>
@@ -145,6 +158,19 @@ tr.drag-over td{border-top:2px solid var(--accent)}
       </div>
     </div>
     <div class="admin-stats" id="statsGrid"></div>
+
+    <!-- CATEGORY MANAGEMENT -->
+    <div style="background:var(--card);border:1px solid var(--border);padding:1.25rem;margin-bottom:1.5rem">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem">
+        <h3 style="font-family:var(--display);font-weight:400;font-size:1.1rem">Categories</h3>
+      </div>
+      <div id="categoryList" style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.75rem"></div>
+      <div style="display:flex;gap:.4rem;max-width:360px">
+        <input type="text" id="mainNewCatInput" placeholder="New category name..." style="flex:1;padding:.45rem .7rem;font-size:.82rem;border:1px solid var(--border);background:var(--bg);font-family:var(--body);outline:none">
+        <button type="button" class="btn-sm btn-primary" style="padding:.45rem .8rem;font-size:.65rem" onclick="addCategoryFromMain()">+ Add</button>
+      </div>
+    </div>
+
     <div style="margin-bottom:1rem">
       <input type="text" id="searchInput" placeholder="Search artworks..." oninput="renderTable()" style="width:100%;max-width:320px;background:var(--card);border:1px solid var(--border);padding:.55rem .9rem;font-family:var(--body);font-size:.85rem;font-weight:300;color:var(--text);outline:none">
     </div>
@@ -227,6 +253,26 @@ tr.drag-over td{border-top:2px solid var(--accent)}
         <img class="img-preview" id="imgPreview">
         <input type="hidden" id="artImagePath">
       </div>
+
+      <!-- ROOM POSITION EDITOR -->
+      <div class="form-group" id="roomPosGroup" style="display:none">
+        <label>Image Position in Room View</label>
+        <p style="font-size:.75rem;color:var(--text-l);margin-bottom:.5rem">Drag the painting to position it. Drag the blue handle to resize (proportions locked).</p>
+        <select id="roomPosRoom" onchange="updateRoomPosEditor()" style="width:100%;max-width:240px;padding:.4rem .6rem;font-size:.82rem;border:1px solid var(--border);background:var(--card);font-family:var(--body);outline:none;margin-bottom:.5rem"></select>
+        <div class="room-pos-editor" id="roomPosEditor">
+          <img class="rpe-bg" id="rpeBg" src="">
+          <div class="rpe-painting" id="rpePainting">
+            <img id="rpePaintingImg" src="">
+            <div class="rpe-resize" id="rpeResize"></div>
+          </div>
+        </div>
+        <div class="room-pos-coords" id="rpePosInfo">Position: — | Size: —</div>
+        <div style="display:flex;gap:.5rem;margin-top:.5rem">
+          <button type="button" class="btn-sm btn-outline-sm" onclick="resetRoomPos()">Reset to Default</button>
+          <button type="button" class="btn-sm btn-primary" onclick="saveAllRoomPositions()">Apply to All Rooms</button>
+        </div>
+      </div>
+
       <div class="form-group">
         <label for="artDesc">Description <span id="charCount" style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--text-l)"></span></label>
         <textarea id="artDesc" placeholder="Describe the artwork, its inspiration, and meaning..." oninput="updateCharCount()"></textarea>
@@ -475,13 +521,19 @@ function changeStatus(id, newStatus) {
 // ============================================================
 // CATEGORY MANAGEMENT
 // ============================================================
+const DEFAULT_CATEGORIES = ['Geometric Abstraction', 'Landscapes', 'Stylised Realism', 'Ukraine Inspired'];
+let customCategories = JSON.parse(localStorage.getItem('henk_custom_cats') || '[]');
+
 function getCategories() {
   var cats = new Set();
-  // Default categories
-  ['Geometric Abstraction', 'Landscapes', 'Stylised Realism', 'Ukraine Inspired'].forEach(function(c){cats.add(c)});
-  // Add categories from existing works
+  DEFAULT_CATEGORIES.forEach(function(c){cats.add(c)});
+  customCategories.forEach(function(c){cats.add(c)});
   works.forEach(function(w){ if(w.category) cats.add(w.category); });
   return Array.from(cats).sort();
+}
+
+function saveCustomCategories() {
+  localStorage.setItem('henk_custom_cats', JSON.stringify(customCategories));
 }
 
 function populateCategorySelect(selectedValue) {
@@ -497,15 +549,63 @@ function addCategory() {
   var input = document.getElementById('newCatInput');
   var name = (input.value || '').trim();
   if (!name) return;
-  // Check if already exists
   var cats = getCategories();
   if (cats.indexOf(name) !== -1) {
     showToast('Category "' + name + '" already exists', 'error');
     return;
   }
+  customCategories.push(name);
+  saveCustomCategories();
   input.value = '';
   populateCategorySelect(name);
+  renderCategoryList();
   showToast('Category "' + name + '" added', 'success');
+}
+
+function addCategoryFromMain() {
+  var input = document.getElementById('mainNewCatInput');
+  var name = (input.value || '').trim();
+  if (!name) return;
+  var cats = getCategories();
+  if (cats.indexOf(name) !== -1) {
+    showToast('Category "' + name + '" already exists', 'error');
+    return;
+  }
+  customCategories.push(name);
+  saveCustomCategories();
+  input.value = '';
+  renderCategoryList();
+  showToast('Category "' + name + '" added', 'success');
+}
+
+function removeCategory(cat) {
+  // Check if any works use this category
+  var usedBy = works.filter(function(w){ return w.category === cat; });
+  if (usedBy.length > 0) {
+    showToast('Cannot delete "' + cat + '" — used by ' + usedBy.length + ' artwork(s)', 'error');
+    return;
+  }
+  if (DEFAULT_CATEGORIES.indexOf(cat) !== -1) {
+    showToast('Cannot delete default category "' + cat + '"', 'error');
+    return;
+  }
+  customCategories = customCategories.filter(function(c){ return c !== cat; });
+  saveCustomCategories();
+  renderCategoryList();
+  showToast('Category "' + cat + '" removed', 'success');
+}
+
+function renderCategoryList() {
+  var el = document.getElementById('categoryList');
+  if (!el) return;
+  var cats = getCategories();
+  el.innerHTML = cats.map(function(c){
+    var count = works.filter(function(w){ return w.category === c; }).length;
+    var isDefault = DEFAULT_CATEGORIES.indexOf(c) !== -1;
+    var isUsed = count > 0;
+    var removeBtn = (!isDefault && !isUsed) ? '<button class="cat-remove" onclick="removeCategory(\''+c.replace(/'/g,"\\'")+'\')" title="Delete category">&times;</button>' : '';
+    return '<span class="cat-tag">'+esc(c)+' <span class="cat-count">('+count+')</span>'+removeBtn+'</span>';
+  }).join('');
 }
 
 function updateCharCount() {
@@ -547,7 +647,7 @@ function hideSaving() {
 // ============================================================
 // RENDERING
 // ============================================================
-function renderAll() { renderStats(); renderTable(); }
+function renderAll() { renderStats(); renderTable(); renderCategoryList(); }
 
 function renderStats() {
   const total = works.length;
@@ -643,6 +743,12 @@ function handleImageSelect(input) {
       pendingImageFile = { name: file.name.replace(/\.[^.]+$/, '.jpg') };
       const size = Math.round(pendingImageBase64.length * 3 / 4 / 1024);
       showToast('Image compressed to ' + size + ' KB (' + w + '×' + h + ')', 'success');
+      // Show room position editor after image selected
+      if (allRooms.length) {
+        document.getElementById('rpePaintingImg').src = compressed;
+        var fakeWork = { room_positions: editingRoomPositions };
+        showRoomPosEditor(fakeWork);
+      }
     };
     img.src = e.target.result;
   };
@@ -677,6 +783,8 @@ function openAddModal() {
   document.getElementById('artFeatured').checked = false;
   pendingImageFile = null;
   pendingImageBase64 = null;
+  editingRoomPositions = {};
+  document.getElementById('roomPosGroup').style.display = 'none';
   document.getElementById('artworkModal').classList.add('open');
 }
 
@@ -701,6 +809,12 @@ function openEditModal(id) {
   pendingImageFile = null;
   pendingImageBase64 = null;
   document.getElementById('artImage').value = '';
+  // Show room position editor if work has image
+  if (w.image && allRooms.length) {
+    showRoomPosEditor(w);
+  } else {
+    document.getElementById('roomPosGroup').style.display = 'none';
+  }
   document.getElementById('artworkModal').classList.add('open');
 }
 
@@ -746,6 +860,11 @@ async function saveArtwork() {
       order: parseInt(document.getElementById('artOrder').value) || works.length + 1,
       featured: document.getElementById('artFeatured').checked
     };
+
+    // Save room positions if any were edited
+    if (Object.keys(editingRoomPositions).length > 0) {
+      data.room_positions = editingRoomPositions;
+    }
 
     if (editId) {
       const idx = works.findIndex(w => w.id === editId);
@@ -923,6 +1042,199 @@ document.getElementById('worksTableBody').addEventListener('drop', function(e) {
   markChanged();
   showToast('Order updated — publish to apply', 'success');
 });
+
+// ============================================================
+// ROOM POSITION EDITOR
+// ============================================================
+let allRooms = [];
+let currentRoomIdx = 0;
+let editingRoomPositions = {};
+
+async function loadRooms() {
+  try {
+    const res = await fetch('/rooms.json?' + Date.now());
+    if (res.ok) allRooms = await res.json();
+  } catch(e) { allRooms = []; }
+}
+loadRooms();
+
+function showRoomPosEditor(work) {
+  const group = document.getElementById('roomPosGroup');
+  if (!allRooms.length) { group.style.display = 'none'; return; }
+
+  group.style.display = 'block';
+  editingRoomPositions = work.room_positions ? JSON.parse(JSON.stringify(work.room_positions)) : {};
+
+  // Populate room selector
+  const sel = document.getElementById('roomPosRoom');
+  sel.innerHTML = allRooms.map(function(r, i){
+    return '<option value="'+i+'">'+r.name+'</option>';
+  }).join('');
+  currentRoomIdx = 0;
+
+  // Set painting image
+  const imgSrc = document.getElementById('imgPreview').src || (work.image ? '/' + work.image : '');
+  document.getElementById('rpePaintingImg').src = imgSrc;
+
+  updateRoomPosEditor();
+}
+
+function getRoomPos(roomId) {
+  if (editingRoomPositions[roomId]) return editingRoomPositions[roomId];
+  var room = allRooms.find(function(r){ return r.id === roomId; });
+  if (!room) return { x: 50, y: 30, scale: 100 };
+  return { x: room.wall_center_x, y: room.wall_center_y, scale: 100 };
+}
+
+function updateRoomPosEditor() {
+  var idx = parseInt(document.getElementById('roomPosRoom').value) || 0;
+  currentRoomIdx = idx;
+  var room = allRooms[idx];
+  if (!room) return;
+
+  document.getElementById('rpeBg').src = '/' + room.image;
+
+  var pos = getRoomPos(room.id);
+  var paintEl = document.getElementById('rpePainting');
+  var maxPct = room.max_painting_pct || 30;
+  var scaledPct = maxPct * (pos.scale / 100);
+
+  // Get artwork aspect ratio
+  var artW = parseFloat(document.getElementById('artWidth').value) || 24;
+  var artH = parseFloat(document.getElementById('artHeight').value) || 24;
+  var ratio = artW / artH;
+
+  paintEl.style.left = pos.x + '%';
+  paintEl.style.top = pos.y + '%';
+  paintEl.style.width = scaledPct + '%';
+  paintEl.style.aspectRatio = ratio;
+  paintEl.style.transform = 'translate(-50%, -50%)';
+
+  updatePosInfo(pos, scaledPct);
+}
+
+function updatePosInfo(pos, sizePct) {
+  document.getElementById('rpePosInfo').textContent =
+    'Position: X=' + Math.round(pos.x) + '% Y=' + Math.round(pos.y) + '% | Size: ' + Math.round(pos.scale) + '%';
+}
+
+function resetRoomPos() {
+  var room = allRooms[currentRoomIdx];
+  if (!room) return;
+  delete editingRoomPositions[room.id];
+  updateRoomPosEditor();
+  showToast('Position reset to default for "' + room.name + '"', 'success');
+}
+
+function saveAllRoomPositions() {
+  // Copy current room position to all rooms
+  var room = allRooms[currentRoomIdx];
+  if (!room) return;
+  var pos = getRoomPos(room.id);
+  allRooms.forEach(function(r) {
+    editingRoomPositions[r.id] = { x: pos.x, y: pos.y, scale: pos.scale };
+  });
+  showToast('Position applied to all rooms', 'success');
+}
+
+// Drag & resize handlers for room position editor
+(function(){
+  var editor = document.getElementById('roomPosEditor');
+  var paintEl = document.getElementById('rpePainting');
+  var resizeEl = document.getElementById('rpeResize');
+  var dragging = false, resizing = false;
+  var startX, startY, startLeft, startTop, startWidth;
+
+  function getEditorRect() { return editor.getBoundingClientRect(); }
+
+  function pxToPct(px, total) { return (px / total) * 100; }
+
+  // DRAG
+  paintEl.addEventListener('mousedown', function(e) {
+    if (e.target === resizeEl) return;
+    e.preventDefault();
+    dragging = true;
+    var rect = getEditorRect();
+    startX = e.clientX;
+    startY = e.clientY;
+    startLeft = parseFloat(paintEl.style.left);
+    startTop = parseFloat(paintEl.style.top);
+  });
+
+  paintEl.addEventListener('touchstart', function(e) {
+    if (e.target === resizeEl) return;
+    e.preventDefault();
+    dragging = true;
+    var rect = getEditorRect();
+    var touch = e.touches[0];
+    startX = touch.clientX;
+    startY = touch.clientY;
+    startLeft = parseFloat(paintEl.style.left);
+    startTop = parseFloat(paintEl.style.top);
+  }, {passive: false});
+
+  // RESIZE
+  resizeEl.addEventListener('mousedown', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    resizing = true;
+    startX = e.clientX;
+    startWidth = paintEl.offsetWidth;
+  });
+
+  resizeEl.addEventListener('touchstart', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    resizing = true;
+    startX = e.touches[0].clientX;
+    startWidth = paintEl.offsetWidth;
+  }, {passive: false});
+
+  function onMove(cx, cy) {
+    var rect = getEditorRect();
+    var room = allRooms[currentRoomIdx];
+    if (!room) return;
+
+    if (dragging) {
+      var dx = cx - startX;
+      var dy = cy - startY;
+      var newX = startLeft + pxToPct(dx, rect.width);
+      var newY = startTop + pxToPct(dy, rect.height);
+      newX = Math.max(5, Math.min(95, newX));
+      newY = Math.max(5, Math.min(95, newY));
+      paintEl.style.left = newX + '%';
+      paintEl.style.top = newY + '%';
+
+      var pos = getRoomPos(room.id);
+      pos.x = newX;
+      pos.y = newY;
+      editingRoomPositions[room.id] = pos;
+      updatePosInfo(pos, (room.max_painting_pct || 30) * (pos.scale / 100));
+    }
+
+    if (resizing) {
+      var dx = cx - startX;
+      var newWidth = startWidth + dx;
+      var maxPct = room.max_painting_pct || 30;
+      var minW = rect.width * 0.05;
+      var maxW = rect.width * 0.60;
+      newWidth = Math.max(minW, Math.min(maxW, newWidth));
+      var newPct = pxToPct(newWidth, rect.width);
+      var newScale = (newPct / maxPct) * 100;
+      paintEl.style.width = newPct + '%';
+
+      var pos = getRoomPos(room.id);
+      pos.scale = newScale;
+      editingRoomPositions[room.id] = pos;
+      updatePosInfo(pos, newPct);
+    }
+  }
+
+  document.addEventListener('mousemove', function(e) { if (dragging || resizing) onMove(e.clientX, e.clientY); });
+  document.addEventListener('touchmove', function(e) { if (dragging || resizing) { e.preventDefault(); onMove(e.touches[0].clientX, e.touches[0].clientY); } }, {passive: false});
+  document.addEventListener('mouseup', function() { dragging = false; resizing = false; });
+  document.addEventListener('touchend', function() { dragging = false; resizing = false; });
+})();
 
 // Init
 initAuth();

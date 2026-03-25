@@ -57,7 +57,7 @@ section{padding:clamp(3rem,6vw,6rem) var(--g)}
 .room-scene{position:relative;width:100%;aspect-ratio:16/10;border-radius:6px;overflow:hidden;background:#e0ddd6}
 .room-scene img.room-bg{width:100%;height:100%;object-fit:cover;display:block}
 .room-painting{position:absolute;box-shadow:0 4px 20px rgba(0,0,0,.25),0 1px 4px rgba(0,0,0,.1);background:#fff;padding:3px;transition:all .3s ease}
-.room-painting img{width:100%;height:100%;object-fit:cover;display:block}
+.room-painting img{width:100%;height:100%;object-fit:contain;display:block}
 .room-selector{display:flex;gap:.5rem;margin-top:.75rem;flex-wrap:wrap}
 .room-thumb{width:60px;height:38px;object-fit:cover;border:2px solid transparent;cursor:pointer;opacity:.6;transition:all .3s;border-radius:3px}
 .room-thumb:hover{opacity:.9}
@@ -175,14 +175,22 @@ if(!artworkId){
     if(allRooms.length > 0){
       var defaultRoom = allRooms[0];
       var thumbsHtml = allRooms.map(function(r, i){
-        return '<img src="../'+r.image+'" alt="'+r.name+'" class="room-thumb'+(i===0?' active':'')+'" data-idx="'+i+'" onclick="switchRoom('+i+',\''+work.id+'\')">';
+        return '<img src="../'+r.image+'" alt="'+r.name+'" class="room-thumb'+(i===0?' active':'')+'" data-idx="'+i+'" onclick="switchRoom('+i+')">';
       }).join('');
+
+      // Use custom position if available, else room defaults
+      var customPos = work.room_positions && work.room_positions[defaultRoom.id];
+      var posX = customPos ? customPos.x : defaultRoom.wall_center_x;
+      var posY = customPos ? customPos.y : defaultRoom.wall_center_y;
+      var maxPct = defaultRoom.max_painting_pct || 30;
+      var scalePct = customPos ? maxPct * (customPos.scale / 100) : maxPct;
+      var artRatio = (work.width || 24) / (work.height || 24);
 
       roomViewHtml = '<div class="room-section">'
         + '<p class="section-label" style="margin-bottom:.75rem">View in Room</p>'
         + '<div class="room-scene" id="roomScene">'
         + '<img class="room-bg" id="roomBg" src="../'+defaultRoom.image+'" alt="Room view">'
-        + '<div class="room-painting" id="roomPainting" style="left:'+defaultRoom.wall_center_x+'%;top:'+defaultRoom.wall_center_y+'%;transform:translate(-50%,-50%);max-width:'+defaultRoom.max_painting_pct+'%">'
+        + '<div class="room-painting" id="roomPainting" style="left:'+posX+'%;top:'+posY+'%;transform:translate(-50%,-50%);width:'+scalePct+'%;aspect-ratio:'+artRatio+'">'
         + '<img src="../'+work.image+'" alt="'+esc(work.title)+' in room" id="roomArtImg">'
         + '</div>'
         + '</div>'
@@ -214,13 +222,6 @@ if(!artworkId){
 
     document.getElementById('artworkContent').innerHTML = html;
 
-    // Set initial painting aspect ratio
-    var paintEl = document.getElementById('roomPainting');
-    if(paintEl){
-      var ratio = work.width / work.height;
-      paintEl.style.aspectRatio = ratio;
-    }
-
     // Store work data globally for room switching
     window._currentWork = work;
 
@@ -236,9 +237,19 @@ function switchRoom(idx) {
   var work = window._currentWork;
   document.getElementById('roomBg').src = '../' + room.image;
   var paintEl = document.getElementById('roomPainting');
-  paintEl.style.left = room.wall_center_x + '%';
-  paintEl.style.top = room.wall_center_y + '%';
-  paintEl.style.maxWidth = room.max_painting_pct + '%';
+
+  // Use custom position if available
+  var customPos = work.room_positions && work.room_positions[room.id];
+  var posX = customPos ? customPos.x : room.wall_center_x;
+  var posY = customPos ? customPos.y : room.wall_center_y;
+  var maxPct = room.max_painting_pct || 30;
+  var scalePct = customPos ? maxPct * (customPos.scale / 100) : maxPct;
+  var artRatio = (work.width || 24) / (work.height || 24);
+
+  paintEl.style.left = posX + '%';
+  paintEl.style.top = posY + '%';
+  paintEl.style.width = scalePct + '%';
+  paintEl.style.aspectRatio = artRatio;
   // Update active thumb
   document.querySelectorAll('.room-thumb').forEach(function(t){t.classList.remove('active')});
   document.querySelectorAll('.room-thumb')[idx].classList.add('active');
