@@ -4,407 +4,23 @@
     "title": "Pigeonholing",
     "category": "Geometric Abstraction",
     "medium": "Acrylic on Canvas",
-    "width": 24,
-    "height": 16,
+    "width": 18,
+    "height": 24,
     "price": 300,
-    "status": "Sold",
-    "image": "images/img01.jpg",
-    "description": "A structured grid of horizontal blocks suggests separation and confinement. Yet textures remain expressive, and colours bleed across boundaries, hinting that interaction persists despite rigid frameworks. A reflection on categorisation, structure, and quiet resistance.",
+    "status": "Available",
+    "image": "images/HW18_-_Henk_Weijers__Pigeonholing_2025_max_3_Mb.jpg",
+    "description": "Referring to pigeonholing, this work reflects how people live and work within silos. A structured grid of horizontal blocks suggests separation and confinement. Yet textures remain expressive, and colours bleed across boundaries, hinting that interaction persists despite rigid frameworks. A reflection on categorisation, structure, and quiet resistance.",
+    "year": 2025,
+    "serial": "HW18 - 1225",
     "order": 1,
-    "featured": false
-  },
-  {
-    "id": "the-relentless-red-race",
-    "title": "The Relentless Red Race",
-    "category": "Geometric Abstraction",
-    "medium": "Acrylic on Canvas",
-    "width": 16,
-    "height": 24,
-    "price": 300,
-    "status": "Sold",
-    "image": "images/img02.jpg",
-    "description": "A dense, rhythmic composition capturing urgency and constant motion. Layers of red, pink, black, and white collide like intersecting paths. The scene recalls busy airports or train stations where commuters rush onward, barely connecting. A reflection on speed, routine, and modern life ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ where momentum dominates and stillness is rare.",
-    "order": 5,
-    "featured": false
-  },
-  {
-    "id": "lauterbrunnen",
-    "title": "Lauterbrunnen",
-    "category": "Landscapes",
-    "medium": "Acrylic on Canvas",
-    "width": 24,
-    "height": 24,
-    "price": 400,
-    "status": "Reserved",
-    "image": "images/img03.jpg",
-    "description": "Lauterbrunnen captures an impression of the famous village, with bold turquoise mountains, dramatic cliffs, and a bright open sky. A small house rests quietly in a wide yellow-green field, surrounded by textured brushstrokes that suggest waterfalls and steep rock faces. This painting reflects the powerful landscape of Lauterbrunnen in a simple, expressive way.",
-    "order": 3,
     "featured": true,
     "room_positions": {
-      "living-minimal": {
-        "x": 49.920634920634924,
-        "y": 31.26984126984127,
-        "scale": 80.72562358276643
-      },
-      "living-marble": {
-        "x": 67.22222222222223,
-        "y": 34.57142857142857,
-        "scale": 100
-      },
-      "studio-leather": {
-        "x": 44.698412698412696,
-        "y": 33.58730158730159,
-        "scale": 80.85317460317462
-      },
-      "living-grey": {
-        "x": 55.65079365079365,
-        "y": 35.61904761904762,
-        "scale": 78.83597883597882
-      },
-      "gallery-gold": {
-        "x": 50.15873015873016,
-        "y": 36.317460317460316,
-        "scale": 87.71929824561401
-      },
-      "bedroom-wood": {
-        "x": 51.746,
-        "y": 31.603173015873015,
-        "scale": 91.42857142857143
-      }
-    }
-  },
-  {
-    "id": "burgdorf",
-    "title": "Burgdorf",
-    "category": "Landscapes",
-    "medium": "Acrylic on Canvas",
-    "width": 24,
-    "height": 24,
-    "price": 400,
-    "status": "Sold",
-    "image": "images/img04.jpg",
-    "description": "Burgdorf presents an expressive impression of the Swiss town and its historic castle rising above the landscape. Strong turquoise and green forms suggest rolling hills, while textured grey and red shapes echo stone walls and rooftops. The sun hangs quietly in a pale sky, adding calm contrast to the bold foreground.",
-    "order": 4,
-    "featured": false,
-    "room_positions": {
-      "living-minimal": {
-        "x": 48.80952380952381,
-        "y": 31.523809523809526,
-        "scale": 79.81859410430839
-      },
-      "living-marble": {
-        "x": 65.7936507936508,
-        "y": 33.80952380952381,
-        "scale": 77.77777777777779
-      },
-      "living-grey": {
-        "x": 54.06349206349206,
-        "y": 33.333333333333336,
-        "scale": 73.54497354497354
-      },
-      "studio-leather": {
-        "x": 42.63492063492063,
-        "y": 34.85714285714286,
-        "scale": 71.42857142857143
-      },
-      "gallery-gold": {
-        "x": 50.79365079365079,
-        "y": 36.317460317460316,
-        "scale": 68.92230576441104
-      },
-      "bedroom-wood": {
-        "x": 51.26984126984127,
-        "y": 30.58730158730159,
-        "scale": 75.55555555555556
-      }
-    }
-  },
-  {
-    "id": "timurid-palette",
-    "title": "Timurid Palette",
-    "category": "Geometric Abstraction",
-    "medium": "Acrylic on Canvas",
-    "width": 15.5,
-    "height": 11.5,
-    "price": 200,
-    "status": "Sold",
-    "image": "images/img05.jpg",
-    "description": "Inspired by visits to Bukhara and Samarqand, this work draws on the geometry of Islamic art. Interlocking hexagonal forms symbolise order, continuity, and repetition. Layers of blue, turquoise, teal, and green echo glazed tiles of Timurid architecture. Precision and painterly freedom coexist, inviting contemplation where rhythm, balance, and pattern become a meditative experience.",
-    "order": 6,
-    "featured": false,
-    "room_positions": {
-      "living-minimal": {
-        "x": 49.920634920634924,
-        "y": 30,
-        "scale": 94.33106575963718
-      },
-      "living-marble": {
-        "x": 63.57142857142857,
-        "y": 33.301587301587304,
-        "scale": 94.70899470899471
-      },
-      "living-grey": {
-        "x": 54.69842063492063,
-        "y": 35.619,
-        "scale": 97.35449735449735
-      },
-      "studio-leather": {
-        "x": 42,
-        "y": 31.80952380952381,
-        "scale": 92.7579365079365
-      },
-      "gallery-gold": {
-        "x": 50.15873015873016,
-        "y": 37.079365079365076,
-        "scale": 96.49122807017542
-      },
-      "bedroom-wood": {
-        "x": 50.476190476190474,
-        "y": 31.857142857142858,
-        "scale": 97.77777777777777
-      }
-    }
-  },
-  {
-    "id": "the-musical-box",
-    "title": "The Musical Box",
-    "category": "Geometric Abstraction",
-    "medium": "Acrylic on Canvas",
-    "width": 24,
-    "height": 16,
-    "price": 300,
-    "status": "Available",
-    "image": "images/img06.jpg",
-    "description": "Inspired by early predecessors of the jukebox, this painting imagines music as colour. When the box opens, sound spills out as small, interlocking rectangles scattered across the surface. Turquoise, ochre, lilac, brown, and white move in a lively rhythm, translating melody into visual motion where music is not only heard, but seen.",
-    "order": 7,
-    "featured": true,
-    "room_positions": {
-      "living-minimal": {
-        "x": 49.920634920634924,
-        "y": 32.03174603174603,
-        "scale": 100,
-        "rotation": 90
-      },
-      "living-marble": {
-        "x": 67.2221873015873,
-        "y": 34.06344603174603,
-        "scale": 100,
-        "rotation": 90
-      },
-      "living-grey": {
-        "x": 55.3174253968254,
-        "y": 33.30154126984127,
-        "scale": 85.71428571428571,
-        "rotation": 90
-      },
-      "studio-leather": {
-        "x": 49.920634920634924,
-        "y": 32.03174603174603,
-        "scale": 91.76587301587303,
-        "rotation": 90
-      },
-      "gallery-gold": {
-        "x": 51.34917142857143,
-        "y": 38.126938095238096,
-        "scale": 83.95989974937342,
-        "rotation": 90
-      },
-      "bedroom-wood": {
-        "x": 50.71425079365079,
-        "y": 31.523763492063495,
-        "scale": 100,
-        "rotation": 90
-      }
-    }
-  },
-  {
-    "id": "ruby-my-dear",
-    "title": "Ruby My Dear",
-    "category": "Geometric Abstraction",
-    "medium": "Acrylic on Canvas",
-    "width": 24,
-    "height": 16,
-    "price": 300,
-    "status": "Available",
-    "image": "images/img07.jpg",
-    "description": "Named after the jazz standard by Thelonious Monk, this painting mirrors his unconventional rhythms and melodic twists. Overlapping rectangles in ruby red, crimson, rose, black, and white create a syncopated visual field. The ruby palette drives emotional intensity, while underlying structure brings balance beneath apparent disorder.",
-    "order": 8,
-    "featured": true,
-    "room_positions": {
-      "living-minimal": {
-        "x": 49.44444444444444,
-        "y": 32.53968253968254,
-        "scale": 97.05215419501134,
-        "rotation": 90
-      },
-      "living-marble": {
-        "x": 65.7936,
-        "y": 34.82541428571429,
-        "scale": 89.94708994708994,
-        "rotation": 90
-      },
-      "living-grey": {
-        "x": 54.68249523809524,
-        "y": 35.58731904761905,
-        "scale": 91.53439153439155,
-        "rotation": 90
-      },
-      "studio-leather": {
-        "x": 46.904717460317464,
-        "y": 35.58731904761905,
-        "scale": 93.25396825396825,
-        "rotation": 90
-      },
-      "gallery-gold": {
-        "x": 51.190460317460314,
-        "y": 37.6191,
-        "scale": 81.45363408521304,
-        "rotation": 90
-      },
-      "bedroom-wood": {
-        "x": 50.87297142857143,
-        "y": 31.77779523809524,
-        "scale": 90.15873015873017,
-        "rotation": 90
-      }
-    }
-  },
-  {
-    "id": "fragments-of-freedom",
-    "title": "Fragments Of Freedom",
-    "category": "Ukraine Inspired",
-    "medium": "Acrylic on Canvas",
-    "width": 24,
-    "height": 16,
-    "price": 300,
-    "status": "Available",
-    "image": "images/img08.jpg",
-    "description": "Built around blue and yellow ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ the colours of the Ukrainian flag ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ this work evokes sky and golden fields. Layered, fragmented strokes create rhythm interrupted by darker accents and lighter pauses. The horizontal division suggests balance, while texture keeps the surface unresolved. A quiet yet resolute reflection on resilience, hope, and freedom.",
-    "order": 9,
-    "featured": true,
-    "room_positions": {
-      "living-minimal": {
-        "x": 49.6031746031746,
-        "y": 31.523809523809526,
-        "scale": 89.3424036281179
-      },
-      "living-marble": {
-        "x": 64.2063492063492,
-        "y": 32.79365079365079,
-        "scale": 100
-      },
-      "living-grey": {
-        "x": 54.698412698412696,
-        "y": 35.111111111111114,
-        "scale": 100
-      },
-      "studio-leather": {
-        "x": 42,
-        "y": 33.58730158730159,
-        "scale": 100
-      },
-      "gallery-gold": {
-        "x": 50.15873015873016,
-        "y": 34.285714285714285,
-        "scale": 100
-      },
-      "bedroom-wood": {
-        "x": 50,
-        "y": 29.825396825396826,
-        "scale": 100
-      }
-    }
-  },
-  {
-    "id": "lavaux",
-    "title": "Lavaux",
-    "category": "Landscapes",
-    "medium": "Acrylic on Canvas",
-    "width": 24,
-    "height": 24,
-    "price": 400,
-    "status": "Available",
-    "image": "images/img09.jpg",
-    "description": "This semi-abstract expressionist landscape presents Lavaux, a UNESCO World Heritage site. The painting shows St. Saphorin, an idyllic medieval village, overlooking Lac Leman with the French Alps rising beyond. Bold yellow vineyard terraces descend diagonally toward the blue expanse of water, while structured mountain forms anchor the horizon in rhythmic, high-contrast colour fields.",
-    "order": 10,
-    "featured": true,
-    "room_positions": {
-      "living-minimal": {
-        "x": 49.76185873015873,
-        "y": 33.04758253968254,
-        "scale": 73.92290249433108
-      },
-      "living-marble": {
-        "x": 63.41274126984127,
-        "y": 33.55554126984127,
-        "scale": 89.41798941798942
-      },
-      "living-grey": {
-        "x": 54.698412698412696,
-        "y": 35.61904761904762,
-        "scale": 100
-      },
-      "studio-leather": {
-        "x": 42.317460317460316,
-        "y": 34.34918571428572,
-        "scale": 91.76587301587303
-      },
-      "gallery-gold": {
-        "x": 51.4286,
-        "y": 36.31753174603175,
-        "scale": 89.8078529657477
-      },
-      "bedroom-wood": {
-        "x": 50.63496031746032,
-        "y": 31.603204761904763,
-        "scale": 88.25396825396825
-      }
-    }
-  },
-  {
-    "id": "bavovna-ii",
-    "title": "Bavovna - II",
-    "category": "Ukraine Inspired",
-    "medium": "Acrylic on Canvas",
-    "width": 24,
-    "height": 16,
-    "price": 300,
-    "status": "Available",
-    "image": "images/img10.jpg",
-    "description": "Bavovna means explosion in Ukrainian. Energetic, fractured strokes radiate across the surface, colliding like bursts of light and sound. At the centre stands the Ukrainian trident, containing the hidden word Volya ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ Freedom. The contrast between explosive movement and firm geometry reflects resilience, continuity, and resolve in the face of chaos.",
-    "order": 11,
-    "featured": true,
-    "room_positions": {
-      "living-minimal": {
-        "x": 48.1745619047619,
-        "y": 30.254,
-        "scale": 100
-      },
-      "living-marble": {
-        "x": 65.63492063492063,
-        "y": 31.26984126984127,
-        "scale": 100
-      },
-      "living-grey": {
-        "x": 54.22222222222222,
-        "y": 35.36507936507937,
-        "scale": 100
-      },
-      "studio-leather": {
-        "x": 42,
-        "y": 30.285714285714285,
-        "scale": 100
-      },
-      "gallery-gold": {
-        "x": 50.476190476190474,
-        "y": 35.301568253968256,
-        "scale": 100
-      },
-      "bedroom-wood": {
-        "x": 50.476190476190474,
-        "y": 30.58730158730159,
-        "scale": 100
-      }
+      "living-minimal": { "x": 50, "y": 31, "scale": 80, "rotation": 0 },
+      "living-marble":  { "x": 67, "y": 35, "scale": 80, "rotation": 0 },
+      "living-grey":    { "x": 56, "y": 36, "scale": 69, "rotation": 0 },
+      "studio-leather": { "x": 45, "y": 34, "scale": 77, "rotation": 0 },
+      "gallery-gold":   { "x": 50, "y": 36, "scale": 70, "rotation": 0 },
+      "bedroom-wood":   { "x": 51, "y": 32, "scale": 80, "rotation": 0 }
     }
   },
   {
@@ -416,41 +32,19 @@
     "height": 24,
     "price": 400,
     "status": "Available",
-    "image": "images/img11.jpg",
+    "image": "images/HW20_-_Henk_Weijers__Pictures_at_an_exhibition-I__2025_max_10_Mb.jpg",
     "description": "A grid composed of 25 individual paintings, each a self-contained work that gains meaning through proximity. Repetition creates order, while variation invites discovery. With each viewing, new shapes and connections emerge as the eye moves across the surface. A meditation on multiplicity, observation, and constraint.",
-    "order": 12,
+    "year": 2025,
+    "serial": "HW20 - 1225",
+    "order": 2,
     "featured": true,
     "room_positions": {
-      "living-minimal": {
-        "x": 50.55555555555556,
-        "y": 33.55555555555556,
-        "scale": 88.43537414965986
-      },
-      "living-marble": {
-        "x": 66.58730158730158,
-        "y": 33.04761904761905,
-        "scale": 96.82539682539684
-      },
-      "living-grey": {
-        "x": 54.698412698412696,
-        "y": 35.111111111111114,
-        "scale": 89.94708994708994
-      },
-      "studio-leather": {
-        "x": 42.317460317460316,
-        "y": 33.079365079365076,
-        "scale": 87.79761904761905
-      },
-      "gallery-gold": {
-        "x": 50.63492063492063,
-        "y": 36.31746825396825,
-        "scale": 71.84628237259815
-      },
-      "bedroom-wood": {
-        "x": 50.95238095238095,
-        "y": 30.333333333333336,
-        "scale": 91.42857142857143
-      }
+      "living-minimal": { "x": 50, "y": 31, "scale": 80, "rotation": 0 },
+      "living-marble":  { "x": 67, "y": 35, "scale": 80, "rotation": 0 },
+      "living-grey":    { "x": 56, "y": 36, "scale": 69, "rotation": 0 },
+      "studio-leather": { "x": 45, "y": 34, "scale": 77, "rotation": 0 },
+      "gallery-gold":   { "x": 50, "y": 36, "scale": 70, "rotation": 0 },
+      "bedroom-wood":   { "x": 51, "y": 32, "scale": 80, "rotation": 0 }
     }
   },
   {
@@ -462,41 +56,19 @@
     "height": 24,
     "price": 400,
     "status": "Available",
-    "image": "images/img12.jpg",
-    "description": "This second exploration assembles 25 individual works into a unified grid. Warm tones ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ reds, ochres, golds, and pinks ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ create density and cohesion. Each square holds its own rhythm, yet relationships shift with every viewing. A reflection on repetition, variation, and how perception evolves over time.",
-    "order": 13,
+    "image": "images/HW21_-_Henk_Weijers__Pictures_at_an_exhibition-II__2025_max_3_Mb.jpg",
+    "description": "This second exploration assembles 25 individual works into a unified grid. Warm tones — reds, ochres, golds, and pinks — create density and cohesion. Each square holds its own rhythm, yet relationships shift with every viewing. A reflection on repetition, variation, and how perception evolves over time.",
+    "year": 2025,
+    "serial": "HW21 - 1225",
+    "order": 3,
     "featured": true,
     "room_positions": {
-      "living-minimal": {
-        "x": 49.44444444444444,
-        "y": 32.03174603174603,
-        "scale": 81.17913832199545
-      },
-      "living-marble": {
-        "x": 66.42857142857143,
-        "y": 34.82539682539682,
-        "scale": 91.005291005291
-      },
-      "living-grey": {
-        "x": 54.698412698412696,
-        "y": 35.36507936507937,
-        "scale": 93.12169312169313
-      },
-      "studio-leather": {
-        "x": 42.15873015873016,
-        "y": 32.82539682539682,
-        "scale": 82.8373015873016
-      },
-      "gallery-gold": {
-        "x": 50.95238095238095,
-        "y": 37.079365079365076,
-        "scale": 79.36507936507937
-      },
-      "bedroom-wood": {
-        "x": 51.111111111111114,
-        "y": 32.111111111111114,
-        "scale": 90.7936507936508
-      }
+      "living-minimal": { "x": 50, "y": 31, "scale": 80, "rotation": 0 },
+      "living-marble":  { "x": 67, "y": 35, "scale": 80, "rotation": 0 },
+      "living-grey":    { "x": 56, "y": 36, "scale": 69, "rotation": 0 },
+      "studio-leather": { "x": 45, "y": 34, "scale": 77, "rotation": 0 },
+      "gallery-gold":   { "x": 50, "y": 36, "scale": 70, "rotation": 0 },
+      "bedroom-wood":   { "x": 51, "y": 32, "scale": 80, "rotation": 0 }
     }
   },
   {
@@ -504,151 +76,47 @@
     "title": "Collected Thoughts",
     "category": "Stylised Realism",
     "medium": "Acrylic on Canvas",
-    "width": 24,
-    "height": 16,
-    "price": 300,
-    "status": "Sold",
-    "image": "images/img13.jpg",
-    "description": "Books arranged on three shelves become metaphors for the mind. Some volumes are large and heavy, others small and fleeting; some bright, others dark. Together they form a personal archive of thoughts shaped by memory and experience. A contemplative work about knowledge, reflection, and the layered nature of thinking.",
-    "order": 14,
-    "featured": false
-  },
-  {
-    "id": "impulse-versus-discipline",
-    "title": "Impulse Versus Discipline",
-    "category": "Geometric Abstraction",
-    "medium": "Acrylic on Canvas",
-    "width": 24,
-    "height": 16,
+    "width": 18,
+    "height": 24,
     "price": 300,
     "status": "Available",
-    "image": "images/img14.jpg",
-    "description": "Impulse versus discipline reflects the tension between spontaneity and structure. Energetic strokes meet carefully placed rectangular forms, as impulse confronts discipline. Greens, blues, oranges, and whites move freely within an underlying framework. The work explores balance ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ where intuition is shaped by order and contrasting energies coexist in harmony.",
-    "order": 15,
-    "featured": false,
+    "image": "images/HW22_-_Henk_Weijers__Collected_Thoughts_2025_max_3_Mb.jpg",
+    "description": "Books arranged on three shelves become metaphors for the mind. Some volumes are large and heavy, others small and fleeting; some bright, others dark. Together they form a personal archive of thoughts shaped by memory and experience. A contemplative work about knowledge, reflection, and the layered nature of thinking.",
+    "year": 2025,
+    "serial": "HW22 - 1225",
+    "order": 4,
+    "featured": true,
     "room_positions": {
-      "living-minimal": {
-        "x": 49.920634920634924,
-        "y": 35.84126984126984,
-        "scale": 100
-      },
-      "living-marble": {
-        "x": 65.15873015873015,
-        "y": 33.04761904761905,
-        "scale": 100
-      },
-      "living-grey": {
-        "x": 55.492063492063494,
-        "y": 37.14285714285714,
-        "scale": 96.82539682539684
-      },
-      "studio-leather": {
-        "x": 42,
-        "y": 35.36507936507937,
-        "scale": 100
-      },
-      "gallery-gold": {
-        "x": 50,
-        "y": 36.82539682539682,
-        "scale": 84.7953216374269
-      },
-      "bedroom-wood": {
-        "x": 50.317460317460316,
-        "y": 31.603168253968253,
-        "scale": 94.6031746031746
-      }
+      "living-minimal": { "x": 50, "y": 31, "scale": 80, "rotation": 0 },
+      "living-marble":  { "x": 67, "y": 35, "scale": 80, "rotation": 0 },
+      "living-grey":    { "x": 56, "y": 36, "scale": 69, "rotation": 0 },
+      "studio-leather": { "x": 45, "y": 34, "scale": 77, "rotation": 0 },
+      "gallery-gold":   { "x": 50, "y": 36, "scale": 70, "rotation": 0 },
+      "bedroom-wood":   { "x": 51, "y": 32, "scale": 80, "rotation": 0 }
     }
   },
   {
     "id": "dolce-maria",
     "title": "Dolce Maria",
-    "category": "Landscapes",
+    "category": "Semi Abstract Expressionist Landscape",
     "medium": "Acrylic on Canvas",
     "width": 24,
     "height": 24,
     "price": 400,
     "status": "Available",
-    "image": "images/img15.jpg",
+    "image": "images/HW23_-_Henk_Weijers__Dolce_Maria_2026_max_3_Mb.jpg",
     "description": "Dolce Maria depicts the hill town of Pitigliano after sunset, its clustered buildings glowing against a restless blue sky. The scene recalls an adolescent romance in Italy, marked by heightened emotion and possibility. Named after a song by PFM, the work carries a sense of nostalgia and youthful longing. It reflects on how a single choice can shape a life, leaving the lasting question of what might have been.",
-    "order": 16,
-    "featured": false,
+    "year": 2026,
+    "serial": "HW23 - 0126",
+    "order": 5,
+    "featured": true,
     "room_positions": {
-      "living-minimal": {
-        "x": 49.920634920634924,
-        "y": 32.03174603174603,
-        "scale": 92.06349206349206
-      },
-      "living-marble": {
-        "x": 63.73016984126984,
-        "y": 34.31750952380953,
-        "scale": 88.35978835978835
-      },
-      "living-grey": {
-        "x": 54.2222,
-        "y": 36.38097301587301,
-        "scale": 83.06878306878306
-      },
-      "studio-leather": {
-        "x": 42,
-        "y": 34.34920634920635,
-        "scale": 87.79761904761905
-      },
-      "gallery-gold": {
-        "x": 50.79365079365079,
-        "y": 35.55554126984127,
-        "scale": 85.63074352548036
-      },
-      "bedroom-wood": {
-        "x": 50.95238095238095,
-        "y": 31.095238095238095,
-        "scale": 86.34920634920636
-      }
-    }
-  },
-  {
-    "id": "dads-ties",
-    "title": "Dad's Ties",
-    "category": "Geometric Abstraction",
-    "medium": "Acrylic on Canvas",
-    "width": 24,
-    "height": 24,
-    "price": 400,
-    "status": "Available",
-    "image": "images/img16.jpg",
-    "description": "Dad's Ties refers to the Father's Day presents my daughter gave me as a child. The vertical bands resemble neckties, but also stand for conventions, opinions, and expectations that shape identity. Two dark bars interrupt the rhythm. The hands forcing them apart suggest a jailbreak ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ a metaphor for my pursuit of artistic freedom. Built with heavy palette-knife layers, the work combines geometric order with expressive texture and symbolic abstraction.",
-    "order": 17,
-    "featured": false,
-    "room_positions": {
-      "living-minimal": {
-        "x": 49.76190476190476,
-        "y": 31.26984126984127,
-        "scale": 85.71428571428571
-      },
-      "living-marble": {
-        "x": 64.0476126984127,
-        "y": 34.57144126984127,
-        "scale": 82.010582010582
-      },
-      "living-grey": {
-        "x": 53.904761904761905,
-        "y": 35.87301587301587,
-        "scale": 91.53439153439155
-      },
-      "studio-leather": {
-        "x": 42.15873015873016,
-        "y": 34.6031746031746,
-        "scale": 85.81349206349206
-      },
-      "gallery-gold": {
-        "x": 50,
-        "y": 36.317460317460316,
-        "scale": 74.35254803675856
-      },
-      "bedroom-wood": {
-        "x": 50.79365079365079,
-        "y": 32.111111111111114,
-        "scale": 92.06349206349206
-      }
+      "living-minimal": { "x": 50, "y": 31, "scale": 80, "rotation": 0 },
+      "living-marble":  { "x": 67, "y": 35, "scale": 80, "rotation": 0 },
+      "living-grey":    { "x": 56, "y": 36, "scale": 69, "rotation": 0 },
+      "studio-leather": { "x": 45, "y": 34, "scale": 77, "rotation": 0 },
+      "gallery-gold":   { "x": 50, "y": 36, "scale": 70, "rotation": 0 },
+      "bedroom-wood":   { "x": 51, "y": 32, "scale": 80, "rotation": 0 }
     }
   },
   {
@@ -657,96 +125,46 @@
     "category": "Geometric Abstraction",
     "medium": "Acrylic on Canvas",
     "width": 24,
-    "height": 28,
-    "price": 400,
-    "status": "Available",
-    "image": "images/img17.jpg",
-    "description": "Cerrado reflects a return to origins. The title refers to Djavan's song Cerrado, about longing for one's roots and the people who shaped a life. In Portuguese, cerrado means closed, describing a dense Brazilian landscape named by early settlers for its resistant vegetation. The painting mirrors this idea: the surface is cut into separate fields, compact and fragmented. What first feels closed slowly reveals rhythm, warmth, memory, and quiet joy.",
-    "order": 18,
-    "featured": false,
-    "room_positions": {
-      "living-minimal": {
-        "x": 49.6031746031746,
-        "y": 34.82539682539682,
-        "scale": 70.29478458049886,
-        "rotation": 0
-      },
-      "living-marble": {
-        "x": 64.84129523809524,
-        "y": 34.8254,
-        "scale": 70.29478458049886,
-        "rotation": 0
-      },
-      "living-grey": {
-        "x": 54.3651,
-        "y": 34.8254,
-        "scale": 70.29478458049886,
-        "rotation": 0
-      },
-      "studio-leather": {
-        "x": 49.6031746031746,
-        "y": 34.82539682539682,
-        "scale": 70.29478458049886,
-        "rotation": 0
-      },
-      "gallery-gold": {
-        "x": 50.39685079365079,
-        "y": 35.841273015873014,
-        "scale": 59.314954051796164,
-        "rotation": 0
-      },
-      "bedroom-wood": {
-        "x": 51.666692063492064,
-        "y": 32.285717460317464,
-        "scale": 70.29478458049886,
-        "rotation": 0
-      }
-    }
-  },
-  {
-    "id": "colour-dialogues",
-    "title": "Colour Dialogues",
-    "category": "Geometric Abstraction",
-    "medium": "Acrylic on Canvas",
-    "width": 24,
     "height": 24,
     "price": 400,
     "status": "Available",
-    "image": "images/img18.jpg",
-    "description": "Colour Dialogues shows two complementary colour ranges moving across the canvas in structured rows of fragments. The diversity of colours creates a visual dialogue where contrast and cooperation exist at the same time. The work can also be read as a reflection of politics and social issues ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ where different voices, interests, and identities meet. Despite tension and difference, the composition suggests that dialogue can create balance and synergy rather than division.",
-    "order": 19,
-    "featured": false,
+    "image": "images/HW25_-_Henk_Weijers__Cerrado_2026_max_3_Mb.jpg",
+    "description": "Cerrado reflects a return to origins. The title refers to Djavan's song Cerrado, about longing for one's roots and the people who shaped a life. In Portuguese, serrado means closed, describing a dense Brazilian landscape named by early settlers for its resistant vegetation. The painting mirrors this idea: the surface is cut into separate fields, compact and fragmented. What first feels closed slowly reveals rhythm, warmth, memory, and quiet joy.",
+    "year": 2026,
+    "serial": "HW25 - 0126",
+    "order": 6,
+    "featured": true,
     "room_positions": {
-      "living-minimal": {
-        "x": 50.079365079365076,
-        "y": 32.285714285714285,
-        "scale": 84.35374149659864
-      },
-      "living-marble": {
-        "x": 65,
-        "y": 33.55557777777778,
-        "scale": 81.48148148148148
-      },
-      "living-grey": {
-        "x": 54.22222222222222,
-        "y": 34.85714285714286,
-        "scale": 86.24338624338625
-      },
-      "studio-leather": {
-        "x": 41.84126984126984,
-        "y": 32.82539682539682,
-        "scale": 85.31746031746032
-      },
-      "gallery-gold": {
-        "x": 51.111111111111114,
-        "y": 39.36507936507937,
-        "scale": 71.42857142857143
-      },
-      "bedroom-wood": {
-        "x": 51.11116031746032,
-        "y": 31.6032,
-        "scale": 90.7936507936508
-      }
+      "living-minimal": { "x": 50, "y": 31, "scale": 80, "rotation": 0 },
+      "living-marble":  { "x": 67, "y": 35, "scale": 80, "rotation": 0 },
+      "living-grey":    { "x": 56, "y": 36, "scale": 69, "rotation": 0 },
+      "studio-leather": { "x": 45, "y": 34, "scale": 77, "rotation": 0 },
+      "gallery-gold":   { "x": 50, "y": 36, "scale": 70, "rotation": 0 },
+      "bedroom-wood":   { "x": 51, "y": 32, "scale": 80, "rotation": 0 }
+    }
+  },
+  {
+    "id": "deferred-pleasures",
+    "title": "Deferred Pleasures",
+    "category": "Stylised Realism",
+    "medium": "Acrylic on Canvas",
+    "width": 18,
+    "height": 24,
+    "price": 300,
+    "status": "Available",
+    "image": "images/HW27_-_Henk_Weijers__Deferred_Pleasures_2026_max_3_Mb.jpg",
+    "description": "Deferred Pleasures shows rows of carefully selected wines, resting in quiet anticipation. The painting suggests that some things in life improve with time and are worth waiting for. Choices made too quickly can lose meaning, while patience allows character to develop. It reminds us that anticipation, restraint, and time itself can be more rewarding than possession alone. The work invites the viewer to recognise the bottles and return to personal memories — perhaps a shared glass at a special moment. Wine becomes a marker of time remembered.",
+    "year": 2026,
+    "serial": "HW27 - 0226",
+    "order": 7,
+    "featured": true,
+    "room_positions": {
+      "living-minimal": { "x": 50, "y": 31, "scale": 80, "rotation": 0 },
+      "living-marble":  { "x": 67, "y": 35, "scale": 80, "rotation": 0 },
+      "living-grey":    { "x": 56, "y": 36, "scale": 69, "rotation": 0 },
+      "studio-leather": { "x": 45, "y": 34, "scale": 77, "rotation": 0 },
+      "gallery-gold":   { "x": 50, "y": 36, "scale": 70, "rotation": 0 },
+      "bedroom-wood":   { "x": 51, "y": 32, "scale": 80, "rotation": 0 }
     }
   },
   {
@@ -758,101 +176,139 @@
     "height": 24,
     "price": 400,
     "status": "Available",
-    "image": "images/img19.jpg",
-    "description": "Firebreaks refers to the physical barriers cut into landscapes to stop fire from spreading. In this painting, the idea extends beyond land management. The layered marks and sharp divisions suggest moments where movement is interrupted and contained. Metaphorically, firebreaks represent boundaries we create in life ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ pauses, limits, or decisions that prevent escalation. The work reflects the balance between control and chaos, destruction and protection.",
-    "order": 20,
-    "featured": false,
+    "image": "images/HW28_-_Henk_Weijers__Firebreaks_2026_max_3_Mb.jpg",
+    "description": "Firebreaks refers to the physical barriers cut into landscapes to stop fire from spreading. In this painting, the idea extends beyond land management. The layered marks and sharp divisions suggest moments where movement is interrupted and contained. Metaphorically, firebreaks represent boundaries we create in life — pauses, limits, or decisions that prevent escalation. The work reflects the balance between control and chaos, destruction and protection.",
+    "year": 2026,
+    "serial": "HW28 - 0226",
+    "order": 8,
+    "featured": true,
     "room_positions": {
-      "living-minimal": {
-        "x": 49.920634920634924,
-        "y": 32.03174603174603,
-        "scale": 91.156462585034
-      },
-      "living-marble": {
-        "x": 65.15873015873015,
-        "y": 34.317460317460316,
-        "scale": 86.77248677248677
-      },
-      "living-grey": {
-        "x": 55.17460317460318,
-        "y": 34.6031746031746,
-        "scale": 88.8888888888889
-      },
-      "studio-leather": {
-        "x": 42.15873015873016,
-        "y": 32.57142857142857,
-        "scale": 89.28571428571428
-      },
-      "gallery-gold": {
-        "x": 50.6349,
-        "y": 35.5555,
-        "scale": 81.87134502923976
-      },
-      "bedroom-wood": {
-        "x": 51.587269841269844,
-        "y": 31.857168253968254,
-        "scale": 87.61904761904762
-      }
+      "living-minimal": { "x": 50, "y": 31, "scale": 80, "rotation": 0 },
+      "living-marble":  { "x": 67, "y": 35, "scale": 80, "rotation": 0 },
+      "living-grey":    { "x": 56, "y": 36, "scale": 69, "rotation": 0 },
+      "studio-leather": { "x": 45, "y": 34, "scale": 77, "rotation": 0 },
+      "gallery-gold":   { "x": 50, "y": 36, "scale": 70, "rotation": 0 },
+      "bedroom-wood":   { "x": 51, "y": 32, "scale": 80, "rotation": 0 }
     }
   },
   {
-    "id": "bestia-madonna",
-    "title": "bestia madonna",
-    "category": "Geometric Abstraction",
+    "id": "lauterbrunnen",
+    "title": "Lauterbrunnen",
+    "category": "Semi Abstract Expressionist Landscape",
     "medium": "Acrylic on Canvas",
-    "width": 200,
-    "height": 80,
+    "width": 24,
+    "height": 24,
     "price": 400,
-    "status": "Sold",
-    "image": "images/img-1774416027495.jpg",
-    "description": "ydhcahudiohciasuhmc",
-    "order": 21,
-    "featured": false
+    "status": "Available",
+    "image": "images/HW29_-_Henk_Weijers__Lauterbrunnen_2026_max_3_Mb.jpg",
+    "description": "Lauterbrunnen captures an impression of the famous village, with bold turquoise mountains, dramatic cliffs, and a bright open sky. A small house rests quietly in a wide yellow-green field, surrounded by textured brushstrokes that suggest waterfalls and steep rock faces. The artist was fortunate to have lived in Switzerland, arguably the most beautiful country in the world. This painting reflects the powerful landscape of Lauterbrunnen in a simple, expressive way.",
+    "year": 2026,
+    "serial": "HW29 - 0226",
+    "order": 9,
+    "featured": true,
+    "room_positions": {
+      "living-minimal": { "x": 50, "y": 31, "scale": 80, "rotation": 0 },
+      "living-marble":  { "x": 67, "y": 35, "scale": 80, "rotation": 0 },
+      "living-grey":    { "x": 56, "y": 36, "scale": 69, "rotation": 0 },
+      "studio-leather": { "x": 45, "y": 34, "scale": 77, "rotation": 0 },
+      "gallery-gold":   { "x": 50, "y": 36, "scale": 70, "rotation": 0 },
+      "bedroom-wood":   { "x": 51, "y": 32, "scale": 80, "rotation": 0 }
+    }
   },
   {
-    "id": "prova",
-    "title": "Prova",
-    "category": "Prova",
+    "id": "burgdorf",
+    "title": "Burgdorf",
+    "category": "Semi Abstract Expressionist Landscape",
     "medium": "Acrylic on Canvas",
-    "width": 48,
-    "height": 48,
+    "width": 24,
+    "height": 24,
     "price": 400,
-    "status": "Sold",
-    "image": "images/img-1774423260681.jpg",
-    "description": "dsaofiugvhaosiudhbcaS",
-    "order": 2,
-    "featured": false,
+    "status": "Available",
+    "image": "images/HW30_-_Henk_Weijers__Burgdorf_2026_max_3_Mb.jpg",
+    "description": "Burgdorf presents an expressive impression of the Swiss town and its historic castle rising above the landscape. Strong turquoise and green forms suggest rolling hills, while textured grey and red shapes echo stone walls and rooftops. The sun hangs quietly in a pale sky, adding calm contrast to the bold foreground. This painting reflects the strength and character of Burgdorf in a simplified, modern way.",
+    "year": 2026,
+    "serial": "HW30 - 0226",
+    "order": 10,
+    "featured": true,
     "room_positions": {
-      "living-minimal": {
-        "x": 48.96819206349206,
-        "y": 33.80949682539683,
-        "scale": 101.58730158730158
-      },
-      "living-marble": {
-        "x": 66.90470793650795,
-        "y": 36.34918253968254,
-        "scale": 87.83068783068784
-      },
-      "living-grey": {
-        "x": 65.4761365079365,
-        "y": 35.84124603174603,
-        "scale": 101.58730158730158
-      },
-      "studio-leather": {
-        "x": 44.999906349206356,
-        "y": 32.03175873015873,
-        "scale": 101.58730158730158
-      },
-      "gallery-gold": {
-        "x": 49.28566031746032,
-        "y": 48.53965873015873,
-        "scale": 60.985797827903085
-      },
-      "bedroom-wood": {
-        "x": 48.96819206349206,
-        "y": 33.80949682539683,
-        "scale": 73.65079365079366
-      }
+      "living-minimal": { "x": 50, "y": 31, "scale": 80, "rotation": 0 },
+      "living-marble":  { "x": 67, "y": 35, "scale": 80, "rotation": 0 },
+      "living-grey":    { "x": 56, "y": 36, "scale": 69, "rotation": 0 },
+      "studio-leather": { "x": 45, "y": 34, "scale": 77, "rotation": 0 },
+      "gallery-gold":   { "x": 50, "y": 36, "scale": 70, "rotation": 0 },
+      "bedroom-wood":   { "x": 51, "y": 32, "scale": 80, "rotation": 0 }
+    }
+  },
+  {
+    "id": "lavaux",
+    "title": "Lavaux",
+    "category": "Semi Abstract Expressionist Landscape",
+    "medium": "Acrylic on Canvas",
+    "width": 24,
+    "height": 24,
+    "price": 400,
+    "status": "Available",
+    "image": "images/HW33_-_Henk_Weijers__Lavaux_2026_max_3_Mb.jpg",
+    "description": "This semi-abstract expressionist landscape presents Lavaux, a UNESCO World Heritage site. The painting shows St. Saphorin, an idyllic medieval village, overlooking Lac Léman with the French Alps rising beyond. It is the third painting of a series depicting some of the artist's favourite places in Switzerland. Bold yellow vineyard terraces descend diagonally toward the blue expanse of water, while structured mountain forms anchor the horizon in rhythmic, high-contrast colour fields.",
+    "year": 2026,
+    "serial": "HW33 - 0226",
+    "order": 11,
+    "featured": true,
+    "room_positions": {
+      "living-minimal": { "x": 50, "y": 31, "scale": 80, "rotation": 0 },
+      "living-marble":  { "x": 67, "y": 35, "scale": 80, "rotation": 0 },
+      "living-grey":    { "x": 56, "y": 36, "scale": 69, "rotation": 0 },
+      "studio-leather": { "x": 45, "y": 34, "scale": 77, "rotation": 0 },
+      "gallery-gold":   { "x": 50, "y": 36, "scale": 70, "rotation": 0 },
+      "bedroom-wood":   { "x": 51, "y": 32, "scale": 80, "rotation": 0 }
+    }
+  },
+  {
+    "id": "dads-ties",
+    "title": "Dad's Ties",
+    "category": "Geometric Abstraction",
+    "medium": "Acrylic on Canvas",
+    "width": 24,
+    "height": 24,
+    "price": 400,
+    "status": "Available",
+    "image": "images/HW34_-_Henk_Weijers__Dad_s_Ties_2026_max_3_Mb.jpg",
+    "description": "Dad's Ties refers to the Father's Day presents my daughter gave me as a child. The vertical bands resemble neckties, but also stand for conventions, opinions, and expectations that shape identity. Two dark bars interrupt the rhythm. The hands forcing them apart suggest a jailbreak — a metaphor for my pursuit of artistic freedom. Built with heavy palette-knife layers, the work combines geometric order with expressive texture and symbolic abstraction.",
+    "year": 2026,
+    "serial": "HW34 - 0326",
+    "order": 12,
+    "featured": true,
+    "room_positions": {
+      "living-minimal": { "x": 50, "y": 31, "scale": 80, "rotation": 0 },
+      "living-marble":  { "x": 67, "y": 35, "scale": 80, "rotation": 0 },
+      "living-grey":    { "x": 56, "y": 36, "scale": 69, "rotation": 0 },
+      "studio-leather": { "x": 45, "y": 34, "scale": 77, "rotation": 0 },
+      "gallery-gold":   { "x": 50, "y": 36, "scale": 70, "rotation": 0 },
+      "bedroom-wood":   { "x": 51, "y": 32, "scale": 80, "rotation": 0 }
+    }
+  },
+  {
+    "id": "colour-dialogues",
+    "title": "Colour Dialogues",
+    "category": "Geometric Abstraction",
+    "medium": "Acrylic on Canvas",
+    "width": 24,
+    "height": 24,
+    "price": 400,
+    "status": "Available",
+    "image": "images/HW36_-_Henk_Weijers_Colour_Dialogues_2026_max_3_Mb.jpg",
+    "description": "Colour Dialogues shows two complementary colour ranges moving across the canvas in structured rows of fragments. The diversity of colours creates a visual dialogue where contrast and cooperation exist at the same time. The work can also be read as a reflection of politics and social issues — where different voices, interests, and identities meet. Despite tension and difference, the composition suggests that dialogue can create balance and synergy rather than division.",
+    "year": 2026,
+    "serial": "HW36 - 0326",
+    "order": 13,
+    "featured": true,
+    "room_positions": {
+      "living-minimal": { "x": 50, "y": 31, "scale": 80, "rotation": 0 },
+      "living-marble":  { "x": 67, "y": 35, "scale": 80, "rotation": 0 },
+      "living-grey":    { "x": 56, "y": 36, "scale": 69, "rotation": 0 },
+      "studio-leather": { "x": 45, "y": 34, "scale": 77, "rotation": 0 },
+      "gallery-gold":   { "x": 50, "y": 36, "scale": 70, "rotation": 0 },
+      "bedroom-wood":   { "x": 51, "y": 32, "scale": 80, "rotation": 0 }
     }
   }
 ]
