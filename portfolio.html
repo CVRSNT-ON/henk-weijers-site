@@ -136,7 +136,9 @@ section{padding:clamp(3rem,6vw,6rem) var(--g)}
   .form-row{grid-template-columns:1fr}
   .footer{flex-direction:column;gap:.75rem;text-align:center}
   .portfolio-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1rem}
-  .home-works-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}
+  .home-works-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))
+  .critic-quote{font-size:.85rem!important;line-height:1.7!important}
+  .critic-body{font-size:.8rem!important;line-height:1.65!important}
 }
 </style>
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
@@ -170,9 +172,9 @@ section{padding:clamp(3rem,6vw,6rem) var(--g)}
   <!-- Critic text — hardcoded -->
   <div style="max-width:var(--max-w);margin:0 auto 2.5rem" class="reveal">
     <div style="border-left:3px solid var(--accent);padding:.9rem 1.6rem;background:var(--card)">
-      <p style="font-family:var(--display);font-size:1.05rem;font-weight:300;font-style:italic;line-height:1.85;color:var(--text-l);margin-bottom:.9rem">&ldquo;Color is a power which directly influences the soul.&rdquo; &mdash; Wassily Kandinsky</p>
-      <p style="font-size:.93rem;line-height:1.8;color:var(--text-l);margin-bottom:.6rem">In Henk Weijers&rsquo; practice, color becomes emotional architecture. His painting moves effortlessly between geometric abstraction, landscape, and visual memory, building compositions in which formal rigor and poetic sensitivity coexist with rare elegance. Grids, partitions, skylines, books, bottles, and views thus become part of an essential and sophisticated pictorial language, capable of transforming personal experience into a universal image.</p>
-      <p style="font-size:.93rem;line-height:1.8;color:var(--text-l);margin-bottom:.9rem">Weijers&rsquo; works are distinguished by a quiet yet intense presence: layered surfaces, measured chromatic balances, and subtle tensions between order and freedom. Each piece invites a slow, cultivated way of looking, in which painting does not simply describe the world, but filters it through memory, rhythm, and contemplation. It is precisely in this synthesis of compositional discipline, emotional depth, and chromatic refinement that his work finds its most authentic and distinctive voice.</p>
+      <p class="critic-quote" style="font-family:var(--display);font-size:1.05rem;font-weight:300;font-style:italic;line-height:1.85;color:var(--text-l);margin-bottom:.9rem">&ldquo;Color is a power which directly influences the soul.&rdquo; &mdash; Wassily Kandinsky</p>
+      <p class="critic-body" style="font-size:.93rem;line-height:1.8;color:var(--text-l);margin-bottom:.6rem">In Henk Weijers&rsquo; practice, color becomes emotional architecture. His painting moves effortlessly between geometric abstraction, landscape, and visual memory, building compositions in which formal rigor and poetic sensitivity coexist with rare elegance. Grids, partitions, skylines, books, bottles, and views thus become part of an essential and sophisticated pictorial language, capable of transforming personal experience into a universal image.</p>
+      <p class="critic-body" style="font-size:.93rem;line-height:1.8;color:var(--text-l);margin-bottom:.9rem">Weijers&rsquo; works are distinguished by a quiet yet intense presence: layered surfaces, measured chromatic balances, and subtle tensions between order and freedom. Each piece invites a slow, cultivated way of looking, in which painting does not simply describe the world, but filters it through memory, rhythm, and contemplation. It is precisely in this synthesis of compositional discipline, emotional depth, and chromatic refinement that his work finds its most authentic and distinctive voice.</p>
       <p style="font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)">Ludovica Dagna &mdash; Art Curator</p>
     </div>
   </div>

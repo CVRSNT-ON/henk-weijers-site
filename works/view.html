@@ -74,6 +74,8 @@ img{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
 .artwork-main-img{pointer-events:none}
 
 .loading-msg{text-align:center;padding:8rem 2rem;color:var(--text-l);font-size:1rem}
+.artwork-layout{opacity:0;transition:opacity .35s ease}
+.artwork-layout.loaded{opacity:1}
 @media(max-width:768px){
   .nav-links{display:none}.hamburger{display:block}
   .artwork-layout{grid-template-columns:1fr}
@@ -168,7 +170,7 @@ if(!artworkId){
     var vIdx = visibleWorks.findIndex(function(w){return w.id === artworkId});
     var prevWork = vIdx > 0 ? visibleWorks[vIdx-1] : null;
     var nextWork = vIdx < visibleWorks.length-1 ? visibleWorks[vIdx+1] : null;
-    var navHtml = '<div style="display:flex;gap:.75rem;margin-top:2rem">';
+    var navHtml = '<div style="display:flex;gap:.75rem;margin-top:2rem;justify-content:center">';
     if(prevWork) navHtml += '<a href="view.html?id='+encodeURIComponent(prevWork.id)+'" class="btn btn-outline">&larr; Prev</a>';
     if(nextWork) navHtml += '<a href="view.html?id='+encodeURIComponent(nextWork.id)+'" class="btn btn-outline">Next &rarr;</a>';
     navHtml += '</div>';
@@ -258,6 +260,14 @@ if(!artworkId){
       + '</section>';
 
     document.getElementById('artworkContent').innerHTML = html;
+
+    // Fade in after paint to avoid flash
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){
+        var layout = document.querySelector('.artwork-layout');
+        if(layout) layout.classList.add('loaded');
+      });
+    });
 
     // Store work data globally for room switching
     window._currentWork = work;
