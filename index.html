@@ -126,6 +126,17 @@ section{padding:clamp(3rem,6vw,6rem) var(--g)}
 .contact-links a:hover{color:var(--accent-w)}
 
 @media(max-width:1024px){.process-strip{grid-template-columns:1fr}}
+
+/* EXHIBITION TIMELINE */
+.exh-timeline{display:flex;flex-direction:column;gap:0;position:relative}
+.exh-item{display:grid;grid-template-columns:32px 1fr;gap:0 1.5rem;align-items:stretch}
+.exh-dot-wrap{display:flex;flex-direction:column;align-items:center;padding-top:.2rem}
+.exh-dot{width:14px;height:14px;border-radius:50%;background:var(--accent);flex-shrink:0;box-shadow:0 0 0 4px rgba(43,74,140,.12);z-index:1}
+.exh-line{flex:1;width:2px;background:var(--border);margin:4px 0;min-height:32px}
+.exh-body{padding-bottom:2.25rem}
+.exh-date{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:.3rem}
+.exh-name{font-family:var(--display);font-size:1.35rem;font-weight:400;font-style:italic;line-height:1.2;margin-bottom:.3rem;color:var(--text)}
+.exh-venue{font-size:.88rem;color:var(--text-l);line-height:1.5}
 @media(max-width:768px){
   .nav-links{display:none}.hamburger{display:block}
   .about-grid,.contact-grid,.artwork-layout{grid-template-columns:1fr}
@@ -145,6 +156,7 @@ section{padding:clamp(3rem,6vw,6rem) var(--g)}
     <li><a href="index.html#about" >About</a></li>
     <li><a href="portfolio.html" >Portfolio</a></li>
     <li><a href="index.html#approach">Approach</a></li>
+    <li><a href="index.html#exhibitions">Exhibitions</a></li>
     <li><a href="index.html#contact">Contact</a></li>
   </ul>
   <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -154,6 +166,7 @@ section{padding:clamp(3rem,6vw,6rem) var(--g)}
   <a href="index.html#about" onclick="closeMobile()">About</a>
   <a href="portfolio.html" onclick="closeMobile()">Portfolio</a>
   <a href="index.html#approach" onclick="closeMobile()">Approach</a>
+  <a href="index.html#exhibitions" onclick="closeMobile()">Exhibitions</a>
   <a href="index.html#contact" onclick="closeMobile()">Contact</a>
 </div>
 
@@ -201,14 +214,22 @@ section{padding:clamp(3rem,6vw,6rem) var(--g)}
   </div>
 </section>
 
-<section id="contact">
+<section id="exhibitions">
+  <div style="max-width:var(--max-w);margin:0 auto" class="reveal">
+    <p class="section-label">Exhibition History</p>
+    <h2 class="section-title">Exhibitions</h2>
+  </div>
+  <div id="exhibitionsList" style="max-width:var(--max-w);margin:2rem auto 0" class="reveal">
+    <!-- Populated from exhibitions.json by script -->
+  </div>
+<section>
   <div class="contact-grid reveal">
     <div class="contact-info">
-      <p class="section-label">Get in Touch</p>
+      <p class="section-label" id="contact">Get in Touch</p>
       <h2 class="section-title">Inquiries &amp; Commissions</h2>
       <p>For inquiries about available works, purchases, exhibition opportunities, commissions, or studio visits, please use the form or reach out on Instagram.</p>
       <div class="contact-links">
-        <a href="https://www.instagram.com/henk.weijers_artist" target="_blank" rel="noopener">Instagram &rarr;</a>
+        <a href="https://www.instagram.com/henk.weijers_artist" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:.35rem"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>Instagram</a>
       </div>
     </div>
     <form class="contact-form" data-netlify="true" netlify-honeypot="bot-field" name="contact" method="POST">
@@ -230,7 +251,7 @@ section{padding:clamp(3rem,6vw,6rem) var(--g)}
   <div class="footer-links">
     <a href="privacy-policy.html">Privacy</a>
     <a href="cookie-policy.html">Cookies</a>
-    <a href="https://www.instagram.com/henk.weijers_artist" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.instagram.com/henk.weijers_artist" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:.35rem"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>Instagram</a>
   </div>
 </footer>
 <script>
@@ -249,8 +270,8 @@ window.addEventListener('load', function() {
   var subj = sessionStorage.getItem('formSubj');
   if (msg || subj) {
     setTimeout(function(){
-      var formEl = document.querySelector('.contact-form');
-      if (formEl) formEl.scrollIntoView({behavior:'smooth', block:'center'});
+      var anchor = document.getElementById('contact');
+      if (anchor) anchor.scrollIntoView({behavior:'smooth', block:'start'});
     }, 300);
   }
   if (msg) {
@@ -327,6 +348,42 @@ window.addEventListener('load', function() {
 function acceptCookies(){localStorage.setItem('cookieConsent','accepted');document.getElementById('cookieBanner').style.display='none'}
 </script>
 
+<script>
+// Load exhibitions.json and render as timeline roadmap
+(function(){
+  function fmtDate(str){
+    if(!str) return '';
+    var d = new Date(str);
+    return d.toLocaleDateString('en-GB',{month:'short',year:'numeric'});
+  }
+  fetch('exhibitions.json').then(function(r){return r.json()}).then(function(exs){
+    var el = document.getElementById('exhibitionsList');
+    if(!el) return;
+    if(!exs || !exs.length){
+      el.innerHTML = '<p style="color:var(--text-l);font-size:.9rem">No exhibitions listed yet.</p>';
+      return;
+    }
+    // Sort chronologically descending
+    exs.sort(function(a,b){ return (b.date_from||'').localeCompare(a.date_from||''); });
+
+    var html = '<div class="exh-timeline">';
+    exs.forEach(function(ex, i){
+      var dateStr = fmtDate(ex.date_from);
+      if(ex.date_to) dateStr += ' &ndash; ' + fmtDate(ex.date_to);
+      html += '<div class="exh-item">'
+        + '<div class="exh-dot-wrap"><div class="exh-dot"></div>' + (i < exs.length-1 ? '<div class="exh-line"></div>' : '') + '</div>'
+        + '<div class="exh-body">'
+        + '<p class="exh-date">'+dateStr+'</p>'
+        + '<h3 class="exh-name">'+ex.name+'</h3>'
+        + '<p class="exh-venue">'+ex.venue+'</p>'
+        + '</div>'
+        + '</div>';
+    });
+    html += '</div>';
+    el.innerHTML = html;
+  }).catch(function(){});
+})();
+</script>
 <script>
   if (window.netlifyIdentity) {
     window.netlifyIdentity.on("init", function(user) {

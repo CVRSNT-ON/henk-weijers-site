@@ -44,7 +44,9 @@ body{font-family:var(--body);background:var(--bg);color:var(--text);line-height:
 .works-table th{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-l);text-align:left;padding:.75rem 1rem;border-bottom:2px solid var(--border);background:var(--bg)}
 .works-table td{padding:.6rem 1rem;border-bottom:1px solid var(--border);font-size:.88rem;vertical-align:middle}
 .works-table tr:hover td{background:rgba(43,74,140,.03)}
-.works-table img{width:50px;height:50px;object-fit:cover;display:block;border:1px solid var(--border)}
+.works-table img.thumb-sm{width:50px;height:50px;object-fit:cover;display:block;border:1px solid var(--border);transition:transform .2s,box-shadow .2s;cursor:zoom-in}
+.thumb-popup{display:none;position:fixed;z-index:500;width:220px;height:220px;object-fit:cover;border:2px solid var(--border);box-shadow:0 12px 40px rgba(0,0,0,.25);pointer-events:none}
+.works-table img:hover{transform:scale(4);box-shadow:0 8px 32px rgba(0,0,0,.3);z-index:10;position:relative}
 .status-badge{display:inline-block;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;padding:.15rem .45rem;border-radius:2px}
 .status-available{background:#2B6B3B;color:#fff}
 .status-sold{background:var(--danger);color:#fff}
@@ -161,6 +163,7 @@ tr.drag-below td{border-bottom:2px solid var(--accent)}
       <h2>Artwork Management</h2>
       <div style="display:flex;gap:.5rem;flex-wrap:wrap;align-items:center">
         <button class="btn-sm btn-primary" onclick="openAddModal()">+ Add Artwork</button>
+        <button class="btn-sm btn-outline-sm" onclick="exportCSV()">&#8595; Export CSV</button>
         <button class="btn-sm btn-success" id="publishBtn" onclick="publishChanges()" style="display:none">&#9650; Publish Changes <span id="changeCount"></span></button>
       </div>
     </div>
@@ -188,6 +191,55 @@ tr.drag-below td{border-bottom:2px solid var(--accent)}
         </tr></thead>
         <tbody id="worksTableBody"></tbody>
       </table>
+    </div>
+
+    <!-- ====================================================
+         EXHIBITIONS SECTION
+    ==================================================== -->
+    <div style="margin-top:2.5rem;border-top:2px solid var(--border);padding-top:2rem">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;flex-wrap:wrap;gap:.75rem">
+        <h2 style="font-family:var(--display);font-weight:300;font-size:1.6rem">Exhibitions</h2>
+        <button class="btn-sm btn-primary" onclick="openExhModal()">+ Add Exhibition</button>
+      </div>
+      <div id="exhibitionsAdminList" style="display:grid;gap:.75rem"></div>
+    </div>
+
+
+
+  </div><!-- /admin-content -->
+</div><!-- /adminPanel -->
+
+<!-- EXHIBITION MODAL -->
+<div class="modal-overlay" id="exhModal">
+  <div class="modal" style="max-width:500px">
+    <div class="modal-header">
+      <h3 id="exhModalTitle">Add Exhibition</h3>
+      <button class="modal-close" onclick="closeExhModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="exhEditId">
+      <div class="form-group">
+        <label for="exhName">Exhibition Name</label>
+        <input type="text" id="exhName" placeholder="e.g. Margini di Pagina">
+      </div>
+      <div class="form-group">
+        <label for="exhVenue">Venue &amp; Location</label>
+        <input type="text" id="exhVenue" placeholder="e.g. Spazio Guido Tommasi Editore, Milano, Italy">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="exhDateFrom">From</label>
+          <input type="date" id="exhDateFrom">
+        </div>
+        <div class="form-group">
+          <label for="exhDateTo">To</label>
+          <input type="date" id="exhDateTo">
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-sm btn-outline-sm" onclick="closeExhModal()">Cancel</button>
+      <button class="btn-sm btn-primary" onclick="saveExhibition()">Save Exhibition</button>
     </div>
   </div>
 </div>
@@ -245,6 +297,16 @@ tr.drag-below td{border-bottom:2px solid var(--accent)}
         <div class="form-group">
           <label for="artOrder">Display Order</label>
           <input type="number" id="artOrder" step="1" placeholder="1">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="artYear">Year</label>
+          <input type="number" id="artYear" step="1" placeholder="2026">
+        </div>
+        <div class="form-group">
+          <label for="artSerial">Serial Nr</label>
+          <input type="text" id="artSerial" placeholder="e.g. HW18 - 1225">
         </div>
       </div>
       <div class="form-group" style="display:flex;align-items:center;gap:.6rem">
@@ -332,10 +394,12 @@ tr.drag-below td{border-bottom:2px solid var(--accent)}
 // ============================================================
 const GIT_API = '/.netlify/git/github';
 const WORKS_PATH = 'works.json';
+const EXHIBITIONS_PATH = 'exhibitions.json';
 const IMAGES_DIR = 'images';
 const BRANCH = 'main';
 
 let works = [];
+let exhibitionsSha = null;
 let worksSha = null;
 let deleteTargetId = null;
 let pendingImageFile = null;
@@ -461,6 +525,7 @@ async function saveWorksToRepo(commitMessage) {
   }
 }
 
+function markUnsaved() { markChanged(); }
 function markChanged() {
   pendingChanges++;
   setSyncStatus('unsaved');
@@ -480,13 +545,17 @@ function updatePublishBtn() {
   }
 }
 
-async function publishChanges() {
+async async function publishChanges() {
   if (pendingChanges === 0) return;
   document.getElementById('publishBtn').disabled = true;
-  showSaving('Publishing ' + pendingChanges + ' change' + (pendingChanges > 1 ? 's' : '') + '...');
+  showSaving('Publishing changes...');
   try {
-    const ok = await saveWorksToRepo('Update artworks (' + pendingChanges + ' changes)');
-    if (ok) {
+    const okWorks = await saveWorksToRepo('Update artworks (' + pendingChanges + ' changes)');
+    // Save exhibitions if changed
+    if (window._pendingExhibitions !== undefined) {
+      await saveExhibitionsToRepo();
+    }
+    if (okWorks) {
       showToast('All changes published! Site updating...', 'success');
     }
   } catch(e) {
@@ -495,6 +564,45 @@ async function publishChanges() {
     document.getElementById('publishBtn').disabled = false;
     hideSaving();
   }
+}
+
+async function saveExhibitionsToRepo() {
+  const json = JSON.stringify(window._pendingExhibitions || allExhibitions, null, 2);
+  try {
+    const result = await writeFile(EXHIBITIONS_PATH, json, 'Update exhibitions', exhibitionsSha);
+    exhibitionsSha = result.content.sha;
+    window._pendingExhibitions = undefined;
+    localStorage.removeItem('exh_draft');
+  } catch(e) { console.error('Failed to save exhibitions.json:', e); }
+}
+
+
+
+function exportCSV() {
+  const header = ['Title','Category','Medium','Width (in)','Height (in)','Price (EUR)','Status','Year','Serial Nr','Featured','Description'];
+  const rows = works.map(function(w) {
+    return [
+      '"' + (w.title||'').replace(/"/g,'""') + '"',
+      '"' + (w.category||'').replace(/"/g,'""') + '"',
+      '"' + (w.medium||'').replace(/"/g,'""') + '"',
+      w.width||'',
+      w.height||'',
+      w.price||'',
+      w.status||'',
+      w.year||'',
+      '"' + (w.serial||'').replace(/"/g,'""') + '"',
+      w.featured ? 'Yes' : 'No',
+      '"' + (w.description||'').replace(/"/g,'""') + '"'
+    ].join(',');
+  });
+  const csv = [header.join(','), ...rows].join('\n');
+  const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'henk-weijers-artworks.csv';
+  document.body.appendChild(a); a.click();
+  document.body.removeChild(a); URL.revokeObjectURL(url);
+  showToast('CSV exported', 'success');
 }
 
 function slugify(t) {
@@ -700,7 +808,7 @@ function renderTable() {
     const imgSrc = w.image ? '/'+w.image : '/favicon.svg';
     return `<tr draggable="true" data-id="${w.id}" data-idx="${idx}">
       <td><span class="drag-handle" title="Drag to reorder">&#9776;</span></td>
-      <td><img src="${imgSrc}" alt="${esc(w.title)}" onerror="this.src='/favicon.svg'"></td>
+      <td style="position:relative"><img class="thumb-sm" src="${imgSrc}" alt="${esc(w.title)}" onerror="this.src='/favicon.svg'" onmouseenter="showThumbPopup(event,'${imgSrc}')" onmouseleave="hideThumbPopup()"></td>
       <td><strong style="font-family:var(--display);font-weight:400;font-style:italic">${esc(w.title)}</strong></td>
       <td style="font-size:.82rem;color:var(--text-l)">${esc(w.category||'')}</td>
       <td style="font-size:.82rem">${w.width||'?'} &times; ${w.height||'?'} in</td>
@@ -713,6 +821,7 @@ function renderTable() {
       <td><button class="${starClass}" onclick="toggleFeatured('${w.id}')" title="Show on Homepage">${starChar}</button></td>
       <td><div class="table-actions">
         <button class="btn-sm btn-outline-sm" onclick="openEditModal('${w.id}')">Edit</button>
+        <a class="btn-sm btn-outline-sm" href="/works/view.html?id=${encodeURIComponent(w.id)}" target="_blank" rel="noopener" style="text-decoration:none;display:inline-block" title="Live preview">&#128065;</a>
         <button class="btn-sm btn-danger" onclick="openDeleteModal('${w.id}')">Del</button>
       </div></td>
     </tr>`;
@@ -818,6 +927,8 @@ function openEditModal(id) {
   document.getElementById('artPrice').value = w.price || '';
   document.getElementById('artStatus').value = w.status || 'Available';
   document.getElementById('artOrder').value = w.order || 1;
+  document.getElementById('artYear').value = w.year || '';
+  document.getElementById('artSerial').value = w.serial || '';
   document.getElementById('artDesc').value = w.description || '';
   document.getElementById('artImagePath').value = w.image || '';
   document.getElementById('artFeatured').checked = !!w.featured;
@@ -888,7 +999,9 @@ async function saveArtwork() {
       image: imagePath,
       description: artDesc,
       order: newOrder,
-      featured: document.getElementById('artFeatured').checked
+      featured: document.getElementById('artFeatured').checked,
+      year: parseInt(document.getElementById('artYear').value) || null,
+      serial: document.getElementById('artSerial').value.trim() || null
     };
 
     // Save room positions if any were edited
@@ -1015,6 +1128,7 @@ function initAuth() {
   if (user) {
     showAdmin(user.email);
     loadWorks();
+  loadExhibitions();
   } else {
     document.getElementById('loginScreen').style.display = 'flex';
   }
@@ -1341,8 +1455,135 @@ function saveAllRoomPositions() {
   document.addEventListener('touchend', function() { dragging = false; resizing = false; });
 })();
 
+
+// ============================================================
+// EXHIBITIONS MANAGEMENT
+// ============================================================
+var allExhibitions = [];
+
+function fmtDateAdmin(str){
+  if(!str) return '';
+  var d = new Date(str + 'T12:00:00');
+  return d.toLocaleDateString('en-GB',{month:'short',year:'numeric'});
+}
+
+function loadExhibitions() {
+  fetch('/exhibitions.json').then(function(r){ return r.json(); }).then(function(data) {
+    allExhibitions = data || [];
+    var draft = localStorage.getItem('exh_draft');
+    if (draft) { try { allExhibitions = JSON.parse(draft); } catch(e) {} }
+    renderExhibitions();
+  }).catch(function() { allExhibitions = []; renderExhibitions(); });
+}
+
+function renderExhibitions() {
+  var el = document.getElementById('exhibitionsAdminList');
+  if (!el) return;
+  if (!allExhibitions.length) {
+    el.innerHTML = '<p style="color:var(--text-l);font-size:.88rem;padding:.5rem 0">No exhibitions yet. Click &ldquo;+ Add Exhibition&rdquo; to get started.</p>';
+    return;
+  }
+  // Sort descending
+  var sorted = allExhibitions.slice().sort(function(a,b){ return (b.date_from||'').localeCompare(a.date_from||''); });
+  el.innerHTML = sorted.map(function(ex, i) {
+    var dateStr = fmtDateAdmin(ex.date_from);
+    if(ex.date_to) dateStr += ' &ndash; ' + fmtDateAdmin(ex.date_to);
+    var origIdx = allExhibitions.indexOf(ex);
+    return '<div style="background:var(--card);border:1px solid var(--border);padding:.9rem 1.15rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap">'
+      + '<div style="flex:1;min-width:180px">'
+      + '<p style="font-family:var(--display);font-size:1.05rem;font-style:italic;margin-bottom:.1rem">' + ex.name + '</p>'
+      + '<p style="font-size:.82rem;color:var(--text-l);margin-bottom:.05rem">' + ex.venue + '</p>'
+      + '<p style="font-size:.75rem;color:var(--accent);letter-spacing:.06em">' + dateStr + '</p>'
+      + '</div>'
+      + '<div style="display:flex;gap:.4rem;flex-shrink:0">'
+      + '<button class="btn-sm btn-outline-sm" onclick="editExhibition('+origIdx+')">Edit</button>'
+      + '<button class="btn-sm btn-danger" onclick="deleteExhibition('+origIdx+')">Del</button>'
+      + '</div>'
+      + '</div>';
+  }).join('');
+}
+
+function openExhModal(prefillIdx) {
+  var isEdit = prefillIdx !== undefined;
+  document.getElementById('exhModalTitle').textContent = isEdit ? 'Edit Exhibition' : 'Add Exhibition';
+  document.getElementById('exhEditId').value = isEdit ? String(prefillIdx) : '';
+  var ex = isEdit ? allExhibitions[prefillIdx] : {};
+  document.getElementById('exhName').value = ex.name || '';
+  document.getElementById('exhVenue').value = ex.venue || '';
+  document.getElementById('exhDateFrom').value = ex.date_from || '';
+  document.getElementById('exhDateTo').value = ex.date_to || '';
+  document.getElementById('exhModal').classList.add('open');
+}
+
+function closeExhModal() {
+  document.getElementById('exhModal').classList.remove('open');
+}
+
+function editExhibition(i) { openExhModal(i); }
+
+function deleteExhibition(i) {
+  if (!confirm('Delete "' + allExhibitions[i].name + '"?')) return;
+  allExhibitions.splice(i, 1);
+  renderExhibitions();
+  persistExhibitions();
+}
+
+function saveExhibition() {
+  var idxStr = document.getElementById('exhEditId').value;
+  var name = document.getElementById('exhName').value.trim();
+  if (!name) { showToast('Exhibition name is required', 'error'); return; }
+  var ex = {
+    id: (idxStr !== '' && allExhibitions[parseInt(idxStr)]) ? allExhibitions[parseInt(idxStr)].id : ('exh-' + Date.now()),
+    name: name,
+    venue: document.getElementById('exhVenue').value.trim(),
+    date_from: document.getElementById('exhDateFrom').value,
+    date_to: document.getElementById('exhDateTo').value
+  };
+  if (idxStr !== '') {
+    allExhibitions[parseInt(idxStr)] = ex;
+  } else {
+    allExhibitions.push(ex);
+  }
+  closeExhModal();
+  renderExhibitions();
+  persistExhibitions();
+  showToast('Exhibition saved', 'success');
+}
+
+function persistExhibitions() {
+  localStorage.setItem('exh_draft', JSON.stringify(allExhibitions));
+  markUnsaved();
+  window._pendingExhibitions = allExhibitions;
+}
+
+
 // Init
 initAuth();
+</script>
+<div id="thumbPopup" class="thumb-popup"></div>
+<script>
+function showThumbPopup(e, src){
+  var p = document.getElementById('thumbPopup');
+  p.style.backgroundImage = 'url('+src+')';
+  p.style.backgroundSize = 'cover';
+  p.style.backgroundPosition = 'center';
+  p.style.display = 'block';
+  posThumbPopup(e);
+}
+function posThumbPopup(e){
+  var p = document.getElementById('thumbPopup');
+  var x = e.clientX + 14, y = e.clientY - 110;
+  if(x + 230 > window.innerWidth) x = e.clientX - 234;
+  if(y < 8) y = 8;
+  p.style.left = x + 'px'; p.style.top = y + 'px';
+}
+function hideThumbPopup(){
+  document.getElementById('thumbPopup').style.display='none';
+}
+document.addEventListener('mousemove', function(e){
+  var p = document.getElementById('thumbPopup');
+  if(p && p.style.display==='block') posThumbPopup(e);
+});
 </script>
 </body>
 </html>

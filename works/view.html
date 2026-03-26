@@ -8,6 +8,8 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Henk Weijers — Acrylic Painter">
 <meta name="description" id="metaDesc" content="Original artwork by Henk Weijers — Acrylic Painter">
+<meta property="og:image" id="ogImage" content="https://henk-weijers-site.netlify.app/images/KIN0288_WEB.jpg">
+<meta property="og:title" id="ogTitle" content="Henk Weijers — Acrylic Painter">
 <meta property="og:description" id="ogDesc" content="Original artwork by Henk Weijers — Acrylic Painter">
 <title>Loading... — Henk Weijers</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -110,7 +112,7 @@ img{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
   <div class="footer-links">
     <a href="../privacy-policy.html">Privacy</a>
     <a href="../cookie-policy.html">Cookies</a>
-    <a href="https://www.instagram.com/henk.weijers_artist" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.instagram.com/henk.weijers_artist" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:.35rem"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>Instagram</a>
   </div>
 </footer>
 
@@ -156,6 +158,8 @@ if(!artworkId){
     var descText = work.description ? work.description.substring(0, 160) : work.title + ' by Henk Weijers. ' + work.medium + ', ' + work.width + ' × ' + work.height + ' in.';
     var md = document.getElementById('metaDesc'); if(md) md.setAttribute('content', descText);
     var od = document.getElementById('ogDesc'); if(od) od.setAttribute('content', descText);
+    var oi = document.getElementById('ogImage'); if(oi && work.image) oi.setAttribute('content', 'https://henk-weijers-site.netlify.app/'+work.image);
+    var ot = document.getElementById('ogTitle'); if(ot) ot.setAttribute('content', work.title+' — Henk Weijers');
 
     var badgeColor = work.status==='Available'?'#2B6B3B':'#8B6914';
 
@@ -242,7 +246,8 @@ if(!artworkId){
       + '<p class="section-label">'+esc(work.category || '')+'</p>'
       + '<h1 class="section-title" style="font-style:italic">'+esc(work.title)+'</h1>'
       + '<p class="artwork-meta">'+esc(work.medium || 'Acrylic on Canvas')+'</p>'
-      + '<p class="artwork-meta">'+work.width+' × '+work.height+' in</p>'
+      + '<p class="artwork-meta">'+work.width+' × '+work.height+' in'+(work.year ? ' &nbsp;&middot;&nbsp; '+work.year : '')+'</p>'
+      + (work.serial ? '<p class="artwork-meta" style="font-size:.78rem;color:var(--text-l);letter-spacing:.04em">'+esc(work.serial)+'</p>' : '')
       + '<p class="artwork-price">&euro;'+work.price+'</p>'
       + '<span class="pf-badge" style="margin-bottom:1.25rem;background:'+badgeColor+'">'+work.status+'</span>'
       + '<p class="artwork-desc">'+esc(work.description || '')+'</p>'
