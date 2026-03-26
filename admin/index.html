@@ -545,7 +545,7 @@ function updatePublishBtn() {
   }
 }
 
-async async function publishChanges() {
+async function publishChanges() {
   if (pendingChanges === 0) return;
   document.getElementById('publishBtn').disabled = true;
   showSaving('Publishing changes...');
