@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="author" content="Henk Weijers">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Henk Weijers — Acrylic Painter">
+<meta name="description" id="metaDesc" content="Original artwork by Henk Weijers — Acrylic Painter">
+<meta property="og:image" id="ogImage" content="https://henk-weijers-site.netlify.app/images/KIN0288_WEB.jpg">
+<meta property="og:title" id="ogTitle" content="Henk Weijers — Acrylic Painter">
+<meta property="og:description" id="ogDesc" content="Original artwork by Henk Weijers — Acrylic Painter">
+<title>Loading... — Henk Weijers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#F5F0E8;--text:#1A1A1A;--text-l:#5A5550;--accent:#2B4A8C;--accent-w:#8C3B2B;--border:#D4CFC5;--card:#FFFDF8;--display:'Cormorant Garamond',Georgia,serif;--body:'DM Sans',-apple-system,sans-serif;--max-w:1400px;--g:clamp(1.25rem,4vw,3rem)}
+html{scroll-behavior:smooth;scroll-padding-top:100px}
+body{font-family:var(--body);background:var(--bg);color:var(--text);line-height:1.6;font-weight:300;-webkit-font-smoothing:antialiased}
+.mobile-close{position:absolute;top:1.25rem;right:var(--g);background:none;border:none;font-size:2rem;color:var(--text);cursor:pointer;z-index:111;line-height:1;padding:.25rem}
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.25rem var(--g);display:flex;justify-content:space-between;align-items:center;transition:background .4s,backdrop-filter .4s}
+.nav.scrolled{background:rgba(245,240,232,.92);backdrop-filter:blur(12px);box-shadow:0 1px 0 var(--border)}
+.nav-logo{font-family:var(--display);font-size:1.35rem;font-weight:400;letter-spacing:.04em;color:var(--text);text-decoration:none}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:.78rem;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:var(--text-l);text-decoration:none;transition:color .3s}
+.nav-links a:hover,.nav-links a.active{color:var(--accent)}
+.hamburger{display:none;background:none;border:none;cursor:pointer;width:28px;height:20px;position:relative;z-index:110}
+.hamburger span{display:block;width:100%;height:1.5px;background:var(--text);position:absolute;left:0;transition:all .3s}
+.hamburger span:nth-child(1){top:0}.hamburger span:nth-child(2){top:50%;transform:translateY(-50%)}.hamburger span:nth-child(3){bottom:0}
+.hamburger.active span:nth-child(1){top:50%;transform:translateY(-50%) rotate(45deg)}.hamburger.active span:nth-child(2){opacity:0}.hamburger.active span:nth-child(3){bottom:50%;transform:translateY(50%) rotate(-45deg)}
+.mobile-menu{display:none;position:fixed;inset:0;z-index:105;background:rgba(245,240,232,.98);backdrop-filter:blur(20px);flex-direction:column;justify-content:center;align-items:center;gap:2.5rem}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-family:var(--display);font-size:1.8rem;font-weight:300;color:var(--text);text-decoration:none}
+section{padding:clamp(3rem,6vw,6rem) var(--g)}
+.section-label{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-l);margin-bottom:.75rem}
+.section-title{font-family:var(--display);font-weight:300;font-size:clamp(1.8rem,3.5vw,3rem);line-height:1.15;margin-bottom:1rem}
+.footer{border-top:1px solid var(--border);padding:2rem var(--g);display:flex;justify-content:space-between;align-items:center;max-width:var(--max-w);margin:0 auto;font-size:.78rem;color:var(--text-l);flex-wrap:wrap;gap:.75rem}
+.footer a{color:var(--text-l);text-decoration:none}
+.footer a:hover{color:var(--text)}
+.footer-links{display:flex;gap:1.5rem;flex-wrap:wrap}
+.artwork-detail{max-width:var(--max-w);margin:0 auto;padding-top:6rem}
+.artwork-layout{display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(2rem,4vw,4rem);align-items:start}
+.artwork-main-img{width:100%;display:block;box-shadow:0 4px 20px rgba(0,0,0,.1);pointer-events:none;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+.artwork-info .section-title{margin-bottom:.5rem}
+.artwork-meta{font-size:.88rem;color:var(--text-l);margin-bottom:.35rem}
+.artwork-price{font-family:var(--display);font-size:1.8rem;font-weight:500;margin:1rem 0}
+.artwork-desc{font-size:.95rem;color:var(--text-l);line-height:1.75;margin-bottom:2rem}
+.artwork-actions{display:flex;gap:.75rem;flex-wrap:wrap}
+.btn{display:inline-block;text-align:center;font-family:var(--body);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;padding:.8rem 2rem;cursor:pointer;text-decoration:none;transition:all .3s;border:none}
+.btn-outline{border:1px solid var(--text);background:none;color:var(--text)}
+.btn-outline:hover{background:var(--text);color:var(--bg)}
+.btn-solid{background:var(--accent);color:#fff}
+.btn-solid:hover{background:#1e3a6e}
+.pf-badge{display:inline-block;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;padding:.2rem .5rem;color:#fff;margin-bottom:.35rem}
+
+/* ROOM VIEW WITH PHOTOS */
+.room-section{margin-top:2.5rem}
+.room-scene{position:relative;width:100%;aspect-ratio:16/10;border-radius:6px;overflow:hidden;background:#e0ddd6}
+.room-scene img.room-bg{width:100%;height:100%;object-fit:cover;display:block}
+/* aspect-ratio on .room-painting sets the correct artwork proportions (width/height from works.json).
+   .room-painting-inner and its img must both use height:100% + object-fit:cover to fill that box,
+   matching the admin preview behaviour. */
+.room-painting{position:absolute;transition:all .3s ease;transform:translate(-50%,-50%)}
+.room-painting-inner{position:relative;width:100%;height:100%;border:4px solid #1a1a1a;box-shadow:0 12px 40px rgba(0,0,0,.45),0 4px 12px rgba(0,0,0,.30),0 1px 3px rgba(0,0,0,.20),inset 0 1px 0 rgba(255,255,255,.06)}
+.room-painting-inner img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+.room-selector{display:flex;gap:.5rem;margin-top:.75rem;flex-wrap:wrap}
+.room-thumb{width:60px;height:38px;object-fit:cover;border:2px solid transparent;cursor:pointer;opacity:.6;transition:all .3s;border-radius:3px}
+.room-thumb:hover{opacity:.9}
+.room-thumb.active{border-color:var(--accent);opacity:1}
+.room-caption{text-align:center;margin-top:.75rem;font-size:.8rem;color:var(--text-l);font-style:italic}
+/* Global image protection */
+img{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+.artwork-main-img{pointer-events:none}
+
+.loading-msg{text-align:center;padding:8rem 2rem;color:var(--text-l);font-size:1rem}
+.artwork-layout{opacity:0;transition:opacity .35s ease}
+.artwork-layout.loaded{opacity:1}
+@media(max-width:768px){
+  .nav-links{display:none}.hamburger{display:block}
+  .artwork-layout{grid-template-columns:1fr}
+  .artwork-actions{flex-direction:column}
+  .artwork-actions .btn{width:100%;text-align:center}
+  .footer{flex-direction:column;text-align:center}
+  .room-thumb{width:48px;height:30px}
+}
+</style>
+</head>
+<body>
+<nav class="nav" id="nav">
+  <a href="../index.html" class="nav-logo">Henk Weijers</a>
+  <ul class="nav-links">
+    <li><a href="../index.html#about">About</a></li>
+    <li><a href="../portfolio.html" class="active">Portfolio</a></li>
+    <li><a href="../index.html#approach">Approach</a></li>
+    <li><a href="../index.html#contact">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose" aria-label="Close menu">&times;</button>
+  <a href="../index.html#about" onclick="closeMobile()">About</a>
+  <a href="../portfolio.html" onclick="closeMobile()">Portfolio</a>
+  <a href="../index.html#approach" onclick="closeMobile()">Approach</a>
+  <a href="../index.html#contact" onclick="closeMobile()">Contact</a>
+</div>
+
+<div id="artworkContent">
+  <p class="loading-msg">Loading artwork...</p>
+</div>
+
+<footer class="footer">
+  <span>&copy; 2026 Henk Weijers. All rights reserved.</span>
+  <div class="footer-links">
+    <a href="../privacy-policy.html">Privacy</a>
+    <a href="../cookie-policy.html">Cookies</a>
+    <a href="https://www.instagram.com/henk.weijers_artist" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:.35rem"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>Instagram</a>
+  </div>
+</footer>
+
+<script>
+var nav=document.getElementById("nav");
+if(nav){window.addEventListener("scroll",function(){nav.classList.toggle("scrolled",window.scrollY>60)})}
+var hb=document.getElementById("hamburger"),mm=document.getElementById("mobileMenu"),mc=document.getElementById("mobileClose");
+if(hb){hb.addEventListener("click",function(){hb.classList.toggle("active");mm.classList.toggle("open");document.body.style.overflow=mm.classList.contains("open")?"hidden":""})}
+if(mc){mc.addEventListener("click",function(){closeMobile()})}
+function closeMobile(){if(hb){hb.classList.remove("active");mm.classList.remove("open");document.body.style.overflow=""}}
+function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+
+var params = new URLSearchParams(window.location.search);
+var artworkId = params.get('id');
+var allRooms = [];
+
+if(!artworkId){
+  document.getElementById('artworkContent').innerHTML = '<p class="loading-msg">Artwork not found. <a href="../portfolio.html" style="color:var(--accent)">Back to Portfolio</a></p>';
+} else {
+  // Load rooms and works in parallel
+  Promise.all([
+    fetch('../works.json').then(function(r){return r.json()}),
+    fetch('../rooms.json').then(function(r){return r.json()}).catch(function(){return []})
+  ]).then(function(results){
+    var works = results[0];
+    allRooms = results[1];
+    var sorted = works.sort(function(a,b){return (a.order||99)-(b.order||99)});
+    var idx = sorted.findIndex(function(w){return w.id === artworkId});
+    var work = sorted[idx];
+
+    if(!work){
+      document.getElementById('artworkContent').innerHTML = '<p class="loading-msg">Artwork not found. <a href="../portfolio.html" style="color:var(--accent)">Back to Portfolio</a></p>';
+      return;
+    }
+
+    // Redirect sold works
+    if(work.status === 'Sold'){
+      document.getElementById('artworkContent').innerHTML = '<p class="loading-msg">This artwork has been sold. <a href="../portfolio.html" style="color:var(--accent)">Browse available works</a></p>';
+      return;
+    }
+
+    document.title = work.title + ' — Henk Weijers';
+    var descText = work.description ? work.description.substring(0, 160) : work.title + ' by Henk Weijers. ' + work.medium + ', ' + work.width + ' × ' + work.height + ' in.';
+    var md = document.getElementById('metaDesc'); if(md) md.setAttribute('content', descText);
+    var od = document.getElementById('ogDesc'); if(od) od.setAttribute('content', descText);
+    var oi = document.getElementById('ogImage'); if(oi && work.image) oi.setAttribute('content', 'https://henk-weijers-site.netlify.app/'+work.image);
+    var ot = document.getElementById('ogTitle'); if(ot) ot.setAttribute('content', work.title+' — Henk Weijers');
+
+    var badgeColor = work.status==='Available'?'#2B6B3B':'#8B6914';
+
+    // Prev/Next (skip sold)
+    var visibleWorks = sorted.filter(function(w){return w.status !== 'Sold'});
+    var vIdx = visibleWorks.findIndex(function(w){return w.id === artworkId});
+    var prevWork = vIdx > 0 ? visibleWorks[vIdx-1] : null;
+    var nextWork = vIdx < visibleWorks.length-1 ? visibleWorks[vIdx+1] : null;
+    var navHtml = '<div style="display:flex;gap:.75rem;margin-top:2rem;justify-content:center">';
+    if(prevWork) navHtml += '<a href="view.html?id='+encodeURIComponent(prevWork.id)+'" class="btn btn-outline">&larr; Prev</a>';
+    if(nextWork) navHtml += '<a href="view.html?id='+encodeURIComponent(nextWork.id)+'" class="btn btn-outline">Next &rarr;</a>';
+    navHtml += '</div>';
+
+    var inquireMsg = 'Dear Henk, I am interested in: "'+work.title+'" at the price of €'+work.price+'.00. Can you give me additional information?';
+
+    var actionsHtml = '';
+    if(work.status === 'Available'){
+      actionsHtml = '<div class="artwork-actions">'
+        + '<button class="btn btn-solid" id="buyNowBtn" data-id="'+work.id+'" data-price="'+work.price+'" onclick="handleBuyNow(this)">Buy Now &mdash; &euro;'+work.price+'</button>'
+        + '<button class="btn btn-outline" onclick="handleInquire()">Inquire</button>'
+        + '</div>';
+    } else {
+      actionsHtml = '<p style="font-size:.88rem;color:#8B6914;font-weight:400;margin-bottom:1rem">This painting is currently reserved. <button onclick="handleInquire()" style="color:var(--accent);background:none;border:none;cursor:pointer;font-family:var(--body);font-size:inherit;text-decoration:underline">Ask about availability</button></p>';
+    }
+
+    window._inquireMsg = inquireMsg;
+
+    // Build room view with photo backgrounds
+    var roomViewHtml = '';
+    if(allRooms.length > 0){
+      var defaultRoom = allRooms[0];
+      var thumbsHtml = allRooms.map(function(r, i){
+        return '<img src="../'+r.image+'" alt="'+r.name+'" class="room-thumb'+(i===0?' active':'')+'" data-idx="'+i+'" onclick="switchRoom('+i+')">';
+      }).join('');
+
+      var customPos = work.room_positions && work.room_positions[defaultRoom.id];
+      var posX = customPos ? customPos.x : defaultRoom.wall_center_x;
+      var posY = customPos ? customPos.y : defaultRoom.wall_center_y;
+      var maxPct = defaultRoom.max_painting_pct || 30;
+      var scaleFactor = customPos ? (customPos.scale / 100) : 1;
+      var rotation = (customPos && customPos.rotation) ? customPos.rotation : 0;
+      var artW = work.width || 24;
+      var artH = work.height || 24;
+      var artRatio = artW / artH;
+
+      // Calculate width: for landscape use maxPct, for portrait reduce width so height stays reasonable
+      var paintWidthPct;
+      if (artRatio >= 1) {
+        paintWidthPct = maxPct * scaleFactor;
+      } else {
+        // Portrait: height would be width/ratio. Limit so height ~ maxPct * sceneAspect
+        // Scene aspect is 16/10 = 1.6, so max height in % of width = maxPct * 1.6
+        // We want painting height in scene to be about maxPct of scene height
+        // paintHeight% of scene width = paintWidthPct / artRatio
+        // paintHeight in scene height % = (paintWidthPct / artRatio) * (16/10)
+        // We want that <= maxPct of scene height, so:
+        // paintWidthPct = maxPct * artRatio / 1.6
+        paintWidthPct = maxPct * artRatio / 1.2 * scaleFactor;
+      }
+
+      roomViewHtml = '<div class="room-section">'
+        + '<p class="section-label" style="margin-bottom:.75rem">View in Room</p>'
+        + '<div class="room-scene" id="roomScene">'
+        + '<img class="room-bg" id="roomBg" src="../'+defaultRoom.image+'" alt="Room view">'
+        + '<div class="room-painting" id="roomPainting" style="left:'+posX+'%;top:'+posY+'%;width:'+paintWidthPct+'%;aspect-ratio:'+artRatio+';transform:translate(-50%,-50%) rotate('+rotation+'deg)">'
+        + '<div class="room-painting-inner">'
+        + '<img src="../'+work.image+'" alt="'+esc(work.title)+' in room" id="roomArtImg">'
+        + '</div>'
+        + '</div>'
+        + '</div>'
+        + '<div class="room-selector" id="roomSelector">'+thumbsHtml+'</div>'
+        + '<p class="room-caption">Proportionally rendered — '+work.width+' × '+work.height+' in</p>'
+        + '</div>';
+    }
+
+    var html = '<section class="artwork-detail">'
+      + '<p style="margin-bottom:1.5rem"><a href="../portfolio.html" style="color:var(--accent);text-decoration:none;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase">&larr; Back to Portfolio</a></p>'
+      + '<div class="artwork-layout">'
+      + '<div>'
+      + '<img src="../'+work.image+'" alt="'+esc(work.title)+'" class="artwork-main-img">'
+      + roomViewHtml
+      + '</div>'
+      + '<div class="artwork-info">'
+      + '<p class="section-label">'+esc(work.category || '')+'</p>'
+      + '<h1 class="section-title" style="font-style:italic">'+esc(work.title)+'</h1>'
+      + '<p class="artwork-meta">'+esc(work.medium || 'Acrylic on Canvas')+'</p>'
+      + '<p class="artwork-meta">'+work.width+' × '+work.height+' in'+(work.year ? ' &nbsp;&middot;&nbsp; '+work.year : '')+'</p>'
+      + (work.serial ? '<p class="artwork-meta" style="font-size:.78rem;color:var(--text-l);letter-spacing:.04em">'+esc(work.serial)+'</p>' : '')
+      + '<p class="artwork-price">&euro;'+work.price+'</p>'
+      + '<span class="pf-badge" style="margin-bottom:1.25rem;background:'+badgeColor+'">'+work.status+'</span>'
+      + '<p class="artwork-desc">'+esc(work.description || '')+'</p>'
+      + actionsHtml
+      + navHtml
+      + '</div>'
+      + '</div>'
+      + '</section>';
+
+    document.getElementById('artworkContent').innerHTML = html;
+
+    // Fade in after paint to avoid flash
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){
+        var layout = document.querySelector('.artwork-layout');
+        if(layout) layout.classList.add('loaded');
+      });
+    });
+
+    // Store work data globally for room switching
+    window._currentWork = work;
+
+  }).catch(function(e){
+    console.error('Failed to load artwork:', e);
+    document.getElementById('artworkContent').innerHTML = '<p class="loading-msg">Could not load artwork data. <a href="../portfolio.html" style="color:var(--accent)">Back to Portfolio</a></p>';
+  });
+}
+
+function switchRoom(idx) {
+  if(!allRooms[idx] || !window._currentWork) return;
+  var room = allRooms[idx];
+  var work = window._currentWork;
+  document.getElementById('roomBg').src = '../' + room.image;
+  var paintEl = document.getElementById('roomPainting');
+
+  var customPos = work.room_positions && work.room_positions[room.id];
+  var posX = customPos ? customPos.x : room.wall_center_x;
+  var posY = customPos ? customPos.y : room.wall_center_y;
+  var maxPct = room.max_painting_pct || 30;
+  var scaleFactor = customPos ? (customPos.scale / 100) : 1;
+  var rotation = (customPos && customPos.rotation) ? customPos.rotation : 0;
+  var artW = work.width || 24;
+  var artH = work.height || 24;
+  var artRatio = artW / artH;
+
+  var paintWidthPct;
+  if (artRatio >= 1) {
+    paintWidthPct = maxPct * scaleFactor;
+  } else {
+    paintWidthPct = maxPct * artRatio / 1.2 * scaleFactor;
+  }
+
+  paintEl.style.left = posX + '%';
+  paintEl.style.top = posY + '%';
+  paintEl.style.width = paintWidthPct + '%';
+  paintEl.style.aspectRatio = artRatio;
+  paintEl.style.transform = 'translate(-50%,-50%) rotate(' + rotation + 'deg)';
+  document.querySelectorAll('.room-thumb').forEach(function(t){t.classList.remove('active')});
+  document.querySelectorAll('.room-thumb')[idx].classList.add('active');
+}
+
+function handleBuyNow(btn) {
+  var title = document.querySelector('.section-title') ? document.querySelector('.section-title').textContent : 'this artwork';
+  var price = btn.dataset.price;
+  var msg = 'Dear Henk, I would like to purchase: "' + title + '" at the price of \u20ac' + price + '.00. Can you send payment details?';
+  sessionStorage.setItem('formMsg', msg);
+  sessionStorage.setItem('formSubj', 'purchase');
+  window.location.href = '../index.html#contact';
+}
+
+function handleInquire() {
+  if (window._inquireMsg) {
+    sessionStorage.setItem('formMsg', window._inquireMsg);
+    sessionStorage.setItem('formSubj', 'purchase');
+  }
+  window.location.href = '../index.html#contact';
+}
+
+// ============================================================
+// IMAGE PROTECTION — disable right-click save, drag, long-press
+// ============================================================
+document.addEventListener('contextmenu', function(e) {
+  if (e.target.tagName === 'IMG') { e.preventDefault(); return false; }
+});
+document.addEventListener('dragstart', function(e) {
+  if (e.target.tagName === 'IMG') { e.preventDefault(); return false; }
+});
+// Prevent iOS long-press save on images
+document.addEventListener('touchstart', function(e) {}, {passive: true});
+// Disable text/image selection globally
+document.addEventListener('selectstart', function(e) {
+  if (e.target.tagName === 'IMG') { e.preventDefault(); return false; }
+});
+</script>
+
+<!-- Cookie Banner -->
+<div id="cookieBanner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:rgba(26,26,26,.95);backdrop-filter:blur(10px);padding:1rem clamp(1.25rem,4vw,3rem);color:#F5F0E8">
+  <div style="max-width:1400px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap">
+    <p style="font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:300;line-height:1.6;margin:0;flex:1;min-width:280px">We use essential cookies to ensure the website functions properly. No tracking or advertising cookies are used. <a href="../cookie-policy.html" style="color:#7B9FD4;text-decoration:underline">Cookie Policy</a> · <a href="../privacy-policy.html" style="color:#7B9FD4;text-decoration:underline">Privacy Policy</a></p>
+    <button onclick="acceptCookies()" style="background:#F5F0E8;color:#1A1A1A;border:none;font-family:'DM Sans',sans-serif;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;padding:.6rem 1.5rem;cursor:pointer;white-space:nowrap;font-weight:400;transition:background .3s">Accept</button>
+  </div>
+</div>
+<script>
+(function(){if(!localStorage.getItem('cookieConsent')){document.getElementById('cookieBanner').style.display='block'}})();
+function acceptCookies(){localStorage.setItem('cookieConsent','accepted');document.getElementById('cookieBanner').style.display='none'}
+</script>
+</body>
+</html>
