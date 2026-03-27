@@ -274,11 +274,11 @@ tr.drag-below td{border-bottom:2px solid var(--accent)}
       <div class="form-row-3">
         <div class="form-group">
           <label for="artWidth">Width (in)</label>
-          <input type="number" id="artWidth" step="0.5" placeholder="24">
+          <input type="number" id="artWidth" step="0.5" placeholder="24" oninput="resetRoomDefaults()">
         </div>
         <div class="form-group">
           <label for="artHeight">Height (in)</label>
-          <input type="number" id="artHeight" step="0.5" placeholder="24">
+          <input type="number" id="artHeight" step="0.5" placeholder="24" oninput="resetRoomDefaults()">
         </div>
         <div class="form-group">
           <label for="artPrice">Price (&euro;)</label>
@@ -874,6 +874,29 @@ function handleImageSelect(input) {
       // Show room position editor after image selected
       if (allRooms.length) {
         document.getElementById('rpePaintingImg').src = compressed;
+        // Pre-populate editingRoomPositions with correct defaults based on dimensions
+        if (Object.keys(editingRoomPositions).length === 0) {
+          var _w = parseFloat(document.getElementById('artWidth').value) || 24;
+          var _h = parseFloat(document.getElementById('artHeight').value) || 24;
+          var _isSquare = Math.abs(_w - _h) < 0.5;
+          var _SQPOS = {
+            'living-minimal': {x:50,y:31,scale:55,rotation:0},
+            'living-marble':  {x:63,y:36,scale:55,rotation:0},
+            'living-grey':    {x:55,y:35,scale:55,rotation:0},
+            'studio-leather': {x:47,y:33,scale:55,rotation:0},
+            'gallery-gold':   {x:51,y:32,scale:55,rotation:0},
+            'bedroom-wood':   {x:51,y:31,scale:55,rotation:0}
+          };
+          var _REPOS = {
+            'living-minimal': {x:50,y:31,scale:50,rotation:0},
+            'living-marble':  {x:63,y:33,scale:50,rotation:0},
+            'living-grey':    {x:55,y:33,scale:50,rotation:0},
+            'studio-leather': {x:42,y:32,scale:50,rotation:0},
+            'gallery-gold':   {x:51,y:35,scale:50,rotation:0},
+            'bedroom-wood':   {x:51,y:32,scale:50,rotation:0}
+          };
+          editingRoomPositions = _isSquare ? JSON.parse(JSON.stringify(_SQPOS)) : JSON.parse(JSON.stringify(_REPOS));
+        }
         var fakeWork = { room_positions: editingRoomPositions };
         showRoomPosEditor(fakeWork);
       }
@@ -1585,6 +1608,12 @@ function persistExhibitions() {
   window._pendingExhibitions = allExhibitions;
 }
 
+
+// Reset editingRoomPositions when dimensions change so defaults recalculate
+function resetRoomDefaults() {
+  var editId = document.getElementById('editId').value;
+  if (!editId) { editingRoomPositions = {}; }
+}
 
 // ============================================================
 // EXHIBITIONS VISIBILITY TOGGLE
