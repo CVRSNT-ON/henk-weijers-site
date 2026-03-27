@@ -18,37 +18,37 @@
       "living-minimal": {
         "x": 50,
         "y": 31,
-        "scale": 49.88662131519274,
+        "scale": 50,
         "rotation": 0
       },
       "living-marble": {
-        "x": 62.698412698412696,
-        "y": 32.26984126984127,
-        "scale": 49.88662131519274,
+        "x": 63,
+        "y": 33,
+        "scale": 50,
         "rotation": 0
       },
       "living-grey": {
-        "x": 54.285714285714285,
-        "y": 35.82539682539682,
-        "scale": 49.88662131519274,
+        "x": 55,
+        "y": 33,
+        "scale": 50,
         "rotation": 0
       },
       "studio-leather": {
-        "x": 43.96825396825397,
-        "y": 32.77777777777778,
-        "scale": 49.88662131519274,
+        "x": 42,
+        "y": 32,
+        "scale": 50,
         "rotation": 0
       },
       "gallery-gold": {
-        "x": 50.79365079365079,
-        "y": 36.079365079365076,
-        "scale": 49.88662131519274,
+        "x": 51,
+        "y": 35,
+        "scale": 50,
         "rotation": 0
       },
       "bedroom-wood": {
-        "x": 51.111111111111114,
-        "y": 31.507936507936506,
-        "scale": 49.88662131519274,
+        "x": 51,
+        "y": 32,
+        "scale": 50,
         "rotation": 0
       }
     }
@@ -72,37 +72,37 @@
       "living-minimal": {
         "x": 50,
         "y": 31,
-        "scale": 55.328798185941054,
+        "scale": 55,
         "rotation": 0
       },
       "living-marble": {
-        "x": 63.492020634920635,
-        "y": 35.82537777777778,
-        "scale": 55.328798185941054,
+        "x": 63,
+        "y": 36,
+        "scale": 55,
         "rotation": 0
       },
       "living-grey": {
-        "x": 55.079365079365076,
-        "y": 34.55555555555556,
-        "scale": 55.328798185941054,
+        "x": 55,
+        "y": 35,
+        "scale": 55,
         "rotation": 0
       },
       "studio-leather": {
-        "x": 41.74603015873016,
-        "y": 31.5079,
-        "scale": 55.328798185941054,
+        "x": 47,
+        "y": 33,
+        "scale": 55,
         "rotation": 0
       },
       "gallery-gold": {
-        "x": 50,
-        "y": 32.26984126984127,
-        "scale": 55.328798185941054,
+        "x": 51,
+        "y": 32,
+        "scale": 55,
         "rotation": 0
       },
       "bedroom-wood": {
-        "x": 50.63492063492063,
+        "x": 51,
         "y": 31,
-        "scale": 55.328798185941054,
+        "scale": 55,
         "rotation": 0
       }
     }
@@ -117,7 +117,7 @@
     "price": 400,
     "status": "Available",
     "image": "images/HW21_-_Henk_Weijers__Pictures_at_an_exhibition-II__2025_max_3_Mb.jpg",
-    "description": "This second exploration assembles 25 individual works into a unified\ngrid. Warm tones—reds, ochres, golds, and pinks—create density and\ncohesion. Each square holds its own rhythm, yet relationships shift with\nevery viewing. A reflection on repetition, variation, and how perception\nevolves over time",
+    "description": "This second exploration assembles 25 individual works into a unified grid. Warm tones — reds, ochres, golds, and pinks — create density and cohesion. Each square holds its own rhythm, yet relationships shift with every viewing. A reflection on repetition, variation, and how perception evolves over time.",
     "year": 2025,
     "serial": "HW21 - 1225",
     "order": 3,
@@ -126,37 +126,37 @@
       "living-minimal": {
         "x": 50,
         "y": 31,
-        "scale": 55.782312925170075,
+        "scale": 55,
         "rotation": 0
       },
       "living-marble": {
-        "x": 63.01587301587302,
-        "y": 33.79365079365079,
-        "scale": 55.782312925170075,
+        "x": 63,
+        "y": 36,
+        "scale": 55,
         "rotation": 0
       },
       "living-grey": {
-        "x": 54.44444444444444,
-        "y": 35.57142857142857,
-        "scale": 55.782312925170075,
+        "x": 55,
+        "y": 35,
+        "scale": 55,
         "rotation": 0
       },
       "studio-leather": {
-        "x": 47.93653650793651,
-        "y": 35.3175,
-        "scale": 55.782312925170075,
+        "x": 47,
+        "y": 33,
+        "scale": 55,
         "rotation": 0
       },
       "gallery-gold": {
-        "x": 51.26984126984127,
-        "y": 31.507936507936506,
-        "scale": 55.782312925170075,
+        "x": 51,
+        "y": 32,
+        "scale": 55,
         "rotation": 0
       },
       "bedroom-wood": {
-        "x": 50,
+        "x": 51,
         "y": 31,
-        "scale": 55.782312925170075,
+        "scale": 55,
         "rotation": 0
       }
     }
@@ -180,37 +180,37 @@
       "living-minimal": {
         "x": 50,
         "y": 31,
-        "scale": 50.34013605442177,
+        "scale": 50,
         "rotation": 0
       },
       "living-marble": {
-        "x": 62.857142857142854,
-        "y": 33.03174603174603,
-        "scale": 50.34013605442177,
+        "x": 63,
+        "y": 33,
+        "scale": 50,
         "rotation": 0
       },
       "living-grey": {
-        "x": 54.76190476190476,
-        "y": 32.77777777777778,
-        "scale": 50.34013605442177,
+        "x": 55,
+        "y": 33,
+        "scale": 50,
         "rotation": 0
       },
       "studio-leather": {
-        "x": 42.06344444444444,
-        "y": 32.26980476190476,
-        "scale": 50.34013605442177,
+        "x": 42,
+        "y": 32,
+        "scale": 50,
         "rotation": 0
       },
       "gallery-gold": {
-        "x": 50.63492063492063,
-        "y": 34.80952380952381,
-        "scale": 50.34013605442177,
+        "x": 51,
+        "y": 35,
+        "scale": 50,
         "rotation": 0
       },
       "bedroom-wood": {
-        "x": 51.42857142857143,
-        "y": 31.507936507936506,
-        "scale": 50.34013605442177,
+        "x": 51,
+        "y": 32,
+        "scale": 50,
         "rotation": 0
       }
     }
@@ -234,37 +234,37 @@
       "living-minimal": {
         "x": 50,
         "y": 31,
-        "scale": 54.87528344671203,
+        "scale": 55,
         "rotation": 0
       },
       "living-marble": {
-        "x": 63.17460317460318,
-        "y": 33.79365079365079,
-        "scale": 54.87528344671203,
+        "x": 63,
+        "y": 36,
+        "scale": 55,
         "rotation": 0
       },
       "living-grey": {
-        "x": 54.6031746031746,
-        "y": 32.26984126984127,
-        "scale": 54.87528344671203,
+        "x": 55,
+        "y": 35,
+        "scale": 55,
         "rotation": 0
       },
       "studio-leather": {
-        "x": 47.61904761904762,
-        "y": 32.01587301587301,
-        "scale": 54.87528344671203,
+        "x": 47,
+        "y": 33,
+        "scale": 55,
         "rotation": 0
       },
       "gallery-gold": {
-        "x": 50.476190476190474,
-        "y": 31.253968253968253,
-        "scale": 54.87528344671203,
+        "x": 51,
+        "y": 32,
+        "scale": 55,
         "rotation": 0
       },
       "bedroom-wood": {
-        "x": 50.63492063492063,
+        "x": 51,
         "y": 31,
-        "scale": 54.87528344671203,
+        "scale": 55,
         "rotation": 0
       }
     }
@@ -288,37 +288,37 @@
       "living-minimal": {
         "x": 50,
         "y": 31,
-        "scale": 55.328798185941054,
+        "scale": 55,
         "rotation": 0
       },
       "living-marble": {
-        "x": 63.333333333333336,
-        "y": 33.03174603174603,
-        "scale": 55.328798185941054,
+        "x": 63,
+        "y": 36,
+        "scale": 55,
         "rotation": 0
       },
       "living-grey": {
-        "x": 54.285714285714285,
-        "y": 34.55555555555556,
-        "scale": 55.328798185941054,
+        "x": 55,
+        "y": 35,
+        "scale": 55,
         "rotation": 0
       },
       "studio-leather": {
-        "x": 47.46028095238095,
-        "y": 31.254,
-        "scale": 55.328798185941054,
+        "x": 47,
+        "y": 33,
+        "scale": 55,
         "rotation": 0
       },
       "gallery-gold": {
-        "x": 51.26984126984127,
-        "y": 31.253968253968253,
-        "scale": 55.328798185941054,
+        "x": 51,
+        "y": 32,
+        "scale": 55,
         "rotation": 0
       },
       "bedroom-wood": {
-        "x": 50.63492063492063,
+        "x": 51,
         "y": 31,
-        "scale": 55.328798185941054,
+        "scale": 55,
         "rotation": 0
       }
     }
@@ -333,7 +333,7 @@
     "price": 300,
     "status": "Available",
     "image": "images/HW27_-_Henk_Weijers__Deferred_Pleasures_2026_max_3_Mb.jpg",
-    "description": "quiet anticipation. The painting suggests that some things in life\nimprove with time and are worth waiting for. Choices made too quickly\ncan lose meaning, while patience allows character to develop. It\nreminds us that anticipation, restraint, and time itself can be more\nrewarding than possession alone. The work invites the viewer to\nrecognize the bottles and return to personal memories—perhaps a\nshared glass at a special moment. Wine becomes a marker of time\nremembered.",
+    "description": "Deferred Pleasures shows rows of carefully selected wines, resting in quiet anticipation. The painting suggests that some things in life improve with time and are worth waiting for. Choices made too quickly can lose meaning, while patience allows character to develop. It reminds us that anticipation, restraint, and time itself can be more rewarding than possession alone. The work invites the viewer to recognise the bottles and return to personal memories — perhaps a shared glass at a special moment. Wine becomes a marker of time remembered.",
     "year": 2026,
     "serial": "HW27 - 0226",
     "order": 7,
@@ -342,37 +342,37 @@
       "living-minimal": {
         "x": 50,
         "y": 31,
-        "scale": 49.88662131519274,
+        "scale": 50,
         "rotation": 0
       },
       "living-marble": {
-        "x": 63.492063492063494,
-        "y": 34.04761904761905,
-        "scale": 49.88662131519274,
+        "x": 63,
+        "y": 33,
+        "scale": 50,
         "rotation": 0
       },
       "living-grey": {
-        "x": 54.920634920634924,
-        "y": 32.77777777777778,
-        "scale": 49.88662131519274,
+        "x": 55,
+        "y": 33,
+        "scale": 50,
         "rotation": 0
       },
       "studio-leather": {
-        "x": 47.77777777777778,
-        "y": 31,
-        "scale": 49.88662131519274,
+        "x": 42,
+        "y": 32,
+        "scale": 50,
         "rotation": 0
       },
       "gallery-gold": {
-        "x": 51.42857142857143,
-        "y": 31,
-        "scale": 49.88662131519274,
+        "x": 51,
+        "y": 35,
+        "scale": 50,
         "rotation": 0
       },
       "bedroom-wood": {
-        "x": 50.95238095238095,
-        "y": 31,
-        "scale": 49.88662131519274,
+        "x": 51,
+        "y": 32,
+        "scale": 50,
         "rotation": 0
       }
     }
@@ -387,7 +387,7 @@
     "price": 400,
     "status": "Available",
     "image": "images/HW28_-_Henk_Weijers__Firebreaks_2026_max_3_Mb.jpg",
-    "description": "Firebreaks refers to the physical barriers cut into landscapes to stop fire\nfrom spreading. In this painting, the idea extends beyond land\nmanagement. The layered marks and sharp divisions suggest moments\nwhere movement is interrupted and contained. Metaphorically,\nfirebreaks represent boundaries we create in life—pauses, limits, or\ndecisions that prevent escalation. The work reflects the balance\nbetween control and chaos, destruction and protection",
+    "description": "Firebreaks refers to the physical barriers cut into landscapes to stop fire from spreading. In this painting, the idea extends beyond land management. The layered marks and sharp divisions suggest moments where movement is interrupted and contained. Metaphorically, firebreaks represent boundaries we create in life — pauses, limits, or decisions that prevent escalation. The work reflects the balance between control and chaos, destruction and protection.",
     "year": 2026,
     "serial": "HW28 - 0226",
     "order": 8,
@@ -396,37 +396,37 @@
       "living-minimal": {
         "x": 50,
         "y": 31,
-        "scale": 54.87528344671203,
+        "scale": 55,
         "rotation": 0
       },
       "living-marble": {
-        "x": 63.333333333333336,
-        "y": 38.36507936507937,
-        "scale": 54.87528344671203,
+        "x": 63,
+        "y": 36,
+        "scale": 55,
         "rotation": 0
       },
       "living-grey": {
-        "x": 54.6031746031746,
-        "y": 38.87301587301587,
-        "scale": 54.87528344671203,
+        "x": 55,
+        "y": 35,
+        "scale": 55,
         "rotation": 0
       },
       "studio-leather": {
-        "x": 47.301587301587304,
-        "y": 31.253968253968253,
-        "scale": 54.87528344671203,
+        "x": 47,
+        "y": 33,
+        "scale": 55,
         "rotation": 0
       },
       "gallery-gold": {
-        "x": 51.74603174603175,
-        "y": 31.507936507936506,
-        "scale": 54.87528344671203,
+        "x": 51,
+        "y": 32,
+        "scale": 55,
         "rotation": 0
       },
       "bedroom-wood": {
-        "x": 51.74603174603175,
-        "y": 31.253968253968253,
-        "scale": 54.87528344671203,
+        "x": 51,
+        "y": 31,
+        "scale": 55,
         "rotation": 0
       }
     }
@@ -450,37 +450,37 @@
       "living-minimal": {
         "x": 50,
         "y": 31,
-        "scale": 55.328798185941054,
+        "scale": 55,
         "rotation": 0
       },
       "living-marble": {
-        "x": 63.492063492063494,
-        "y": 32.26984126984127,
-        "scale": 55.328798185941054,
+        "x": 63,
+        "y": 36,
+        "scale": 55,
         "rotation": 0
       },
       "living-grey": {
-        "x": 55.23809523809524,
-        "y": 35.317460317460316,
-        "scale": 55.328798185941054,
+        "x": 55,
+        "y": 35,
+        "scale": 55,
         "rotation": 0
       },
       "studio-leather": {
-        "x": 47.301587301587304,
-        "y": 31.253968253968253,
-        "scale": 55.328798185941054,
+        "x": 47,
+        "y": 33,
+        "scale": 55,
         "rotation": 0
       },
       "gallery-gold": {
-        "x": 51.111111111111114,
-        "y": 31.507936507936506,
-        "scale": 55.328798185941054,
+        "x": 51,
+        "y": 32,
+        "scale": 55,
         "rotation": 0
       },
       "bedroom-wood": {
-        "x": 50.79365079365079,
-        "y": 31.253968253968253,
-        "scale": 55.328798185941054,
+        "x": 51,
+        "y": 31,
+        "scale": 55,
         "rotation": 0
       }
     }
@@ -504,37 +504,37 @@
       "living-minimal": {
         "x": 50,
         "y": 31,
-        "scale": 54.87528344671203,
+        "scale": 55,
         "rotation": 0
       },
       "living-marble": {
-        "x": 63.65079365079365,
-        "y": 31.253968253968253,
-        "scale": 54.87528344671203,
+        "x": 63,
+        "y": 36,
+        "scale": 55,
         "rotation": 0
       },
       "living-grey": {
-        "x": 54.6031746031746,
-        "y": 31.761904761904763,
-        "scale": 54.87528344671203,
+        "x": 55,
+        "y": 35,
+        "scale": 55,
         "rotation": 0
       },
       "studio-leather": {
-        "x": 47.61904761904762,
-        "y": 31.761904761904763,
-        "scale": 54.87528344671203,
+        "x": 47,
+        "y": 33,
+        "scale": 55,
         "rotation": 0
       },
       "gallery-gold": {
-        "x": 50.95238095238095,
-        "y": 31,
-        "scale": 54.87528344671203,
+        "x": 51,
+        "y": 32,
+        "scale": 55,
         "rotation": 0
       },
       "bedroom-wood": {
-        "x": 50.79365079365079,
-        "y": 31.253968253968253,
-        "scale": 54.87528344671203,
+        "x": 51,
+        "y": 31,
+        "scale": 55,
         "rotation": 0
       }
     }
@@ -549,7 +549,7 @@
     "price": 400,
     "status": "Available",
     "image": "images/HW33_-_Henk_Weijers__Lavaux_2026_max_3_Mb.jpg",
-    "description": "This semi-abstract expressionist landscape presents Lavaux, a UNESCO\nWorld Heritage site. The painting shows St. Saphorin, an idyllic medieval\nvillage, overlooking Lac Léman with the French Alps rising beyond. It is\nmy third painting of a series depicting some of my favourite places in\nSwitzerland. Bold yellow vineyard terraces descend diagonally toward\nthe blue expanse of water, while structured mountain forms anchor the\nhorizon in rhythmic, high-contrast colour fields.",
+    "description": "This semi-abstract expressionist landscape presents Lavaux, a UNESCO World Heritage site. The painting shows St. Saphorin, an idyllic medieval village, overlooking Lac Léman with the French Alps rising beyond. It is the third painting of a series depicting some of the artist's favourite places in Switzerland. Bold yellow vineyard terraces descend diagonally toward the blue expanse of water, while structured mountain forms anchor the horizon in rhythmic, high-contrast colour fields.",
     "year": 2026,
     "serial": "HW33 - 0226",
     "order": 11,
@@ -558,37 +558,37 @@
       "living-minimal": {
         "x": 50,
         "y": 31,
-        "scale": 54.87528344671203,
+        "scale": 55,
         "rotation": 0
       },
       "living-marble": {
-        "x": 63.17460317460318,
-        "y": 32.77777777777778,
-        "scale": 54.87528344671203,
+        "x": 63,
+        "y": 36,
+        "scale": 55,
         "rotation": 0
       },
       "living-grey": {
-        "x": 55.079365079365076,
-        "y": 35.317460317460316,
-        "scale": 54.87528344671203,
+        "x": 55,
+        "y": 35,
+        "scale": 55,
         "rotation": 0
       },
       "studio-leather": {
-        "x": 47.77777777777778,
-        "y": 31,
-        "scale": 54.87528344671203,
+        "x": 47,
+        "y": 33,
+        "scale": 55,
         "rotation": 0
       },
       "gallery-gold": {
-        "x": 51.26984126984127,
-        "y": 31.253968253968253,
-        "scale": 54.87528344671203,
+        "x": 51,
+        "y": 32,
+        "scale": 55,
         "rotation": 0
       },
       "bedroom-wood": {
-        "x": 50.63492063492063,
-        "y": 31.253968253968253,
-        "scale": 54.87528344671203,
+        "x": 51,
+        "y": 31,
+        "scale": 55,
         "rotation": 0
       }
     }
@@ -603,7 +603,7 @@
     "price": 400,
     "status": "Available",
     "image": "images/HW34_-_Henk_Weijers__Dad_s_Ties_2026_max_3_Mb.jpg",
-    "description": "Dad’s Ties refers to the Father’s Day presents my daughter gave me as\na child. The vertical bands resemble neckties, but also stand for\nconventions, opinions, and expectations that shape identity. Two dark\nbars interrupt the rhythm. The hands forcing them apart suggest a\njailbreak — a metaphor for my pursuit of artistic freedom. Built with\nheavy palette-knife layers, the work combines geometric order with\nexpressive texture and symbolic abstraction.",
+    "description": "Dad's Ties refers to the Father's Day presents my daughter gave me as a child. The vertical bands resemble neckties, but also stand for conventions, opinions, and expectations that shape identity. Two dark bars interrupt the rhythm. The hands forcing them apart suggest a jailbreak — a metaphor for my pursuit of artistic freedom. Built with heavy palette-knife layers, the work combines geometric order with expressive texture and symbolic abstraction.",
     "year": 2026,
     "serial": "HW34 - 0326",
     "order": 12,
@@ -612,37 +612,37 @@
       "living-minimal": {
         "x": 50,
         "y": 31,
-        "scale": 54.87528344671203,
+        "scale": 55,
         "rotation": 0
       },
       "living-marble": {
-        "x": 64.60317460317461,
-        "y": 32.01587301587301,
-        "scale": 54.87528344671203,
+        "x": 63,
+        "y": 36,
+        "scale": 55,
         "rotation": 0
       },
       "living-grey": {
-        "x": 55.3968253968254,
-        "y": 32.77777777777778,
-        "scale": 54.87528344671203,
+        "x": 55,
+        "y": 35,
+        "scale": 55,
         "rotation": 0
       },
       "studio-leather": {
-        "x": 47.77777777777778,
-        "y": 31,
-        "scale": 54.87528344671203,
+        "x": 47,
+        "y": 33,
+        "scale": 55,
         "rotation": 0
       },
       "gallery-gold": {
-        "x": 50.95238095238095,
-        "y": 31.253968253968253,
-        "scale": 54.87528344671203,
+        "x": 51,
+        "y": 32,
+        "scale": 55,
         "rotation": 0
       },
       "bedroom-wood": {
-        "x": 51.26984126984127,
-        "y": 31.253968253968253,
-        "scale": 54.87528344671203,
+        "x": 51,
+        "y": 31,
+        "scale": 55,
         "rotation": 0
       }
     }
@@ -657,7 +657,7 @@
     "price": 400,
     "status": "Available",
     "image": "images/HW36_-_Henk_Weijers_Colour_Dialogues_2026_max_3_Mb.jpg",
-    "description": "Colour Dialogues shows two complementary colour ranges moving\nacross the canvas in structured rows of fragments. The diversity of\ncolours creates a visual dialogue where contrast and cooperation exist\nat the same time. The work can also be read as a reflection of politics\nand social issues — where different voices, interests, and identities meet.\nDespite tension and difference, the composition suggests that dialogue\ncan create balance and synergy rather than division.",
+    "description": "Colour Dialogues shows two complementary colour ranges moving across the canvas in structured rows of fragments. The diversity of colours creates a visual dialogue where contrast and cooperation exist at the same time. The work can also be read as a reflection of politics and social issues — where different voices, interests, and identities meet. Despite tension and difference, the composition suggests that dialogue can create balance and synergy rather than division.",
     "year": 2026,
     "serial": "HW36 - 0326",
     "order": 13,
@@ -666,37 +666,37 @@
       "living-minimal": {
         "x": 50,
         "y": 31,
-        "scale": 55.328798185941054,
+        "scale": 55,
         "rotation": 0
       },
       "living-marble": {
-        "x": 63.65079365079365,
-        "y": 32.26984126984127,
-        "scale": 55.328798185941054,
+        "x": 63,
+        "y": 36,
+        "scale": 55,
         "rotation": 0
       },
       "living-grey": {
-        "x": 54.920634920634924,
-        "y": 31.253968253968253,
-        "scale": 55.328798185941054,
+        "x": 55,
+        "y": 35,
+        "scale": 55,
         "rotation": 0
       },
       "studio-leather": {
-        "x": 47.46031746031746,
-        "y": 31.253968253968253,
-        "scale": 55.328798185941054,
+        "x": 47,
+        "y": 33,
+        "scale": 55,
         "rotation": 0
       },
       "gallery-gold": {
-        "x": 51.26984126984127,
-        "y": 31,
-        "scale": 55.328798185941054,
+        "x": 51,
+        "y": 32,
+        "scale": 55,
         "rotation": 0
       },
       "bedroom-wood": {
-        "x": 51.111111111111114,
+        "x": 51,
         "y": 31,
-        "scale": 55.328798185941054,
+        "scale": 55,
         "rotation": 0
       }
     }

@@ -350,6 +350,14 @@ function acceptCookies(){localStorage.setItem('cookieConsent','accepted');docume
 <script>
 // Load exhibitions.json and render as timeline roadmap
 (function(){
+  // Check if exhibitions are visible
+  fetch('site-content.json').then(function(r){return r.json();}).then(function(sc){
+    if(sc.exhibitions_visible === false){
+      var sec = document.getElementById('exhibitions');
+      if(sec) sec.style.display = 'none';
+    }
+  }).catch(function(){});
+
   function fmtDate(str){
     if(!str) return '';
     var d = new Date(str);

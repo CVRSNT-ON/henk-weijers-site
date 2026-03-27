@@ -62,7 +62,7 @@ section{padding:clamp(3rem,6vw,6rem) var(--g)}
    .room-painting-inner and its img must both use height:100% + object-fit:cover to fill that box,
    matching the admin preview behaviour. */
 .room-painting{position:absolute;transition:all .3s ease;transform:translate(-50%,-50%)}
-.room-painting-inner{position:relative;width:100%;height:100%;border:4px solid #1a1a1a;box-shadow:0 8px 32px rgba(0,0,0,.35),0 2px 8px rgba(0,0,0,.2)}
+.room-painting-inner{position:relative;width:100%;height:100%;border:4px solid #1a1a1a;box-shadow:0 12px 40px rgba(0,0,0,.45),0 4px 12px rgba(0,0,0,.30),0 1px 3px rgba(0,0,0,.20),inset 0 1px 0 rgba(255,255,255,.06)}
 .room-painting-inner img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
 .room-selector{display:flex;gap:.5rem;margin-top:.75rem;flex-wrap:wrap}
 .room-thumb{width:60px;height:38px;object-fit:cover;border:2px solid transparent;cursor:pointer;opacity:.6;transition:all .3s;border-radius:3px}
@@ -170,7 +170,7 @@ if(!artworkId){
     var vIdx = visibleWorks.findIndex(function(w){return w.id === artworkId});
     var prevWork = vIdx > 0 ? visibleWorks[vIdx-1] : null;
     var nextWork = vIdx < visibleWorks.length-1 ? visibleWorks[vIdx+1] : null;
-    var navHtml = '<div style="display:flex;gap:.75rem;margin-top:2rem;justify-content:center">';
+    var navHtml = '<div style="display:flex;gap:.75rem;margin-top:1.5rem;flex-wrap:wrap">';
     if(prevWork) navHtml += '<a href="view.html?id='+encodeURIComponent(prevWork.id)+'" class="btn btn-outline">&larr; Prev</a>';
     if(nextWork) navHtml += '<a href="view.html?id='+encodeURIComponent(nextWork.id)+'" class="btn btn-outline">Next &rarr;</a>';
     navHtml += '</div>';

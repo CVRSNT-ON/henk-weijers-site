@@ -46,7 +46,7 @@ body{font-family:var(--body);background:var(--bg);color:var(--text);line-height:
 .works-table tr:hover td{background:rgba(43,74,140,.03)}
 .works-table img.thumb-sm{width:50px;height:50px;object-fit:cover;display:block;border:1px solid var(--border);transition:transform .2s,box-shadow .2s;cursor:zoom-in}
 .thumb-popup{display:none;position:fixed;z-index:500;width:220px;height:220px;object-fit:cover;border:2px solid var(--border);box-shadow:0 12px 40px rgba(0,0,0,.25);pointer-events:none}
-.works-table img:hover{transform:scale(4);box-shadow:0 8px 32px rgba(0,0,0,.3);z-index:10;position:relative}
+
 .status-badge{display:inline-block;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;padding:.15rem .45rem;border-radius:2px}
 .status-available{background:#2B6B3B;color:#fff}
 .status-sold{background:var(--danger);color:#fff}
@@ -198,8 +198,8 @@ tr.drag-below td{border-bottom:2px solid var(--accent)}
     ==================================================== -->
     <div style="margin-top:2.5rem;border-top:2px solid var(--border);padding-top:2rem">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;flex-wrap:wrap;gap:.75rem">
-        <h2 style="font-family:var(--display);font-weight:300;font-size:1.6rem">Exhibitions</h2>
-        <button class="btn-sm btn-primary" onclick="openExhModal()">+ Add Exhibition</button>
+        <div style="display:flex;align-items:center;gap:.75rem"><h2 style="font-family:var(--display);font-weight:300;font-size:1.6rem">Exhibitions</h2><span id="exhVisibleBadge" style="font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;padding:.2rem .5rem;border-radius:2px"></span></div>
+        <div style="display:flex;gap:.5rem;align-items:center"><label style="font-size:.78rem;color:var(--text-l);display:flex;align-items:center;gap:.4rem;cursor:pointer"><input type="checkbox" id="exhVisibleToggle" onchange="toggleExhibitionsVisibility()" style="accent-color:var(--accent);width:auto"> Show on site</label><button class="btn-sm btn-primary" onclick="openExhModal()">+ Add Exhibition</button></div>
       </div>
       <div id="exhibitionsAdminList" style="display:grid;gap:.75rem"></div>
     </div>
@@ -395,11 +395,13 @@ tr.drag-below td{border-bottom:2px solid var(--accent)}
 const GIT_API = '/.netlify/git/github';
 const WORKS_PATH = 'works.json';
 const EXHIBITIONS_PATH = 'exhibitions.json';
+const SITE_CONTENT_PATH = 'site-content.json';
 const IMAGES_DIR = 'images';
 const BRANCH = 'main';
 
 let works = [];
 let exhibitionsSha = null;
+let siteContentSha = null;
 let worksSha = null;
 let deleteTargetId = null;
 let pendingImageFile = null;
@@ -1004,9 +1006,29 @@ async function saveArtwork() {
       serial: document.getElementById('artSerial').value.trim() || null
     };
 
-    // Save room positions if any were edited
+    // Set default room positions based on aspect ratio if none edited
+    var SQUARE_POS = {
+      'living-minimal': {x:50,y:31,scale:55,rotation:0},
+      'living-marble':  {x:63,y:36,scale:55,rotation:0},
+      'living-grey':    {x:55,y:35,scale:55,rotation:0},
+      'studio-leather': {x:47,y:33,scale:55,rotation:0},
+      'gallery-gold':   {x:51,y:32,scale:55,rotation:0},
+      'bedroom-wood':   {x:51,y:31,scale:55,rotation:0}
+    };
+    var RECT_POS = {
+      'living-minimal': {x:50,y:31,scale:50,rotation:0},
+      'living-marble':  {x:63,y:33,scale:50,rotation:0},
+      'living-grey':    {x:55,y:33,scale:50,rotation:0},
+      'studio-leather': {x:42,y:32,scale:50,rotation:0},
+      'gallery-gold':   {x:51,y:35,scale:50,rotation:0},
+      'bedroom-wood':   {x:51,y:32,scale:50,rotation:0}
+    };
     if (Object.keys(editingRoomPositions).length > 0) {
       data.room_positions = editingRoomPositions;
+    } else if (!editId) {
+      // New artwork: assign defaults based on shape
+      var isSquare = Math.abs(data.width - data.height) < 0.5;
+      data.room_positions = isSquare ? SQUARE_POS : RECT_POS;
     }
 
     if (editId) {
@@ -1470,9 +1492,16 @@ function fmtDateAdmin(str){
 function loadExhibitions() {
   fetch('/exhibitions.json').then(function(r){ return r.json(); }).then(function(data) {
     allExhibitions = data || [];
+    // Only use localStorage draft if it has actual entries (don't overwrite live data with empty draft)
     var draft = localStorage.getItem('exh_draft');
-    if (draft) { try { allExhibitions = JSON.parse(draft); } catch(e) {} }
+    if (draft) {
+      try {
+        var parsed = JSON.parse(draft);
+        if (Array.isArray(parsed) && parsed.length >= allExhibitions.length) allExhibitions = parsed;
+      } catch(e) {}
+    }
     renderExhibitions();
+    loadExhibitionsVisibility();
   }).catch(function() { allExhibitions = []; renderExhibitions(); });
 }
 
@@ -1556,6 +1585,58 @@ function persistExhibitions() {
   window._pendingExhibitions = allExhibitions;
 }
 
+
+// ============================================================
+// EXHIBITIONS VISIBILITY TOGGLE
+// ============================================================
+var exhibitionsVisible = true;
+
+function loadExhibitionsVisibility() {
+  fetch('/site-content.json').then(function(r){ return r.json(); }).then(function(sc) {
+    exhibitionsVisible = sc.exhibitions_visible !== false;
+    var toggle = document.getElementById('exhVisibleToggle');
+    var badge = document.getElementById('exhVisibleBadge');
+    if (toggle) toggle.checked = exhibitionsVisible;
+    updateExhBadge();
+  }).catch(function() {
+    var toggle = document.getElementById('exhVisibleToggle');
+    if (toggle) toggle.checked = true;
+    updateExhBadge();
+  });
+}
+
+function updateExhBadge() {
+  var badge = document.getElementById('exhVisibleBadge');
+  if (!badge) return;
+  if (exhibitionsVisible) {
+    badge.textContent = 'Visible';
+    badge.style.background = 'var(--success)';
+    badge.style.color = '#fff';
+  } else {
+    badge.textContent = 'Hidden';
+    badge.style.background = '#8B6914';
+    badge.style.color = '#fff';
+  }
+}
+
+function toggleExhibitionsVisibility() {
+  var toggle = document.getElementById('exhVisibleToggle');
+  exhibitionsVisible = toggle.checked;
+  updateExhBadge();
+  // Persist to site-content.json via publish
+  window._pendingSiteContent = window._pendingSiteContent || {};
+  window._pendingSiteContent.exhibitions_visible = exhibitionsVisible;
+  // Also save immediately via git
+  fetch('/site-content.json').then(function(r){ return r.json(); }).then(function(sc) {
+    sc.exhibitions_visible = exhibitionsVisible;
+    return writeFile(SITE_CONTENT_PATH, JSON.stringify(sc, null, 2), 'Toggle exhibitions visibility', siteContentSha);
+  }).then(function(result) {
+    siteContentSha = result.content.sha;
+    showToast(exhibitionsVisible ? 'Exhibitions visible on site' : 'Exhibitions hidden from site', 'success');
+  }).catch(function(e) {
+    showToast('Save failed: ' + e.message, 'error');
+  });
+}
 
 // Init
 initAuth();
