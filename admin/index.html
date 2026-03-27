@@ -1513,19 +1513,30 @@ function fmtDateAdmin(str){
 }
 
 function loadExhibitions() {
-  fetch('/exhibitions.json').then(function(r){ return r.json(); }).then(function(data) {
-    allExhibitions = data || [];
-    // Only use localStorage draft if it has actual entries (don't overwrite live data with empty draft)
-    var draft = localStorage.getItem('exh_draft');
-    if (draft) {
-      try {
-        var parsed = JSON.parse(draft);
-        if (Array.isArray(parsed) && parsed.length >= allExhibitions.length) allExhibitions = parsed;
-      } catch(e) {}
+  // getToken() returns a Promise (user.jwt()) or null — wrap in Promise.resolve
+  Promise.resolve(getToken()).then(function(token) {
+    if (!token) {
+      // Not authenticated yet — fall back to plain public fetch
+      return fetch('/exhibitions.json').then(function(r){ return r.json(); });
     }
+    return fetch(GIT_API + '/contents/exhibitions.json?ref=' + BRANCH, {
+      headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' }
+    }).then(function(r){ return r.json(); }).then(function(data) {
+      exhibitionsSha = data.sha || null;
+      try { return JSON.parse(atob(data.content.replace(/\n/g,''))); } catch(e) { return []; }
+    });
+  }).then(function(data) {
+    allExhibitions = data || [];
+    localStorage.removeItem('exh_draft');
     renderExhibitions();
     loadExhibitionsVisibility();
-  }).catch(function() { allExhibitions = []; renderExhibitions(); });
+  }).catch(function() {
+    fetch('/exhibitions.json').then(function(r){ return r.json(); }).then(function(data) {
+      allExhibitions = data || [];
+      renderExhibitions();
+      loadExhibitionsVisibility();
+    }).catch(function() { allExhibitions = []; renderExhibitions(); });
+  });
 }
 
 function renderExhibitions() {
@@ -1621,12 +1632,19 @@ function resetRoomDefaults() {
 var exhibitionsVisible = true;
 
 function loadExhibitionsVisibility() {
-  fetch('/site-content.json').then(function(r){ return r.json(); }).then(function(sc) {
-    exhibitionsVisible = sc.exhibitions_visible !== false;
-    var toggle = document.getElementById('exhVisibleToggle');
-    var badge = document.getElementById('exhVisibleBadge');
-    if (toggle) toggle.checked = exhibitionsVisible;
-    updateExhBadge();
+  Promise.resolve(getToken()).then(function(token) {
+    if (!token) return;
+    return fetch(GIT_API + '/contents/' + SITE_CONTENT_PATH + '?ref=' + BRANCH, {
+      headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' }
+    }).then(function(r) { return r.json(); }).then(function(data) {
+      siteContentSha = data.sha || null;
+      var sc = {};
+      try { sc = JSON.parse(atob(data.content.replace(/\n/g,''))); } catch(e) {}
+      exhibitionsVisible = sc.exhibitions_visible !== false;
+      var toggle = document.getElementById('exhVisibleToggle');
+      if (toggle) toggle.checked = exhibitionsVisible;
+      updateExhBadge();
+    });
   }).catch(function() {
     var toggle = document.getElementById('exhVisibleToggle');
     if (toggle) toggle.checked = true;
