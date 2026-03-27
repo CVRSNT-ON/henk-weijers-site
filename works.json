@@ -700,5 +700,59 @@
         "rotation": 0
       }
     }
+  },
+  {
+    "id": "test",
+    "title": "Test",
+    "category": "TEST",
+    "medium": "Acrylic on Canvas",
+    "width": 30,
+    "height": 30,
+    "price": 3000,
+    "status": "Available",
+    "image": "images/img-1774628594169.jpg",
+    "description": "TEST AGGIUNTA CATEGORIA",
+    "order": 14,
+    "featured": false,
+    "year": 2026,
+    "serial": "1234",
+    "room_positions": {
+      "living-minimal": {
+        "x": 50,
+        "y": 31,
+        "scale": 55,
+        "rotation": 0
+      },
+      "living-marble": {
+        "x": 63,
+        "y": 36,
+        "scale": 55,
+        "rotation": 0
+      },
+      "living-grey": {
+        "x": 55,
+        "y": 35,
+        "scale": 55,
+        "rotation": 0
+      },
+      "studio-leather": {
+        "x": 47,
+        "y": 33,
+        "scale": 55,
+        "rotation": 0
+      },
+      "gallery-gold": {
+        "x": 51,
+        "y": 32,
+        "scale": 55,
+        "rotation": 0
+      },
+      "bedroom-wood": {
+        "x": 51,
+        "y": 31,
+        "scale": 55,
+        "rotation": 0
+      }
+    }
   }
 ]
