@@ -12,10 +12,18 @@
 <meta property="og:title" id="ogTitle" content="Henk Weijers — Acrylic Painter">
 <meta property="og:description" id="ogDesc" content="Original artwork by Henk Weijers — Acrylic Painter">
 <title>Loading... — Henk Weijers</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'Avenir Next LT Pro';src:url('../fonts/AvenirNextLTPro-UltLt.otf') format('opentype');font-weight:300;font-style:normal;font-display:swap}
+@font-face{font-family:'Avenir Next LT Pro';src:url('../fonts/AvenirNextLTPro-Regular.otf') format('opentype');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Avenir Next LT Pro';src:url('../fonts/AvenirNextLTPro-It.otf') format('opentype');font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:'Avenir Next LT Pro';src:url('../fonts/AvenirNextLTPro-Medium.otf') format('opentype');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:'Avenir Next LT Pro';src:url('../fonts/AvenirNextLTPro-MediumIt.otf') format('opentype');font-weight:500;font-style:italic;font-display:swap}
+@font-face{font-family:'Avenir Next LT Pro';src:url('../fonts/AvenirNextLTPro-Demi.otf') format('opentype');font-weight:600;font-style:normal;font-display:swap}
+</style>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#F5F0E8;--text:#1A1A1A;--text-l:#5A5550;--accent:#2B4A8C;--accent-w:#8C3B2B;--border:#D4CFC5;--card:#FFFDF8;--display:'Cormorant Garamond',Georgia,serif;--body:'DM Sans',-apple-system,sans-serif;--max-w:1400px;--g:clamp(1.25rem,4vw,3rem)}
+:root{--bg:#F5F0E8;--text:#1A1A1A;--text-l:#5A5550;--accent:#2B4A8C;--accent-w:#8C3B2B;--border:#D4CFC5;--card:#FFFDF8;--display:'Cormorant Garamond',Georgia,serif;--body:'Avenir Next LT Pro',-apple-system,sans-serif;--max-w:1400px;--g:clamp(1.25rem,4vw,3rem)}
 html{scroll-behavior:smooth;scroll-padding-top:100px}
 body{font-family:var(--body);background:var(--bg);color:var(--text);line-height:1.6;font-weight:300;-webkit-font-smoothing:antialiased}
 .mobile-close{position:absolute;top:1.25rem;right:var(--g);background:none;border:none;font-size:2rem;color:var(--text);cursor:pointer;z-index:111;line-height:1;padding:.25rem}
@@ -74,8 +82,20 @@ img{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
 .artwork-main-img{pointer-events:none}
 
 .loading-msg{text-align:center;padding:8rem 2rem;color:var(--text-l);font-size:1rem}
-.artwork-layout{opacity:0;transition:opacity .35s ease}
-.artwork-layout.loaded{opacity:1}
+.artwork-layout{opacity:0}
+
+/* Frame selector */
+.frame-selector{display:flex;gap:.5rem;margin-top:.75rem;flex-wrap:wrap;align-items:center}
+.frame-label{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-l);margin-right:.25rem}
+.frame-btn{font-family:var(--body);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;padding:.35rem .9rem;background:none;border:1px solid var(--border);color:var(--text-l);cursor:pointer;transition:all .25s;border-radius:2px}
+.frame-btn:hover{border-color:var(--text);color:var(--text)}
+.frame-btn.active{background:var(--text);color:var(--bg);border-color:var(--text)}
+
+/* Frame styles applied to .room-painting-inner */
+.room-painting-inner.frame-none{border:none;box-shadow:0 12px 40px rgba(0,0,0,.45),0 4px 12px rgba(0,0,0,.30)}
+.room-painting-inner.frame-black{border:10px solid #1a1a1a;box-shadow:0 14px 44px rgba(0,0,0,.5),0 4px 12px rgba(0,0,0,.35),inset 0 0 0 1px rgba(255,255,255,.08)}
+.room-painting-inner.frame-wood{border:14px solid #7a5c2e;outline:2px solid #5a3e18;outline-offset:-2px;box-shadow:0 14px 44px rgba(0,0,0,.45),0 4px 12px rgba(0,0,0,.30)}
+.room-painting-inner.frame-white{border:14px solid #f8f6f2;box-shadow:0 0 0 1px #ccc,0 14px 44px rgba(0,0,0,.35),0 4px 12px rgba(0,0,0,.20)}
 @media(max-width:768px){
   .nav-links{display:none}.hamburger{display:block}
   .artwork-layout{grid-template-columns:1fr}
@@ -85,7 +105,7 @@ img{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
   .room-thumb{width:48px;height:30px}
 }
 </style>
-</head>
+<script type='text/javascript' src='https://api.netlify.com/VbpFXas4KmSqmDNHA3g7Jf3Fc-6udrC3wNcJDlgAv6kOn4jFt3McgR9--5JNHZudJ0uROIj08BsyPh4voU211hg0-buj7o7JvZCBRkaQcTfQflZQXacYZ0SGzT-FAFVXUXBFMW8zmVZrAYbwfC9gJ-fHUFIKR2ck19pVBs8SjmND5qDXEHj5zwrR69EJ3vCCEP0H7C4N_xE-qe6a41LJDuhVCCKx7YeVBBb8KgbG1msZlSiTOc7eAZ0HYuw9sGxWuUjJC12Fg0qtoKHWozXzE2nem0N5BeIJcgGq0hfJ_nbxO3kLOhYxlaqXi4LH0QmHWFeaJyHWOHctTjeDvUrcIJu9pMf_TA4F6Dnkjip_1Z2idFH5eqSmQbPjJd2nCFcTKi8Io7psmb-V-fZyvQuTdDB6JFlSER7DFVerzmO6mlYaGjIA_WCHTsb43PdGCxA-Nxa9p8Fm6tbpjej0sGd5LJvqz-hV_Bw2sRTBITT7u-be0nCdTJNEmvMd8Bdlr_9S1OvKr6B4oE7uiuf7lTNyIwVegCw'></script></head>
 <body>
 <nav class="nav" id="nav">
   <a href="../index.html" class="nav-logo">Henk Weijers</a>
@@ -222,17 +242,26 @@ if(!artworkId){
         paintWidthPct = maxPct * artRatio / 1.2 * scaleFactor;
       }
 
+      var frameSelectorHtml = '<div class="frame-selector">'
+        + '<span class="frame-label">Frame:</span>'
+        + '<button class="frame-btn active" onclick="setFrame(this,\'frame-none\')">No Frame</button>'
+        + '<button class="frame-btn" onclick="setFrame(this,\'frame-black\')">Thin Black</button>'
+        + '<button class="frame-btn" onclick="setFrame(this,\'frame-wood\')">Natural Wood</button>'
+        + '<button class="frame-btn" onclick="setFrame(this,\'frame-white\')">White</button>'
+        + '</div>';
+
       roomViewHtml = '<div class="room-section">'
         + '<p class="section-label" style="margin-bottom:.75rem">View in Room</p>'
         + '<div class="room-scene" id="roomScene">'
         + '<img class="room-bg" id="roomBg" src="../'+defaultRoom.image+'" alt="Room view">'
         + '<div class="room-painting" id="roomPainting" style="left:'+posX+'%;top:'+posY+'%;width:'+paintWidthPct+'%;aspect-ratio:'+artRatio+';transform:translate(-50%,-50%) rotate('+rotation+'deg)">'
-        + '<div class="room-painting-inner">'
+        + '<div class="room-painting-inner frame-none" id="roomPaintingInner">'
         + '<img src="../'+work.image+'" alt="'+esc(work.title)+' in room" id="roomArtImg">'
         + '</div>'
         + '</div>'
         + '</div>'
         + '<div class="room-selector" id="roomSelector">'+thumbsHtml+'</div>'
+        + frameSelectorHtml
         + '<p class="room-caption">Proportionally rendered — '+work.width+' × '+work.height+' in</p>'
         + '</div>';
     }
@@ -261,12 +290,16 @@ if(!artworkId){
 
     document.getElementById('artworkContent').innerHTML = html;
 
-    // Fade in after paint to avoid flash
+    // GSAP fade-in
     requestAnimationFrame(function(){
-      requestAnimationFrame(function(){
-        var layout = document.querySelector('.artwork-layout');
-        if(layout) layout.classList.add('loaded');
-      });
+      var layout = document.querySelector('.artwork-layout');
+      if(layout){
+        if(window.gsap){
+          gsap.to(layout, {opacity:1, y:0, duration:.5, ease:'power2.out', delay:.05});
+        } else {
+          layout.style.opacity = '1';
+        }
+      }
     });
 
     // Store work data globally for room switching
@@ -328,6 +361,14 @@ function handleInquire() {
   window.location.href = '../index.html#contact';
 }
 
+function setFrame(btn, frameClass) {
+  var inner = document.getElementById('roomPaintingInner');
+  if(!inner) return;
+  inner.className = 'room-painting-inner ' + frameClass;
+  document.querySelectorAll('.frame-btn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+}
+
 // ============================================================
 // IMAGE PROTECTION — disable right-click save, drag, long-press
 // ============================================================
@@ -345,11 +386,12 @@ document.addEventListener('selectstart', function(e) {
 });
 </script>
 
+<script src="../js/gsap.min.js"></script>
 <!-- Cookie Banner -->
 <div id="cookieBanner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:rgba(26,26,26,.95);backdrop-filter:blur(10px);padding:1rem clamp(1.25rem,4vw,3rem);color:#F5F0E8">
   <div style="max-width:1400px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap">
-    <p style="font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:300;line-height:1.6;margin:0;flex:1;min-width:280px">We use essential cookies to ensure the website functions properly. No tracking or advertising cookies are used. <a href="../cookie-policy.html" style="color:#7B9FD4;text-decoration:underline">Cookie Policy</a> · <a href="../privacy-policy.html" style="color:#7B9FD4;text-decoration:underline">Privacy Policy</a></p>
-    <button onclick="acceptCookies()" style="background:#F5F0E8;color:#1A1A1A;border:none;font-family:'DM Sans',sans-serif;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;padding:.6rem 1.5rem;cursor:pointer;white-space:nowrap;font-weight:400;transition:background .3s">Accept</button>
+    <p style="font-family:'Avenir Next LT Pro',-apple-system,sans-serif;font-size:.82rem;font-weight:300;line-height:1.6;margin:0;flex:1;min-width:280px">We use essential cookies to ensure the website functions properly. No tracking or advertising cookies are used. <a href="../cookie-policy.html" style="color:#7B9FD4;text-decoration:underline">Cookie Policy</a> · <a href="../privacy-policy.html" style="color:#7B9FD4;text-decoration:underline">Privacy Policy</a></p>
+    <button onclick="acceptCookies()" style="background:#F5F0E8;color:#1A1A1A;border:none;font-family:'Avenir Next LT Pro',-apple-system,sans-serif;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;padding:.6rem 1.5rem;cursor:pointer;white-space:nowrap;font-weight:400;transition:background .3s">Accept</button>
   </div>
 </div>
 <script>

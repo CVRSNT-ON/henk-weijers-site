@@ -12,10 +12,18 @@
 <meta property="og:url" content="https://henk-weijers-site.netlify.app/portfolio.html">
 <meta property="og:image" content="https://henk-weijers-site.netlify.app/images/portrait.jpg">
 <meta property="og:site_name" content="Henk Weijers — Acrylic Painter">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'Avenir Next LT Pro';src:url('fonts/AvenirNextLTPro-UltLt.otf') format('opentype');font-weight:300;font-style:normal;font-display:swap}
+@font-face{font-family:'Avenir Next LT Pro';src:url('fonts/AvenirNextLTPro-Regular.otf') format('opentype');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Avenir Next LT Pro';src:url('fonts/AvenirNextLTPro-It.otf') format('opentype');font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:'Avenir Next LT Pro';src:url('fonts/AvenirNextLTPro-Medium.otf') format('opentype');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:'Avenir Next LT Pro';src:url('fonts/AvenirNextLTPro-MediumIt.otf') format('opentype');font-weight:500;font-style:italic;font-display:swap}
+@font-face{font-family:'Avenir Next LT Pro';src:url('fonts/AvenirNextLTPro-Demi.otf') format('opentype');font-weight:600;font-style:normal;font-display:swap}
+</style>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#F5F0E8;--text:#1A1A1A;--text-l:#5A5550;--accent:#2B4A8C;--accent-w:#8C3B2B;--border:#D4CFC5;--card:#FFFDF8;--overlay:rgba(26,26,26,.85);--display:'Cormorant Garamond',Georgia,serif;--body:'DM Sans',-apple-system,sans-serif;--max-w:1400px;--g:clamp(1.25rem,4vw,3rem)}
+:root{--bg:#F5F0E8;--text:#1A1A1A;--text-l:#5A5550;--accent:#2B4A8C;--accent-w:#8C3B2B;--border:#D4CFC5;--card:#FFFDF8;--overlay:rgba(26,26,26,.85);--display:'Cormorant Garamond',Georgia,serif;--body:'Avenir Next LT Pro',-apple-system,sans-serif;--max-w:1400px;--g:clamp(1.25rem,4vw,3rem)}
 html{scroll-behavior:smooth;scroll-padding-top:100px}
 body{font-family:var(--body);background:var(--bg);color:var(--text);line-height:1.6;font-weight:300;-webkit-font-smoothing:antialiased}
 img{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;pointer-events:none}
@@ -48,9 +56,9 @@ section{padding:clamp(3rem,6vw,6rem) var(--g)}
 .reveal.visible{opacity:1;transform:translateY(0)}
 
 /* PORTFOLIO GRID */
-.portfolio-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;max-width:var(--max-w);margin:0 auto}
-.pf-card{background:var(--card);border:1px solid var(--border);overflow:hidden;text-decoration:none;color:var(--text);transition:box-shadow .3s,transform .3s}
-.pf-card:hover{box-shadow:0 8px 30px rgba(0,0,0,.08);transform:translateY(-3px)}
+.portfolio-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:2.5rem;max-width:var(--max-w);margin:0 auto}
+.pf-card{background:var(--card);border:1px solid var(--border);overflow:hidden;text-decoration:none;color:var(--text);transition:box-shadow .3s,transform .3s;box-shadow:0 6px 20px rgba(0,0,0,.10),0 2px 6px rgba(0,0,0,.06)}
+.pf-card:hover{box-shadow:0 14px 40px rgba(0,0,0,.16),0 4px 10px rgba(0,0,0,.08);transform:translateY(-4px)}
 .filter-btn{font-family:var(--body);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;padding:.45rem 1.1rem;background:none;border:1px solid var(--border);color:var(--text-l);cursor:pointer;transition:all .3s}
 .filter-btn:hover{border-color:var(--text);color:var(--text)}
 .filter-btn.filter-active{background:var(--text);color:var(--bg);border-color:var(--text)}
@@ -141,7 +149,7 @@ section{padding:clamp(3rem,6vw,6rem) var(--g)}
   .critic-body{font-size:.8rem!important;line-height:1.65!important}
 }
 </style>
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script type='text/javascript' src='https://api.netlify.com/ZvdYKVHtw1CE_MYkLanlXEg0PnR3kwjRNS_i2AwWg6-7OOy7kz9EHBfemo91qLnkIDwy1woGtRWPpxEu7FS0bR2vfCLlv3BPXL_e2PtIFaEBRdnHbXSPP9npYPbKtm4dDuB8Nq-vPIn3jQm-hUO1WQO-lQarEU45McyaE1INxdgFKmk0-Ee5c_fnvCl6YcKep6Vkq9cdBJm0ufD13OhKI4crDFmGNm8f6CU4CBPeG_-iFZUHXRuoh1CfpWCRP4Kk6316ZGddmNdwLin0BM0Ru8kZ4xXu3QllVPY0sTJKu_v8juYivvP98Gx4zX8DIaYXcO0Nbzb6kbVSn1vHk-R1kIrqLpt84lHS_9QeAUk9p1PS8xwRx58r5tPd_ZnFWsBOB33GJJbIZN58PT6SM4JCBh3Jc8hdHUkrSN1BsfmKu_IeUWHvS4vT_dST4Roweu6VLsAnOpI4XSLGIs6XUr-cOnJISYjq-qhtmwYDiwW4vqckkmGpKz9k7_wNR1ilmOorRCpHHC-Bzm6qtdEGcOizkxVrKQ'></script><script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
 <nav class="nav" id="nav">
@@ -178,6 +186,28 @@ section{padding:clamp(3rem,6vw,6rem) var(--g)}
       <p style="font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)">Ludovica Dagna &mdash; Art Curator</p>
     </div>
   </div>
+  <!-- Logistical info -->
+  <div style="max-width:var(--max-w);margin:0 auto 2.5rem" class="reveal">
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem">
+      <div style="display:flex;align-items:flex-start;gap:.75rem;padding:1rem;background:var(--card);border:1px solid var(--border)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:.1rem"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        <div><p style="font-size:.78rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.2rem">Invoice Included</p><p style="font-size:.8rem;color:var(--text-l);line-height:1.5">Official invoice issued with all shipping costs itemised.</p></div>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:.75rem;padding:1rem;background:var(--card);border:1px solid var(--border)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:.1rem"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 4v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        <div><p style="font-size:.78rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.2rem">Secure Shipping</p><p style="font-size:.8rem;color:var(--text-l);line-height:1.5">Dispatched via reliable courier with professional rigid packaging.</p></div>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:.75rem;padding:1rem;background:var(--card);border:1px solid var(--border)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:.1rem"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <div><p style="font-size:.78rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.2rem">Certificate of Authenticity</p><p style="font-size:.8rem;color:var(--text-l);line-height:1.5">Each work ships with a signed certificate of authenticity.</p></div>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:.75rem;padding:1rem;background:var(--card);border:1px solid var(--border)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:.1rem"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        <div><p style="font-size:.78rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.2rem">Original Works Only</p><p style="font-size:.8rem;color:var(--text-l);line-height:1.5">Only unique original paintings sold — no prints or reproductions.</p></div>
+      </div>
+    </div>
+  </div>
+
   <div class="portfolio-grid reveal" id="portfolioGrid">
     <!-- Populated dynamically from works.json -->
   </div>
@@ -233,9 +263,15 @@ section{padding:clamp(3rem,6vw,6rem) var(--g)}
         + '</div></a>';
     }
     grid.innerHTML = html;
-    // Fade-in
-    var fobs = new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('pf-visible');fobs.unobserve(e.target)}})},{threshold:.05});
-    grid.querySelectorAll('.pf-fade').forEach(function(el){fobs.observe(el)});
+    // GSAP stagger animation
+    if(window.gsap){
+      gsap.from(grid.querySelectorAll('.pf-card'), {
+        opacity:0, y:30, duration:.6, stagger:.07, ease:'power2.out',
+        clearProps:'all'
+      });
+    } else {
+      grid.querySelectorAll('.pf-fade').forEach(function(el){el.classList.add('pf-visible')});
+    }
   }
 })();
 </script>
@@ -263,8 +299,8 @@ reveals.forEach(function(el){obs.observe(el)});
 <!-- Cookie Banner -->
 <div id="cookieBanner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:rgba(26,26,26,.95);backdrop-filter:blur(10px);padding:1rem clamp(1.25rem,4vw,3rem);color:#F5F0E8">
   <div style="max-width:1400px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap">
-    <p style="font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:300;line-height:1.6;margin:0;flex:1;min-width:280px">We use essential cookies to ensure the website functions properly. No tracking or advertising cookies are used. <a href="cookie-policy.html" style="color:#7B9FD4;text-decoration:underline">Cookie Policy</a> · <a href="privacy-policy.html" style="color:#7B9FD4;text-decoration:underline">Privacy Policy</a></p>
-    <button onclick="acceptCookies()" style="background:#F5F0E8;color:#1A1A1A;border:none;font-family:'DM Sans',sans-serif;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;padding:.6rem 1.5rem;cursor:pointer;white-space:nowrap;font-weight:400;transition:background .3s">Accept</button>
+    <p style="font-family:'Avenir Next LT Pro',-apple-system,sans-serif;font-size:.82rem;font-weight:300;line-height:1.6;margin:0;flex:1;min-width:280px">We use essential cookies to ensure the website functions properly. No tracking or advertising cookies are used. <a href="cookie-policy.html" style="color:#7B9FD4;text-decoration:underline">Cookie Policy</a> · <a href="privacy-policy.html" style="color:#7B9FD4;text-decoration:underline">Privacy Policy</a></p>
+    <button onclick="acceptCookies()" style="background:#F5F0E8;color:#1A1A1A;border:none;font-family:'Avenir Next LT Pro',-apple-system,sans-serif;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;padding:.6rem 1.5rem;cursor:pointer;white-space:nowrap;font-weight:400;transition:background .3s">Accept</button>
   </div>
 </div>
 <script>
@@ -279,6 +315,7 @@ function acceptCookies(){localStorage.setItem('cookieConsent','accepted');docume
     });
   }
 </script>
+<script src="js/gsap.min.js"></script>
 <script>
 // Image protection — disable right-click, drag, long-press save
 document.addEventListener('contextmenu', function(e) {
